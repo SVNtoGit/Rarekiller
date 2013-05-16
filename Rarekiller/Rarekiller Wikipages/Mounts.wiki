@@ -1,0 +1,10 @@
+#summary Config for Mount Hunting.
+
+= Config for Mount Hunting =
+  * *Timelost Protodrake:* kill Timelost Protodrake for Mount (including killing Vyragosa because of respawn timer, if checked in Part Mobs with Problems)
+  * *Poseidus:* kill Poseidus for Mount
+  * *Aeonaxx:* mount and kill Aeonaxx for Mount (including killing Blood Seeker because of respawn timer). You also can Test the implemented Aeonaxx Rota on a Training Dummy.
+
+*Please Notice:* The Part Aeonaxx is still under Construction because of the really Rare Testobjects. I can't give you a garantee that this Parts works correct, but it is a little chance to get the Dragon. Although flying to Aeonaxx and the amazing Alert works for sure.
+
+See Also [Aeonaxx Easy Setup Aeonaxx], [TLPD Easy Setup Timelost Protodrake] and [Poseidus Easy Setup Poseidus]

@@ -1,0 +1,24 @@
+#summary Log me Off.
+
+= Log me Off on Mount Lootet =
+  * *Log me off on successfully Loot Mount* will log you off after looting TLPD, Aeonaxx, Poseidus or Dormus.
+  
+= Log me Off on Continent Change =
+This Feature will shut down your WoW if you change the Continent.
+=== Instant Logout ===
+Instant Logout instantly kills WoW if you chance the Continent. 
+Only use this while camping without doing other things inbetween like Instances. Always stop the Bot if you manually move your Toon to another Place and then start it there again.
+
+=== Just Alert ===
+Alerts 5 minutes if your Toon change the Continent. Use this if you don't Bot AFK. After this Time he will shut WOW down.
+
+=== Heart and Log Off with Messages ===
+Heart and Log Off with Messages: 
+  * He says something like: *"/s lol, why I'm now in Iron Forge"* (Location automatically inserted)
+  * Then use the Heartstone
+  * Say some other Words, maybe *"/g I log of, good by every one"* and log out.
+  * You can interrupt this Behavior if you stop the Bot
+
+=== Hints ===
+
+If you enter a BG this Part wont log you out.

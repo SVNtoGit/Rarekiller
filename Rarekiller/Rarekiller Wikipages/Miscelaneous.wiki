@@ -1,0 +1,14 @@
+#summary Miscelaneous Settings
+
+= Miscelaneous Settings =
+
+=== Groundmountmode ===
+You can enable Ground Mount Mode if you don't have Livetime or Paid Plugin. Notice: Aeonaxx could only be hunted with Flyingmount, for him you need Livetime
+
+=== don't Ninja Mobs ===
+You could Check to be a very nice Guy
+  * if not checked he will wait who wins the fight and if the other Player dies he will pull the Mob 
+  * if checked he will go ahead and Blacklist the Mob for 2 Minutes. Note: you maybe will lose the Mob if checked
+
+=== Keypresser ===
+Also Implemented a Keypresser for humanlike Camping on one Place. If doing nothing the Keypresser will press a Key every 3 - 14 Minutes if not in Combat, Moving around or doing other Stuff.

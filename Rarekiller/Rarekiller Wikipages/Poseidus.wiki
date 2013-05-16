@@ -1,0 +1,21 @@
+#summary Easy Setup Poseidus
+
+= Easy Setup Poseidus =
+
+  # [Installation Install] and Enable the Plugin in your HB
+  # Open the [DescriptionConfigWindow Configwindow]. 
+  # Check "Cataclysm" on Tap One - Raremob Killer
+  # Take a look at the Security Settings on Tap Three
+  # Check *"Keypresser"* on Tap Two and then press Save.
+  # Download a Profile for Podeidus --> [http://pluginrarekiller.googlecode.com/svn/profile/ Link Here]
+  # Place your toon somewhere to Vashijr near Nesparian in Shimmering Expanse
+  # Choose Gatherbuddy2, load the Profile and press start.
+
+= Easy Setup Poseidus without Livetime =
+
+  # [Installation Install] and Enable the Plugin in your HB
+  # Open the [DescriptionConfigWindow Configwindow]. Take a look at the Security Settings on Tap Three
+  # Check *"Keypresser"* and  *"Groundmountmode"* on Tap Two and then press Save.
+  # Download the Camperprofile for Grindbot --> [http://www.thebuddyforum.com/attachments/honorbuddy-forum/submitted-profiles/neutral/15582d1295802188-%5Bn%5D%5Bcamper%5D-never-afk-again-camper-1-0.xml Link Here]
+  # Place your toon as near as you can to a Spawn Point of Poseidus
+  # Choose Grindbot, load the Profile and press start.

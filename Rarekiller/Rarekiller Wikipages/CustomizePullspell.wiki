@@ -1,0 +1,39 @@
+#summary Customize Pullspell.
+
+= Customize Pullspell =
+=== Default Settings ===
+Per Default the Rarekiller will use this Spells to Pull Timelost Protodrake:
+  * Priest: Shadow Word: Pain
+  * Mage: Ice Lance
+  * Warrior: Heroic Throw
+  * Hunter: Arcane Shot
+  * Rogue: Fan of Knives
+  * Death Knight: Icy Touch
+  * Paladin: Crusader Strike
+  * Shaman: Flame Shock
+  * Warlock: Corruption
+  * Druid: Moonfire
+
+Per Default the Rarekiller will use this Spells to Pull the other Mobs:
+  * Priest: Shadow Word: Pain
+  * Mage: Ice Lance
+  * Warrior: Heroic Throw
+  * Hunter: Arcane Shot
+  * Rogue: Sinister Strike
+  * Death Knight: Icy Touch
+  * Paladin: Exorcism
+  * Shaman: Lightning Bolt
+  * Warlock: Shadow Bolt
+  * Druid: Moonfire
+  * If he don't have one Spell of the Above he will try to use Throw or Shoot.
+
+=== Config the Pull Range ===
+Sometimes you can't use one of the Above Spells because of your Charlevel or you don't want the Bot to use the Default Pullspells.
+
+With this option you could config your own Pullspell.
+  * uncheck *"Use Default Pullspell"*
+  * write your own Pullspell in *english* to the Textfield.
+
+=== Config your Own Spell ===
+
+You also could customize the Pullrange to let the Char move closer to the Target before Pull or to meet the demands of the different Spells
