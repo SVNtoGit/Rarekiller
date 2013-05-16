@@ -334,8 +334,10 @@ namespace katzerle
                 WebClient client = new WebClient();
                 IFormatProvider culture = new CultureInfo("fr-FR", true);
 
-                XDocument VersionLatest = XDocument.Load(Website + "/Updater.xml");
+                XDocument VersionLatest = XDocument.Load(Website + "/UpdaterRarekiller.xml");
+				Logging.WriteDiagnostic(Colors.MediumPurple, "Load Website");
                 XDocument VersionCurrent = XDocument.Load(FolderPath + "\\config\\Updater.xml");
+				Logging.WriteDiagnostic(Colors.MediumPurple, "Load Updater.xml local");
                 DateTime latestTime = DateTime.Parse(VersionLatest.Element("RarekillerUpdater").Element("UpdateTime").Value, culture, DateTimeStyles.NoCurrentDateDefault);
                 DateTime currentTime = DateTime.Parse(VersionCurrent.Element("Updater").Element("UpdateTime").Value, culture, DateTimeStyles.NoCurrentDateDefault);
                 string Version = VersionLatest.Element("RarekillerUpdater").Element("Version").Value;
