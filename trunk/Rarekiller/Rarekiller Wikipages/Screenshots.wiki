@@ -1,0 +1,5 @@
+#summary Screenshots.
+
+= Screenshots =
+
+Here you could choose if the Bot should make some screens if he found a hunted Mob and if he also should make a screen if he kills one.

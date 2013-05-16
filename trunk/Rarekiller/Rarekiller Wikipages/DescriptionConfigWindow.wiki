@@ -1,0 +1,31 @@
+#summary Description of the Config Window
+
+= Description of the Config Window =
+
+===Tap One - Rarekiller===
+  * [RaremobKiller Raremob Killer]
+  * [HuntByID Hunt by ID]
+  * [Mounts]
+  * [ProblemMobs Mobs with Problems]
+  * [Collector]
+  * [Tamer The Tamer] 
+  * [CustomizePullspell customize Pullspell]
+  
+http://pluginrarekiller.googlecode.com/svn/wiki/Tap1.JPG
+
+===Tap Two - Slowfall and other Behavior===
+  * [SlowfallBehavior Slowfall Behavior]
+  * [Screenshots]
+  * [Miscelaneous]
+  * [BlackList Blacklist]
+  * [TaggedMobs Mobs tagged by others]
+
+http://pluginrarekiller.googlecode.com/svn/wiki/Tap2.JPG
+
+===Tap Three - Security Settings===
+
+  * [Alert]
+  * [LogOff Log me off]
+  * [HeartMe If Player follows ...]
+
+http://pluginrarekiller.googlecode.com/svn/wiki/Tap3.JPG

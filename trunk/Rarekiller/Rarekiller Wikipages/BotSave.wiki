@@ -1,0 +1,23 @@
+#summary How to Bot save
+
+= Bot Save =
+
+*First:* We all know Botting is against the Rules.
+
+I know many People use this Plugin to get the Rare Mounts on there Main accounts. *Please* don't get slaphappy if you use this Plugin on your Main. There are many ways to look like normal Player while camping special Rares. Just take some Minutes and think about how would you camp a this Rare Mob without Bot and try to Set up your Bot that he also acts like you would do.
+
+  * Circle around 24/7 the exact same Route over and over for days or maybe also for hours is very risky. Take some breaks between camping sessions.
+  * If you don't need it, don't let your Bot farm herbs and ore beside camping. He will look like a farmer and after some days or maybe just some hours surely he will attract attention of others.
+  * If you want to play save, don't leave your Bot alone at home. Turn the Alerts on and your Boxes loud to wake up, if the Bot gets into trouble.
+  * In my Opinion it is more humenlike to use a Profile with only one fix Hotspot to camp special Rares. If you additional check "Keypresser" on the Second Tap of Rarekiller you will look like a Person who is watching TV beside camping.
+  * Take a look at the Security Page and maybe activate also Log out if Continent Change to aviod Bans because of GM-Ports of your Toon.
+  * For advanced Camping take a look at my Plugin [http://www.thebuddyforum.com/honorbuddy-forum/plugins/free/movement/24809-profile-changer.html#post271846 Profile Changer]. With this Plugin you can mix static One-Point-Profiles with short Fly-a-Circle-Profiles. And maximize your Chances to get the Rare without cause a sensation.
+
+=== If I get caught ===
+If you use - *instant Logout* - and you get a suspencion because of a GM-Port, you could tell Blizz something like:
+"I was just camping/searching for the Dragon/farming some Herbs as surprisedly I get a Relogg Screen and my Toon stands in xyz 
+and I get a WoW Error. My WoW gots broken and I have to reinstall it with all the additional Shit . It takes hours to search for all the Addons I use. And now I'm not able to logg in. Please fix this, I don't know what happens."
+
+And if you use - *Keypresser* - and they ask you why you don't answer to GM-Wispers just say:
+"I told my little Brother/Son/etc to press a Key every few Minutes so my char don't get AFK and let me know if the NPC-Scan shows 
+something. He didn't know how to answer Questions. And what they look like" 

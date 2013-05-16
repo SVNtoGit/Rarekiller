@@ -1,0 +1,17 @@
+#summary Alert Settings.
+
+= Alert Settings =
+
+Here you could choose the Alert Settings and also customize the played Alertsound. Per default he uses Siren.wav for all Cases.
+
+To change the Soundfile click to the Button leftsided of the Textboxes and choose your favourite Wave Soundfile.
+
+=== Found Mob ===
+This soundfile is played if he founds a hunted Mob, Figurine or Nest
+=== Wisper ===
+This soundfile is played if somebody wispers you (it also alerts on Battlenet Wispers and GM Wispers)
+=== Guild ===
+This soundfile is played if you received a Guildmessage or Officersmessage 
+=== Attention ===
+  * He will always play siren.wav if you found Aeonaxx, to alert you.
+  * He will also use siren.wav if your Toon gets an Unautorized Continent Change or another security concealment

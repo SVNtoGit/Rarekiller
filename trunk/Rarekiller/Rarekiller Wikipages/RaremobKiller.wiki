@@ -1,0 +1,14 @@
+#summary Description Raremob Killer.
+
+= Description Raremob Killer =
+
+There you can choose which Mobs you want the Plugin to pull.
+You also could select to collect the Raptor Nests for little Pet Raptors.
+
+===He will Hunt:===
+  * *Cataclysm:* all lootable Cataclysm-Rares for some nice Items - including *Poseidus*
+  * *Wrath of the Lich King:* WOTLK-Rares for Archievement Frostbitten
+  * *Burning Crusade:* BC-Rares for Archievement Bloodlust
+  * *Classic Rare Mobs:* Classic Rare Mobs <= Level 60
+
+*You can enable all of them at the same time*

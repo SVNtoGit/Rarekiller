@@ -1,0 +1,9 @@
+#summary Hunt by ID.
+
+= Hunt by ID =
+
+Here you can insert a Mob Id and the Bot will pull this Mob if he found him. You found the Mob-Id if you search the Mob on [http://www.wowhead.com wowhead] and look at the Adress of the Site of your searched Mob:
+
+For example Poseidus:
+  * ID: 50005
+  * WOWHead Site: http://www.wowhead.com/npc=50005

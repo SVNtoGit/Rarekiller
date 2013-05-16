@@ -1,0 +1,12 @@
+#summary Blacklist unreachable Mobs.
+
+= Blacklist unreachable Mobs =
+
+Here you can Config if the Bot should Blacklist unreachable Mobs, Figurines and Nests for 15 Minutes. 
+
+=== Blacklist after x Seconds ===
+If he founds for example a hunted underground Mob while flying around he will try to reach and pull him, which often results to a crazy flying in circles Behavior of the Bot. If you check "Blacklist Mobs, etc after xxx Seconds" he will put the Mob to a temporarily Blacklist after the xxx Seconds for 15 Minutes and force your Toon to move on.
+ 
+=== don't leave Zone ===
+If you check this your Toon will not hunt Mobs over Area Frontiers.
+He will Blacklist the Mob if your Toon trys to fly over the current Area Frontier and so force the Toon to move on and stay in the current Area.

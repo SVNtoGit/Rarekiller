@@ -1,0 +1,11 @@
+#summary Usefull Hints
+
+= Usefull Hints =
+
+  * You can't hunt Aeonaxx in Groundmount Mode. You need Livetime or Paid Plugin for this Mob.
+  * If you use Rarekiller in combination with Instancebuddy or BG Bot it is possible that you lose your Mob because of an invite at the wrong Time.
+  * It is possible to hunt TLPD and Poseidus in Groundmountmode. He will not be able to go or fly to the Rare, but your Toon will wait if he comes in range and then pull him from the actual Location. A chance for People without Lifetime.
+  * You may die a couple of times, if you hunt Timelost Protodrake or Vyragosa without using the Slowfall Part
+  * The Bot will not try to kill Rare Mobs whose Level is 5+ higher then yours
+  * Rogues, Warriors and sometimes also the caster classes have some Problems to kill Vyragosa because she is a Flying Range Mob. If you don't want your toon trying to kill her just uncheck: kill Vyragosa.
+  * Don't use Paladin Bubble as Slowfall Ability, because you might lose the Aggro of the Drake while Falling down
