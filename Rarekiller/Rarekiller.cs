@@ -70,8 +70,7 @@ namespace katzerle
 		
         public Rarekiller()
         {
-// Automatic Update Function is deaktivated
-			//UpdatePlugin();
+			UpdatePlugin();
 
             Settings.Load();
             Logging.Write(Colors.MediumPurple, "Rarekiller Loaded.");
