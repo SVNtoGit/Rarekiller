@@ -2,6 +2,6 @@
 <!-- These Mobs are underground or inhouse Mobs -->
 <!-- Rarekiller will only pull these Mobs if you place your toon-->
 <!-- right next to them in there Cave, House etc. -->
-<Blacklist>
-	<Mob Entry="9999999" Name="Default Mob" />
-</Blacklist>
+<KillMob>
+	<Mob Entry="99999999" Name="DefaulMob" />
+</KillMob>

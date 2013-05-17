@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- These Mobs are tameable -->
 <!-- Rarekiller will tame them by default if Tamepart is activated-->
-<Blacklist>
+<CollectObject>
   <Object Entry="214945" Name="Onyx Egg" /> 
   <Object Entry="210565" Name="Dark Soil" /> 
   <Object Entry="202082" Name="Raptor Nest" /> 
   <Object Entry="202080" Name="Raptor Nest" /> 
   <Object Entry="202083" Name="Raptor Nest" /> 
   <Object Entry="202081" Name="Raptor Nest" /> 
-</Blacklist>
+</CollectObject>

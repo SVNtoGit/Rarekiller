@@ -43,7 +43,7 @@ namespace katzerle
 		public static string name { get { return "Rarekiller"; } }
 		public override string Name { get { return name; } }
 		public override string Author { get { return "katzerle"; } }
-		private readonly static Version _version = new Version(4, 0);
+		private readonly static Version _version = new Version(3, 0);
 		public override Version Version { get { return _version; } }
 		public override string ButtonText { get { return "Settings"; } }
 		public override bool WantButton { get { return true; } }
@@ -54,7 +54,7 @@ namespace katzerle
         public static RarekillerKiller Killer = new RarekillerKiller();
         public static RarekillerCamel Camel = new RarekillerCamel();
         public static RarekillerTamer Tamer = new RarekillerTamer();
-        public static RarekillerRaptorNest RaptorNest = new RarekillerRaptorNest();
+        public static RarekillerCollector RaptorNest = new RarekillerCollector();
         public static RarekillerSecurity Security = new RarekillerSecurity();
 		public static RarekillerSpells Spells = new RarekillerSpells();
 
@@ -64,6 +64,7 @@ namespace katzerle
 		public static Dictionary<Int32, string> BlacklistMobsList = new Dictionary<Int32, string>();
         public static Dictionary<Int32, string> TameableMobsList = new Dictionary<Int32, string>();
         public static Dictionary<Int32, string> CollectObjectsList = new Dictionary<Int32, string>();
+        public static Dictionary<Int32, string> KillMobsList = new Dictionary<Int32, string>();
 		
         public static bool hasItBeenInitialized = false; 
         Int32 MoveTimer = 100;
@@ -73,7 +74,7 @@ namespace katzerle
 			UpdatePlugin();
 
             Settings.Load();
-            Logging.Write(Colors.MediumPurple, "Rarekiller Loaded.");
+            Logging.Write(Colors.MediumPurple, "Rarekiller loaded");
             if (Me.Class != WoWClass.Hunter)
             {
                 Logging.Write(Colors.MediumPurple, "Rarekiller Part Tamer: I'm no Hunter. Deactivate the Tamer Part");
@@ -108,7 +109,7 @@ namespace katzerle
             BlacklistMobsList.Clear();
             TameableMobsList.Clear();
             CollectObjectsList.Clear();
-	    
+            KillMobsList.Clear();
 
             hasItBeenInitialized = false;
         }
@@ -131,10 +132,18 @@ namespace katzerle
 		
 		static public void Initialize()
         {
-            
 // Register the events of the Start/Stop Button in HB
 			BotEvents.OnBotStopped += BotStopped;
-			
+
+// ------------ Deactivate RareAlerter if Rarekiller is Enabled			
+            List<PluginContainer> _pluginList = PluginManager.Plugins;
+            foreach (PluginContainer _plugin in _pluginList)
+            {
+                if (_plugin.Enabled && _plugin.Plugin.Name == "RareAlerter")
+                    _plugin.Enabled = false;
+            }
+
+
 //Alerts for Wisper and Guild
             if (Rarekiller.Settings.Wisper)
             {
@@ -212,12 +221,35 @@ namespace katzerle
                 string Name3 = CollectObject.Attributes["Name"].InnerText;
                 CollectObjectsList.Add(Entry3, Name3);
             }
+//KillMobs to List
+            XmlDocument KillMobsXML = new XmlDocument();
+            string sPath4 = Path.Combine(FolderPath, "config\\CollectObjects.xml");
+            System.IO.FileStream fs4 = new System.IO.FileStream(@sPath4, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite);
+            try
+            {
+                KillMobsXML.Load(fs4);
+                fs4.Close();
+            }
+            catch (Exception e)
+            {
+                Logging.WriteDiagnostic(Colors.Red, e.Message);
+                fs4.Close();
+                return;
+            }
+            XmlElement root4 = KillMobsXML.DocumentElement;
+            foreach (XmlNode KillMob in root4.ChildNodes)
+            {
+                Int32 Entry3 = Convert.ToInt32(KillMob.Attributes["Entry"].InnerText);
+                string Name3 = KillMob.Attributes["Name"].InnerText;
+                KillMobsList.Add(Entry3, Name3);
+            }
         }
 
         public override void Pulse()
 		{
 			try
 			{
+                
 // ------------ Deactivate if not in Game or in Combat etc
                 if (Me == null || !StyxWoW.IsInGame || inCombat)
                     return;
@@ -229,8 +261,8 @@ namespace katzerle
 // ------------ Part Init
                 if (!hasItBeenInitialized)
                 {
-                    hasItBeenInitialized = true;
                     Initialize();
+                    hasItBeenInitialized = true;
                 }
 
 // ------------ Start the Timer for Anti-AFK

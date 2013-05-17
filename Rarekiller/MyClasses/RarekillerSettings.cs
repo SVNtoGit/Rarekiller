@@ -93,7 +93,7 @@ namespace katzerle
         // Pullspell
         public bool DefaultPull = true;
         public string Pull = "";
-        public string Range = "5";
+        public string Range = "10";
         public bool Vyragosa = true;
         public bool Blazewing = false;
         public bool BloodseekerSearch = false;
@@ -115,7 +115,7 @@ namespace katzerle
         public Int64 Blacklist15 = 900;
         public Int64 Blacklist5 = 300;
         public Int64 Blacklist2 = 120;
-        public BlacklistFlags Flags = BlacklistFlags.All;
+        public BlacklistFlags Flags = BlacklistFlags.Combat;
  	
 // Attentione for Developers		
 //Developer Things
