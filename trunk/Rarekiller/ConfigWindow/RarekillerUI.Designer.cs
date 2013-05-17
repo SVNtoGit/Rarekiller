@@ -440,7 +440,7 @@ namespace katzerle
             this.TBRange.Name = "TBRange";
             this.TBRange.Size = new System.Drawing.Size(63, 20);
             this.TBRange.TabIndex = 1;
-            this.TBRange.Text = "5";
+            this.TBRange.Text = "10";
             // 
             // TBPull
             // 

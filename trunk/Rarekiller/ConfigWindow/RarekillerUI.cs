@@ -223,19 +223,27 @@ namespace katzerle
                 CBPull2.Checked = false;
             }
 
-            // Spellrange Test
-            if (Rarekiller.Settings.DefaultPull && (Convert.ToInt64(Rarekiller.Settings.Range) > Convert.ToInt64(Rarekiller.Spells.RangeCheck)))
+// Spellrange Test Customized Pull Spell
+            if (!CBPull.Checked && (Convert.ToInt64(TBRange.Text) > Convert.ToInt64(Rarekiller.Spells.RangeCheck(TBPull.Text))))
             {
-                Rarekiller.Settings.Range = Rarekiller.Spells.RangeCheck;
-                Logging.Write(Colors.MediumPurple, "Set Range to {0} because of Low-Ranged Default Spell", Rarekiller.Spells.RangeCheck);
+                TBRange.Text = Rarekiller.Spells.RangeCheck(TBPull.Text);
+                Logging.WriteDiagnostic(Colors.MediumPurple, "Set Range to {0} because of Low-Ranged Customized Spell", Rarekiller.Spells.RangeCheck(TBPull.Text));
+            }
+
+// Spellrange Test Default Pull Spell
+            if (!CBPull.Checked && (Convert.ToInt64(TBRange.Text) > Convert.ToInt64(Rarekiller.Spells.RangeCheck(Rarekiller.Spells.FastPullspell))))
+            {
+                TBRange.Text = Rarekiller.Spells.RangeCheck(TBPull.Text);
+                Logging.WriteDiagnostic(Colors.MediumPurple, "Set Range to {0} because of Low-Ranged Default Spell", Rarekiller.Spells.RangeCheck(TBPull.Text));
             }
 
 
-//            if (Convert.ToInt32(TBRange.Text) > 35)
-//            {
-//                Logging.Write(Colors.Red, "Rarekiller: Set Range to 25, over 35 is impossible");
-//                TBRange.Text = "25";
-//            }
+            //if (Convert.ToInt32(TBRange.Text) > 35)
+            //{
+            //    Logging.Write(Colors.Red, "Rarekiller: Set Range to Default 10, over 35 is impossible");
+            //    TBRange.Text = "10";
+            //}
+
 //            if (CBPull.Checked && SpellManager.HasSpell("Fire Blast") && (Convert.ToInt32(TBRange.Text) > 20))
 //            {
 //                Logging.Write(Colors.Red, "Rarekiller: Set Range to 15 because of Low Range of Default Fire Blast");
@@ -847,7 +855,7 @@ namespace katzerle
             CBPull.Checked = true;
             CBPull2.Checked = false;
             TBPull.Text = "";
-            TBRange.Text = "5";
+            TBRange.Text = "10";
             CBVyragosa.Checked = true;
             CBBlazewing.Checked = false;
             CBBloodseekerSearch.Checked = false;

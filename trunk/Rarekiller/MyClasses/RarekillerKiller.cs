@@ -54,7 +54,7 @@ namespace katzerle
 // ----------------- Generate a List with all wanted Rares found in Object Manager ---------------------		
             ObjectManager.Update();
             List<WoWUnit> objList = ObjectManager.GetObjectsOfType<WoWUnit>()
-                .Where(o => (
+                .Where(o => (!Blacklist.Contains(o.Guid, Rarekiller.Settings.Flags) && (
                 (Rarekiller.Settings.CATA && ((o.Entry == 50057)	// Blazewing Hyjal
                         || (o.Entry == 50053)           // Thartuk the Exile Hyjal
                         || (o.Entry == 50050)			// Shok'sharak Vashir
@@ -114,11 +114,12 @@ namespace katzerle
                         || (o.Entry == 18677)			// Mekthorg the Wild
                         || (o.Entry == 20932)			// Nuramoc
                         || (o.Entry == 18693)			// Speaker Mar'grom
-                        || (o.Entry == 18679)))			// Vorakem Doomspeaker	
+                        || (o.Entry == 18679)))			// Vorakem Doomspeaker
+                || Rarekiller.KillMobsList.ContainsKey(Convert.ToInt32(o.Entry)) //Kill Mobs from List
                 || ((o.Level == 86 || o.Level == 87 || o.Level == 88 || o.Level == 89 || o.Level == 90) && Rarekiller.Settings.MOP && (o.CreatureRank == Styx.WoWUnitClassificationType.Rare)) // every single Pandaren Rare Mob is hunted
                 || ((o.Level < Rarekiller.Settings.Level) && Rarekiller.Settings.LowRAR && (o.CreatureRank == Styx.WoWUnitClassificationType.Rare)) // every single Rare Mob < Level 61 is hunted	
                 || (Rarekiller.Settings.HUNTbyID && (o.Entry == Convert.ToInt64(Rarekiller.Settings.MobID)))				// Hunt special IDs 
-                ))
+                )))
                 .OrderBy(o => o.Distance).ToList();
             foreach (WoWUnit o in objList)
             {
@@ -129,6 +130,7 @@ namespace katzerle
 // Don't kill the Rare if ...
                     if (Rarekiller.Settings.NotKillTameable && o.IsTameable) // ... I want to tame him :)
 					{
+                        Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Pulse Tamer");
                         Rarekiller.Tamer.findAndTameMob();
 					}
 
@@ -145,7 +147,7 @@ namespace katzerle
                         Logging.Write(Colors.MediumPurple, "Rarekiller: Blacklist Mob for 5 Minutes.");
                         return;
                     }
-
+                    
 					if (o.Level > (Me.Level + 4)) // ... 4 Levels higher them me
 					{
                         Logging.Write(Colors.MediumPurple, "Rarekiller: His Level is 5 over mine, better not to kill him.");
@@ -204,7 +206,7 @@ namespace katzerle
 					}
 						
 // ----------------- Alert ---------------------
-					
+                    Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Make Noise");
 					if (Rarekiller.Settings.Alert)
 					{
 						if (File.Exists(Rarekiller.Settings.SoundfileFoundRare))
@@ -222,7 +224,7 @@ namespace katzerle
                     }
 
 // ----------------- Move to Mob Part ---------------------	
-                    if ((Me.Class == WoWClass.Hunter) || (Me.Class == WoWClass.Warlock))
+                    if (!(Me.Pet == null) && ((Me.Class == WoWClass.Hunter) || (Me.Class == WoWClass.Warlock)))
                         Lua.DoString(string.Format("RunMacroText(\"/petpassive\")"), 0);
 
 					if ((o.Entry == 49822) || (Rarekiller.Settings.GroundMountMode &&
@@ -234,12 +236,12 @@ namespace katzerle
 					else
 						ForceGround = false;
 
-                    Logging.Write(Colors.MediumPurple, "Rarekiller Part MoveTo: Move to target");
+                    Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part MoveTo: Move to target");
                     BlacklistTimer.Reset();
                     BlacklistTimer.Start();
 					
 					// ----------------- Hunting Flying Mobs with Groundmount Mode ---------------------
-                    if (Rarekiller.Settings.GroundMountMode && ((o.Entry == 50057) || (o.Entry == 50057) || (o.Entry == 50057)))
+                    if (Rarekiller.Settings.GroundMountMode && ((o.Entry == 29753) || (o.Entry == 32491) || (o.Entry == 32630) || (o.Entry == 33687)))
 					{
 						WoWPoint LastLocation = o.Location;
 						while ((o.Location.Distance(Me.Location) > SpellManager.Spells[Rarekiller.Spells.FastPullspell].MaxRange) && !o.TaggedByOther && !o.IsDead)
@@ -249,16 +251,36 @@ namespace katzerle
                             o.Face();
 							Thread.Sleep(500);
 						}
+                        if (o.TaggedByOther)
+                        {
+                            Logging.Write(Colors.MediumPurple, "Rarekiller: Mob is Tagged by another Player");
+                            Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist5));
+                            Logging.Write(Colors.MediumPurple, "Rarekiller: Blacklist Mob for 5 Minutes.");
+                        }
+                        if (o.IsDead && !o.CanLoot)
+                        {
+                            Logging.Write(Colors.MediumPurple, "Rarekiller: Mob was killed by another Player");
+                            Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist60));
+                            Logging.Write(Colors.MediumPurple, "Rarekiller: Blacklist Mob for 60 Minutes.");
+                        }
 					}
 					// ----------------- Hunting Flying Mobs with Flying Mount :) ---------------------
 					else
 					{
-                        // Spellrange Test
-                        if (Rarekiller.Settings.DefaultPull && (Convert.ToInt64(Rarekiller.Settings.Range) > Convert.ToInt64(Rarekiller.Spells.RangeCheck)))
+                        // Spellrange Test Default Pull Spell
+                        if (Rarekiller.Settings.DefaultPull && (Convert.ToInt64(Rarekiller.Settings.Range) > Convert.ToInt64(Rarekiller.Spells.RangeCheck(Rarekiller.Spells.FastPullspell))))
                         {
-                            Rarekiller.Settings.Range = Rarekiller.Spells.RangeCheck;
-                            Logging.Write(Colors.MediumPurple, "Set Range to {0} because of Low-Ranged Default Pull Spell", Rarekiller.Spells.RangeCheck);
+                            Rarekiller.Settings.Range = Rarekiller.Spells.RangeCheck(Rarekiller.Spells.FastPullspell);
+                            Logging.WriteDiagnostic(Colors.MediumPurple, "Set Range to {0} because of Low-Ranged Default Spell", Rarekiller.Spells.RangeCheck(Rarekiller.Spells.FastPullspell));
                         }
+
+                        // Spellrange Test Customized Pull Spell
+                        if (!Rarekiller.Settings.DefaultPull && (Convert.ToInt64(Rarekiller.Settings.Range) > Convert.ToInt64(Rarekiller.Spells.RangeCheck(Rarekiller.Settings.Pull))))
+                        {
+                            Rarekiller.Settings.Range = Rarekiller.Spells.RangeCheck(Rarekiller.Settings.Pull);
+                            Logging.WriteDiagnostic(Colors.MediumPurple, "Set Range to {0} because of Low-Ranged Customized Spell", Rarekiller.Spells.RangeCheck(Rarekiller.Settings.Pull));
+                        }
+
                         if ((o.Entry == 3868) && !Rarekiller.Settings.BloodseekerKill) // ... Special for Bloodseeker, just alert and don't kill him
                             Rarekiller.Settings.Range = "20";
 
@@ -336,13 +358,13 @@ namespace katzerle
                         Rarekiller.Settings.Range = "3";
                     }
 
-					if (!Me.Mounted && ((Me.Class == WoWClass.Hunter) || (Me.Class == WoWClass.Warlock)))
-						Lua.DoString(string.Format("RunMacroText(\"/petdefensive\")"), 0);
+                    if (Me.Pet.IsAlive && ((Me.Class == WoWClass.Hunter) || (Me.Class == WoWClass.Warlock)))
+                        Lua.DoString(string.Format("RunMacroText(\"/petdefensive\")"), 0);
 
                     Thread.Sleep(100);
 					WoWMovement.MoveStop();
                     Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Use Quick Slowfall: {0} Mob: {1}", Me.IsFalling, o.Name);
-                    if (Me.IsFalling && Rarekiller.Settings.UseSlowfall && ((o.Entry == 29753) || (o.Entry == 3868) || (o.Entry == 32491) || (o.Entry == 32630) || (o.Entry == 33687)))
+                    if (Me.IsFalling && Rarekiller.Settings.UseSlowfall && ((o.Entry == 29753) || (o.Entry == 32491) || (o.Entry == 32630) || (o.Entry == 33687)))
 					{
 						Thread.Sleep(200);
 						Rarekiller.Slowfall.HelpFalling();

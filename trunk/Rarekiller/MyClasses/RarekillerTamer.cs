@@ -51,17 +51,17 @@ namespace katzerle
 // ----------------- Generate a List with all wanted Rares found in Object Manager ---------------------		
             ObjectManager.Update();
             List<WoWUnit> objList = ObjectManager.GetObjectsOfType<WoWUnit>()
-                .Where(o => (
+                .Where(o => (!Blacklist.Contains(o.Guid, Rarekiller.Settings.Flags) && (
                 ((Rarekiller.Settings.TameDefault && Rarekiller.TameableMobsList.ContainsKey(Convert.ToInt32(o.Entry)))
                 || (Rarekiller.Settings.TameByID && (o.Entry == Convert.ToInt64(Rarekiller.Settings.TameMobID))))
-                && !o.IsPet && o.IsTameable))
+                && !o.IsPet && o.IsTameable)))
                 .OrderBy(o => o.Distance).ToList();
             foreach (WoWUnit o in objList)
             {
                 if (!o.IsDead && !Blacklist.Contains(o.Guid, Rarekiller.Settings.Flags))
                 {
                     Logging.Write(Colors.MediumPurple, "Rarekiller Part Tamer: Found a new Pet {0} ID {1}", o.Name, o.Entry);
-// Don't tame the Rare if ...
+                    // Don't tame the Rare if ...
                     if (Rarekiller.inCombat)
                     {
                         Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Tamer: ... but I'm in another Combat :( !!!");
@@ -94,19 +94,19 @@ namespace katzerle
                         SpellManager.StopCasting();
                         Thread.Sleep(100);
                     }
-					if(Rarekiller.BlacklistMobsList.ContainsKey(Convert.ToInt32(o.Entry)))
+                    if (Rarekiller.BlacklistMobsList.ContainsKey(Convert.ToInt32(o.Entry)))
                     {
                         Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Tamer: {0} is Member of the BlacklistedMobs.xml", o.Name);
                         Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist15));
                         Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Tamer: Blacklist Mob for 15 Minutes.");
                         return;
-					}
+                    }
 
-//Dismiss Pet
-					SpellManager.Cast("Dismiss Pet");
+                    //Dismiss Pet
+                    SpellManager.Cast("Dismiss Pet");
                     Thread.Sleep(3000);
-					
-// ----------------- Alert ---------------------
+
+                    // ----------------- Alert ---------------------
                     if (Rarekiller.Settings.Alert)
                     {
                         if (File.Exists(Rarekiller.Settings.SoundfileFoundRare))
@@ -116,7 +116,7 @@ namespace katzerle
                         else
                             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Tamer: playing Soundfile failes");
                     }
-// ----------------- Move to Mob Part ---------------------	
+                    // ----------------- Move to Mob Part ---------------------	
 
                     WoWPoint newPoint = WoWMovement.CalculatePointFrom(o.Location, (float)Rarekiller.Settings.Tamedistance);
 
@@ -126,15 +126,15 @@ namespace katzerle
                     Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part MoveTo: Move to target");
                     BlacklistTimer.Reset();
                     BlacklistTimer.Start();
-					while (newPoint.Distance(Me.Location) > Rarekiller.Settings.Tamedistance)
-					{
-						if (Rarekiller.Settings.GroundMountMode || ForceGround)
-							Navigator.MoveTo(newPoint);
-						else
-							Flightor.MoveTo(newPoint);
-						Thread.Sleep(100);
-						// ----------------- Security  ---------------------
-						if (Rarekiller.inCombat) return;
+                    while (newPoint.Distance(Me.Location) > Rarekiller.Settings.Tamedistance)
+                    {
+                        if (Rarekiller.Settings.GroundMountMode || ForceGround)
+                            Navigator.MoveTo(newPoint);
+                        else
+                            Flightor.MoveTo(newPoint);
+                        Thread.Sleep(100);
+                        // ----------------- Security  ---------------------
+                        if (Rarekiller.inCombat) return;
                         if (Rarekiller.Settings.BlacklistCheck && (BlacklistTimer.Elapsed.TotalSeconds > (Convert.ToInt32(Rarekiller.Settings.BlacklistTime))))
                         {
                             Logging.Write(Colors.MediumPurple, "Rarekiller Part Tamer: Can't reach Mob {0}, Blacklist and Move on", o.Name);
@@ -145,8 +145,8 @@ namespace katzerle
                         }
                     }
                     BlacklistTimer.Reset();
-					Thread.Sleep(300);
-					WoWMovement.MoveStop();
+                    Thread.Sleep(300);
+                    WoWMovement.MoveStop();
 
                     if (Me.IsFlying)
                     {
@@ -165,8 +165,8 @@ namespace katzerle
                         Lua.DoString("Dismount()");
 
                     Thread.Sleep(150);
-					o.Target();
-// Tame it
+                    o.Target();
+                    // Tame it
                     while (!o.IsPet)
                     {
                         if (o.IsDead)
@@ -177,7 +177,7 @@ namespace katzerle
                         if (Me.HealthPercent < 10)
                         {
                             Logging.Write(Colors.MediumPurple, "Rarekiller Part Tamer: Health < 10% , Use Feign Death !!! ");
-							SpellManager.Cast("Feign Death");
+                            SpellManager.Cast("Feign Death");
                             return;
                         }
 
@@ -193,9 +193,11 @@ namespace katzerle
                 }
                 else if (o.IsPet)
                     return;
+                else if (Blacklist.Contains(o.Guid, Rarekiller.Settings.Flags))
+                    return;
                 else
                 {
-                    Logging.Write(Colors.MediumPurple, "Rarekiller Part Tamer: Find a Mob, but sadly he's dead, blacklistet or not tameable: {0}", o.Name);
+                    Logging.Write(Colors.MediumPurple, "Rarekiller Part Tamer: Find a Mob, but sadly he's dead or not tameable: {0}", o.Name);
                     Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist5));
                     Logging.Write(Colors.MediumPurple, "Rarekiller Part Tamer: Blacklist Mob for 5 Minutes.");
                     return;
