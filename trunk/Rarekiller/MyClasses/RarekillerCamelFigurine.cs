@@ -161,18 +161,10 @@ namespace katzerle
 
                     Logging.Write(Colors.MediumPurple, "Rarekiller Part Camel: Interact with Figurine - ID {0}", o.Entry);
 					ForceGround = false;
-
-                    if (o.Entry == 50410 && Rarekiller.Settings.Collect)
-                    {
-                        Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist15));
-                        Logging.Write(Colors.MediumPurple, "Rarekiller Part Camel: Blacklist Figurine for 15 Minutes. Just one Try to Collect allowed");
-                    }
                 }
             }
         }
 
-
-//this Part needs some Work, too !!
         public void findAndKillDormus()
         {
             bool CastSuccess = false;
@@ -181,9 +173,7 @@ namespace katzerle
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Scan for Dormus");
             ObjectManager.Update();
             List<WoWUnit> objList = ObjectManager.GetObjectsOfType<WoWUnit>()
-                .Where(o => (!Blacklist.Contains(o.Guid, Rarekiller.Settings.Flags) && ((o.Entry == 50245)
-                    || ((o.Entry == 47755) && Rarekiller.Settings.TestKillDormus) //Testcase Warlord Ihsenn
-                )))
+                .Where(o => (!Blacklist.Contains(o.Guid, Rarekiller.Settings.Flags)) && (o.Entry == 50245))
                 .OrderBy(o => o.Distance).ToList();
             foreach (WoWUnit o in objList)
             {
