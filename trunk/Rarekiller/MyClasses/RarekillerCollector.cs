@@ -109,7 +109,7 @@ namespace katzerle
 
 				while (o.Location.Distance(Me.Location) > 4)
 				{
-                    if (Me.IsIndoors)
+                    if (o.IsIndoors)
                         Navigator.MoveTo(o.Location);
                     else
                         Flightor.MoveTo(o.Location);
