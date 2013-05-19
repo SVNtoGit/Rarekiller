@@ -1,9 +1,0 @@
-#summary Log me Off.
-
-= don't pull tagged Mobs =
-  * If enabled the Bot will not try to pull already tagged Mobs 
-  * You could choose 2 Behaviors how he should react instead:
-=== wait who wins ===
-He will wait who wins the fight and pull the Mob if he kills the other Player
-=== blacklist tagged Mobs ===
-he will blacklist the Mob for some minutes and fly away

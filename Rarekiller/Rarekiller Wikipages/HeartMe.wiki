@@ -1,9 +1,0 @@
-#summary Heart Me
-
-= Heart Me =
-
-This Feature will use Heartstone or kills your WOW if a Player follows you more then x Seconds
-
-If your Heartstone is on the Same Continent your Toon will wait 30 Minutes and then go camping again. If the Heartstone is on another Continent your Toon isn't able to go back to the camping Area and so he will Log out.
-
-Don't use *"Heart me if Player follows"* if you camp on a single Spawn Point, because maybe other People also have this Idea and then your Toon hearts and maybe miss the hunted Rare Mob.
