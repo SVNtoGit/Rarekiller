@@ -77,7 +77,7 @@ namespace katzerle
             Logging.Write(Colors.MediumPurple, "Rarekiller loaded");
             if (Me.Class != WoWClass.Hunter)
             {
-                Logging.Write(Colors.MediumPurple, "Rarekiller Part Tamer: I'm no Hunter. Deactivate the Tamer Part");
+                Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Tamer: I'm no Hunter. Deactivate the Tamer Part");
                 Settings.TameByID = false;
                 Settings.TameDefault = false;
                 Settings.TameMobID = "";
@@ -139,8 +139,11 @@ namespace katzerle
             List<PluginContainer> _pluginList = PluginManager.Plugins;
             foreach (PluginContainer _plugin in _pluginList)
             {
-                if (_plugin.Enabled && _plugin.Plugin.Name == "RareAlerter")
+				if (_plugin.Enabled && _plugin.Plugin.Name == "RareAlerter")
+				{
+					Logging.Write(Colors.MediumPurple, "Rarekiller: RareAlerter deactivated");
                     _plugin.Enabled = false;
+				}
             }
 
 
