@@ -126,7 +126,7 @@ namespace katzerle
                     BlacklistTimer.Start();
                     while (newPoint.Distance(Me.Location) > Rarekiller.Settings.Tamedistance)
                     {
-                        if (o.Entry == 49822 || Me.IsIndoors)
+                        if (o.Entry == 49822 || o.IsIndoors)
                             Navigator.MoveTo(newPoint);
                         else
                             Flightor.MoveTo(newPoint);

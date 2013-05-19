@@ -345,7 +345,7 @@ namespace katzerle
                         Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part MoveTo: Move to target");
 						while (o.Location.Distance(Me.Location) > 5)
 						{
-                            if (o.Entry == 49822 || Me.IsIndoors)
+                            if (o.Entry == 49822 || o.IsIndoors)
 								Navigator.MoveTo(o.Location);
 							else
 								Flightor.MoveTo(o.Location);
