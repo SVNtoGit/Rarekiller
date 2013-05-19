@@ -283,7 +283,7 @@ namespace katzerle
 // ------------ Part Camel Figurine
 					if (Settings.Camel || Settings.TestFigurineInteract)
 						Camel.findAndPickupObject();
-					if (Settings.Dormus || Settings.TestKillDormus)
+                    if (Settings.Camel)
 						Camel.findAndKillDormus();
 
 // ------------ Part Raptor Nest

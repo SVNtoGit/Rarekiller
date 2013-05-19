@@ -69,8 +69,6 @@ namespace katzerle
         public bool ObjectsCollector = true;
 		public bool Poseidus = true;
         public bool Camel = true;
-        public bool Collect = true;
-        public bool Dormus = true;
         // Hunt by ID
         public bool HUNTbyID = false;
         public string MobID = "";
@@ -124,7 +122,6 @@ namespace katzerle
 //Developer Testcases
         public bool TestRaptorNest = false;
         public bool TestFigurineInteract = false;
-        public bool TestKillDormus = false;
 
         // -------------- Load ConfigFile ---------------
         public void Load()
@@ -434,17 +431,6 @@ namespace katzerle
                     Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + Camel.ToString());
                 }
                 xvar = xml.SelectSingleNode("//Rarekiller/Collect");
-                if (xvar != null)
-                {
-                    Collect = Convert.ToBoolean(xvar.InnerText);
-                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + Collect.ToString());
-                }
-                xvar = xml.SelectSingleNode("//Rarekiller/Dormus");
-                if (xvar != null)
-                {
-                    Dormus = Convert.ToBoolean(xvar.InnerText);
-                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + Dormus.ToString());
-                }
             }
             catch (Exception e)
             {

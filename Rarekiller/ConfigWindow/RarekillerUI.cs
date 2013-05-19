@@ -54,8 +54,6 @@ namespace katzerle
             CBRaptorNest.Checked = Rarekiller.Settings.RaptorNest;
             CBObjects.Checked = Rarekiller.Settings.ObjectsCollector;
             CBCamel.Checked = Rarekiller.Settings.Camel;
-            CBCollect.Checked = Rarekiller.Settings.Collect;
-            CBDormus.Checked = Rarekiller.Settings.Dormus;
             // Hunt by ID
             CBHuntByID.Checked = Rarekiller.Settings.HUNTbyID;
             TBHuntByID.Text = Rarekiller.Settings.MobID;
@@ -99,10 +97,8 @@ namespace katzerle
             //Developer Box
             CBTestRaptorNest.Enabled = Rarekiller.Settings.DeveloperBoxActive;
             CBTestCamel.Enabled = Rarekiller.Settings.DeveloperBoxActive;
-            CBTestDormus.Enabled = Rarekiller.Settings.DeveloperBoxActive;
             CBTestRaptorNest.Checked = Rarekiller.Settings.TestRaptorNest;
             CBTestCamel.Checked = Rarekiller.Settings.TestFigurineInteract;
-            CBTestDormus.Checked = Rarekiller.Settings.TestKillDormus;
         }
 		
         private void RBItem_CheckedChanged(object sender, EventArgs e)
@@ -237,47 +233,7 @@ namespace katzerle
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Set Range to {0} because of Low-Ranged Default Spell", Rarekiller.Spells.RangeCheck(TBPull.Text));
             }
 
-
-            //if (Convert.ToInt32(TBRange.Text) > 35)
-            //{
-            //    Logging.Write(Colors.Red, "Rarekiller: Set Range to Default 10, over 35 is impossible");
-            //    TBRange.Text = "10";
-            //}
-
-//            if (CBPull.Checked && SpellManager.HasSpell("Fire Blast") && (Convert.ToInt32(TBRange.Text) > 20))
-//            {
-//                Logging.Write(Colors.Red, "Rarekiller: Set Range to 15 because of Low Range of Default Fire Blast");
-//                TBRange.Text = "15";
-//            }
-//            if (CBPull.Checked && SpellManager.HasSpell("Icy Touch") && (Convert.ToInt32(TBRange.Text) > 20))
-//            {
-//                Logging.Write(Colors.Red, "Rarekiller: Set Range to 15 because of Low Range of Default Icy Touch");
-//              TBRange.Text = "15";
-//            }
-//            if (CBPull.Checked && SpellManager.HasSpell("Earth Shock") && (Convert.ToInt32(TBRange.Text) > 20))
-//            {
-//                Logging.Write(Colors.Red, "Rarekiller: Set Range to 15 because of Low Range of Default Pull Earth Shock");
-//                TBRange.Text = "15";
-//            }
-
-//            if (CBPull.Checked && SpellManager.HasSpell("Jab") && (Convert.ToInt32(TBRange.Text) > 3))
-//            {
-//                Logging.Write(Colors.Red, "Rarekiller: Set Range to 3 because of Low Range of Default Pull Jab");
-//                TBRange.Text = "3";
-//            }
-//            if (CBPull.Checked && SpellManager.HasSpell("Crusader Strike") && (Convert.ToInt32(TBRange.Text) > 3))
-//            {
-//                Logging.Write(Colors.Red, "Rarekiller: Set Range to 3 because of Low Range of Default Pull Spell Crusader Strike");
-//                TBRange.Text = "3";
-//            }
-//            if (CBPull.Checked && SpellManager.HasSpell("Sinister Strike") && (Convert.ToInt32(Rarekiller.Settings.Range) > 3))
-//            {
-//                Logging.Write(Colors.Red, "Rarekiller: Set Range to 3 because of Low Range of Default Spell Sinister Strike");
-//                TBRange.Text = "3";
-//            }
-
-            if ((CBMOP.Checked || CBWotlk.Checked || CBBC.Checked || CBCata.Checked || CBLowRAR.Checked || CBHuntByID.Checked
-                || CBDormus.Checked)
+            if ((CBMOP.Checked || CBWotlk.Checked || CBBC.Checked || CBCata.Checked || CBLowRAR.Checked || CBHuntByID.Checked)
                 && CBPull.Checked && !(SpellManager.HasSpell(Rarekiller.Spells.FastPullspell)))
             {
                 Logging.Write(Colors.MediumPurple, "Rarekiller Part Spells: Don't have your Pull Spell - please config one");
@@ -287,7 +243,6 @@ namespace katzerle
                 CBMOP.Checked = false;
                 CBHuntByID.Checked = false;
                 CBLowRAR.Checked = false;
-                CBDormus.Checked = false;
             }
             if (CBTLPD.Checked && CBPull.Checked
                 && !(SpellManager.HasSpell(Rarekiller.Spells.FastPullspell)))
@@ -382,10 +337,7 @@ namespace katzerle
             Rarekiller.Settings.Blazewing = CBBlazewing.Checked;
             Rarekiller.Settings.BloodseekerSearch = CBBloodseekerSearch.Checked;
             Rarekiller.Settings.BloodseekerKill = CBBloodseekerKill.Checked;
-            //Testpart
             Rarekiller.Settings.Camel = CBCamel.Checked;
-            Rarekiller.Settings.Collect = CBCollect.Checked;
-            Rarekiller.Settings.Dormus = CBDormus.Checked;
             //Alert etc
             Rarekiller.Settings.GroundMountMode = CBGroundMount.Checked;
             Rarekiller.Settings.Alert = CBAlert.Checked;
@@ -398,7 +350,6 @@ namespace katzerle
             //Developer Box
             Rarekiller.Settings.TestRaptorNest = CBTestRaptorNest.Checked; 
             Rarekiller.Settings.TestFigurineInteract = CBTestCamel.Checked;
-            Rarekiller.Settings.TestKillDormus = CBTestDormus.Checked;
 
             // Rarekiller
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: MOP = {0}", CBMOP.Checked.ToString());
@@ -411,8 +362,6 @@ namespace katzerle
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Poseidus = {0}", CBPoseidus.Checked.ToString());
 			// Collector
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Camel = {0}", CBCamel.Checked.ToString());
-            Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: CollectOnce = {0}", CBCollect.Checked.ToString());
-            Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Dormus = {0}", CBDormus.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: RaptorNest = {0}", CBRaptorNest.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: ObjectsCollect = {0}", CBObjects.Checked.ToString());
 			// Problem Mobs
@@ -526,16 +475,6 @@ namespace katzerle
             //let's add another element (child of the root)
             element = xml.CreateElement("Camel");
             text = xml.CreateTextNode(CBCamel.Checked.ToString());
-            element.AppendChild(text);
-            root.AppendChild(element);
-            //let's add another element (child of the root)
-            element = xml.CreateElement("Collect");
-            text = xml.CreateTextNode(CBCollect.Checked.ToString());
-            element.AppendChild(text);
-            root.AppendChild(element);
-            //let's add another element (child of the root)
-            element = xml.CreateElement("Dormus");
-            text = xml.CreateTextNode(CBDormus.Checked.ToString());
             element.AppendChild(text);
             root.AppendChild(element);
             //let's add another element (child of the root)
@@ -860,17 +799,12 @@ namespace katzerle
             CBBlazewing.Checked = false;
             CBBloodseekerSearch.Checked = false;
             CBBloodseekerKill.Checked = false;
-            //Testpart
             CBCamel.Checked = true;
-            CBCollect.Checked = true;
-            CBDormus.Checked = true;
             //Developer Box
             CBTestRaptorNest.Enabled = false;
             CBTestCamel.Enabled = false;
-            CBTestDormus.Enabled = false;
             CBTestRaptorNest.Checked = false;
             CBTestCamel.Checked = false;
-            CBTestDormus.Checked = false;
 			
 			// Variablen nach Settings übernehmen
             // Addons
@@ -909,10 +843,7 @@ namespace katzerle
             Rarekiller.Settings.Blazewing = CBBlazewing.Checked;
             Rarekiller.Settings.BloodseekerSearch = CBBloodseekerSearch.Checked;
             Rarekiller.Settings.BloodseekerKill = CBBloodseekerKill.Checked;
-            //Testpart
             Rarekiller.Settings.Camel = CBCamel.Checked;
-            Rarekiller.Settings.Collect = CBCollect.Checked;
-            Rarekiller.Settings.Dormus = CBDormus.Checked;
             //Alert etc
             Rarekiller.Settings.GroundMountMode = CBGroundMount.Checked;
             Rarekiller.Settings.Alert = CBAlert.Checked;
@@ -925,7 +856,6 @@ namespace katzerle
            //Developer Box
             Rarekiller.Settings.TestRaptorNest = CBTestRaptorNest.Checked; 
             Rarekiller.Settings.TestFigurineInteract = CBTestCamel.Checked;
-            Rarekiller.Settings.TestKillDormus = CBTestDormus.Checked;
         }
 
         private void CBPull_CheckedChanged_1(object sender, EventArgs e)
