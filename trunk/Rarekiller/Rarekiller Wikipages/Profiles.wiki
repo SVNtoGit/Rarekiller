@@ -1,7 +1,0 @@
-#summary Profiles.
-
-= Profiles =
-
-  * Here you found several [http://pluginrarekiller.googlecode.com/svn/profile Profiles for TLPD, Poseidus, Camel Figurine and Aeonaxx]
-  * For camping without Movement and without Livetime you could also use [http://www.thebuddyforum.com/attachments/honorbuddy-forum/submitted-profiles/neutral/15582d1295802188-%5Bn%5D%5Bcamper%5D-never-afk-again-camper-1-0.xml  the Camperprofile (Link)] with the Grindbot.
-  * eXtOphius made a [http://www.thebuddyforum.com/attachments/honorbuddy-forum/submitted-profiles/farming/20367d1301679763-%5Bgb2%5D-frostbitten-achievement-northrend-mega-profile-v1-4-northrend-mega-farm-v1.4.xml Nordend Mega Profile --> Link]. It is perfect to hunt for the Archievement Frostbitten. It is a very long route, and so doesn't attract so much attention as small circles in one Area.
