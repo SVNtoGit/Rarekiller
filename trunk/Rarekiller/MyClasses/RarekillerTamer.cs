@@ -42,12 +42,13 @@ namespace katzerle
     {
         public static LocalPlayer Me = StyxWoW.Me;
         private static Stopwatch BlacklistTimer = new Stopwatch();
-        bool ForceGround = false;
         
         public void findAndTameMob()
         {
             if (Rarekiller.Settings.DeveloperLogs)
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Scan for Tamer");
+            if (Me.Class != WoWClass.Hunter)
+                return;
 // ----------------- Generate a List with all wanted Rares found in Object Manager ---------------------		
             ObjectManager.Update();
             List<WoWUnit> objList = ObjectManager.GetObjectsOfType<WoWUnit>()
@@ -120,15 +121,12 @@ namespace katzerle
 
                     WoWPoint newPoint = WoWMovement.CalculatePointFrom(o.Location, (float)Rarekiller.Settings.Tamedistance);
 
-                    if (o.Entry == 49822)
-                        ForceGround = true;
-
                     Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part MoveTo: Move to target");
                     BlacklistTimer.Reset();
                     BlacklistTimer.Start();
                     while (newPoint.Distance(Me.Location) > Rarekiller.Settings.Tamedistance)
                     {
-                        if (Rarekiller.Settings.GroundMountMode || ForceGround)
+                        if (o.Entry == 49822 || Me.IsIndoors)
                             Navigator.MoveTo(newPoint);
                         else
                             Flightor.MoveTo(newPoint);

@@ -40,7 +40,6 @@ namespace katzerle
     {
 		public static LocalPlayer Me = StyxWoW.Me;
         private static Stopwatch BlacklistTimer = new Stopwatch();
-        bool ForceGround = false;
         public void findAndPickupNest()
         {
 
@@ -110,10 +109,10 @@ namespace katzerle
 
 				while (o.Location.Distance(Me.Location) > 4)
 				{
-					if (Rarekiller.Settings.GroundMountMode || ForceGround)
-						Navigator.MoveTo(o.Location);
-					else
-						Flightor.MoveTo(o.Location);
+                    if (Me.IsIndoors)
+                        Navigator.MoveTo(o.Location);
+                    else
+                        Flightor.MoveTo(o.Location);
 					Thread.Sleep(100);
 // ----------------- Security  ---------------------
 					if (Rarekiller.inCombat) return;

@@ -60,7 +60,6 @@ namespace katzerle
             CBBlacklistCheck.Checked = Rarekiller.Settings.BlacklistCheck;
             TBBlacklistTime.Text = Rarekiller.Settings.BlacklistTime;
             //Misc
-            CBGroundMount.Checked = Rarekiller.Settings.GroundMountMode;
 			CBAlert.Checked = Rarekiller.Settings.Alert;
             //Security
             CBWisper.Checked = Rarekiller.Settings.Wisper;
@@ -339,7 +338,6 @@ namespace katzerle
             Rarekiller.Settings.BloodseekerKill = CBBloodseekerKill.Checked;
             Rarekiller.Settings.Camel = CBCamel.Checked;
             //Alert etc
-            Rarekiller.Settings.GroundMountMode = CBGroundMount.Checked;
             Rarekiller.Settings.Alert = CBAlert.Checked;
             Rarekiller.Settings.Wisper = CBWisper.Checked;
             Rarekiller.Settings.Guild = CBGuild.Checked;
@@ -392,7 +390,6 @@ namespace katzerle
 			// Miscs
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: BlacklistCheck = {0}", CBBlacklistCheck.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: BlacklistTime = {0}", TBBlacklistTime.Text.ToString());
-            Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: GroundmountMode = {0}", CBGroundMount.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: MoveAround = {0}", CBKeyer.Checked.ToString());
 			// Alerts
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Alert = {0}", CBAlert.Checked.ToString());
@@ -599,11 +596,6 @@ namespace katzerle
             root.AppendChild(element);
 
 			//Miscs
-            //let's add another element (child of the root)
-            element = xml.CreateElement("GroundMountMode");
-            text = xml.CreateTextNode(CBGroundMount.Checked.ToString());
-            element.AppendChild(text);
-            root.AppendChild(element);
 			//let's add another element (child of the root)
             element = xml.CreateElement("Keyer");
             text = xml.CreateTextNode(CBKeyer.Checked.ToString());
@@ -765,7 +757,6 @@ namespace katzerle
             CBBlacklistCheck.Checked = true;
             TBBlacklistTime.Text = "180";
             //Misc
-            CBGroundMount.Checked = false;
             CBAlert.Checked = true;
             //Security
             CBWisper.Checked = true;
@@ -845,7 +836,6 @@ namespace katzerle
             Rarekiller.Settings.BloodseekerKill = CBBloodseekerKill.Checked;
             Rarekiller.Settings.Camel = CBCamel.Checked;
             //Alert etc
-            Rarekiller.Settings.GroundMountMode = CBGroundMount.Checked;
             Rarekiller.Settings.Alert = CBAlert.Checked;
             Rarekiller.Settings.Wisper = CBWisper.Checked;
             Rarekiller.Settings.Guild = CBGuild.Checked;

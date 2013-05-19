@@ -42,7 +42,6 @@ namespace katzerle
 
         public static LocalPlayer Me = StyxWoW.Me;
         private static Stopwatch BlacklistTimer = new Stopwatch();
-        bool ForceGround = false;
 
         public void findAndKillMob()
         {
@@ -227,105 +226,67 @@ namespace katzerle
                     if (!(Me.Pet == null) && ((Me.Class == WoWClass.Hunter) || (Me.Class == WoWClass.Warlock)))
                         Lua.DoString(string.Format("RunMacroText(\"/petpassive\")"), 0);
 
-					if ((o.Entry == 49822) || (Rarekiller.Settings.GroundMountMode &&
-						(!(o.Entry == 50005)			// Poseidus Vashir
-						|| !(o.Entry == 50052)			// Burgy Blackheart Vashir
-						|| !(o.Entry == 49913)			// Lady La-La Vashir
-						))) //In Vashir you have to use Flightor !
-						ForceGround = true;
-					else
-						ForceGround = false;
-
                     Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part MoveTo: Move to target");
                     BlacklistTimer.Reset();
                     BlacklistTimer.Start();
 					
 					// ----------------- Hunting Flying Mobs with Groundmount Mode ---------------------
-                    if (Rarekiller.Settings.GroundMountMode && ((o.Entry == 29753) || (o.Entry == 32491) || (o.Entry == 32630) || (o.Entry == 33687)))
+// Spellrange Test Default Pull Spell
+                    if (Rarekiller.Settings.DefaultPull && (Convert.ToInt64(Rarekiller.Settings.Range) > Convert.ToInt64(Rarekiller.Spells.RangeCheck(Rarekiller.Spells.FastPullspell))))
+                    {
+                        Rarekiller.Settings.Range = Rarekiller.Spells.RangeCheck(Rarekiller.Spells.FastPullspell);
+                        Logging.WriteDiagnostic(Colors.MediumPurple, "Set Range to {0} because of Low-Ranged Default Spell", Rarekiller.Spells.RangeCheck(Rarekiller.Spells.FastPullspell));
+                    }
+
+                    // Spellrange Test Customized Pull Spell
+                    if (!Rarekiller.Settings.DefaultPull && (Convert.ToInt64(Rarekiller.Settings.Range) > Convert.ToInt64(Rarekiller.Spells.RangeCheck(Rarekiller.Settings.Pull))))
+                    {
+                        Rarekiller.Settings.Range = Rarekiller.Spells.RangeCheck(Rarekiller.Settings.Pull);
+                        Logging.WriteDiagnostic(Colors.MediumPurple, "Set Range to {0} because of Low-Ranged Customized Spell", Rarekiller.Spells.RangeCheck(Rarekiller.Settings.Pull));
+                    }
+
+                    if ((o.Entry == 3868) && !Rarekiller.Settings.BloodseekerKill) // ... Special for Bloodseeker, just alert and don't kill him
+                        Rarekiller.Settings.Range = "20";
+
+                    while ((o.Location.Distance(Me.Location) > Convert.ToInt64(Rarekiller.Settings.Range)) && !o.TaggedByOther && !o.IsDead)
 					{
-						WoWPoint LastLocation = o.Location;
-						while ((o.Location.Distance(Me.Location) > SpellManager.Spells[Rarekiller.Spells.FastPullspell].MaxRange) && !o.TaggedByOther && !o.IsDead)
-						{
-                            Logging.Write(Colors.MediumPurple, "Rarekiller: Try to hunt flying Mob {0} in Ground Mount Mode, maybe he comes in Range.", o.Name);
-                            o.Target();
-                            o.Face();
-							Thread.Sleep(500);
-						}
-                        if (o.TaggedByOther)
-                        {
-                            Logging.Write(Colors.MediumPurple, "Rarekiller: Mob is Tagged by another Player");
-                            Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist5));
-                            Logging.Write(Colors.MediumPurple, "Rarekiller: Blacklist Mob for 5 Minutes.");
-                        }
-                        if (o.IsDead && !o.CanLoot)
-                        {
-                            Logging.Write(Colors.MediumPurple, "Rarekiller: Mob was killed by another Player");
-                            Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist60));
-                            Logging.Write(Colors.MediumPurple, "Rarekiller: Blacklist Mob for 60 Minutes.");
-                        }
-					}
-					// ----------------- Hunting Flying Mobs with Flying Mount :) ---------------------
-					else
-					{
-                        // Spellrange Test Default Pull Spell
-                        if (Rarekiller.Settings.DefaultPull && (Convert.ToInt64(Rarekiller.Settings.Range) > Convert.ToInt64(Rarekiller.Spells.RangeCheck(Rarekiller.Spells.FastPullspell))))
-                        {
-                            Rarekiller.Settings.Range = Rarekiller.Spells.RangeCheck(Rarekiller.Spells.FastPullspell);
-                            Logging.WriteDiagnostic(Colors.MediumPurple, "Set Range to {0} because of Low-Ranged Default Spell", Rarekiller.Spells.RangeCheck(Rarekiller.Spells.FastPullspell));
-                        }
-
-                        // Spellrange Test Customized Pull Spell
-                        if (!Rarekiller.Settings.DefaultPull && (Convert.ToInt64(Rarekiller.Settings.Range) > Convert.ToInt64(Rarekiller.Spells.RangeCheck(Rarekiller.Settings.Pull))))
-                        {
-                            Rarekiller.Settings.Range = Rarekiller.Spells.RangeCheck(Rarekiller.Settings.Pull);
-                            Logging.WriteDiagnostic(Colors.MediumPurple, "Set Range to {0} because of Low-Ranged Customized Spell", Rarekiller.Spells.RangeCheck(Rarekiller.Settings.Pull));
-                        }
-
-                        if ((o.Entry == 3868) && !Rarekiller.Settings.BloodseekerKill) // ... Special for Bloodseeker, just alert and don't kill him
-                            Rarekiller.Settings.Range = "20";
-
-                        while ((o.Location.Distance(Me.Location) > Convert.ToInt64(Rarekiller.Settings.Range)) && !o.TaggedByOther && !o.IsDead)
-						{
-							if (Rarekiller.Settings.GroundMountMode || ForceGround)
-								Navigator.MoveTo(o.Location);
-							else
-								Flightor.MoveTo(o.Location);
-							Thread.Sleep(50);
+                        if (o.Entry == 49822 || Me.IsIndoors)
+							Navigator.MoveTo(o.Location);
+						else
+							Flightor.MoveTo(o.Location);
+						Thread.Sleep(50);
 							
-							// ----------------- Security  ---------------------
-							if (Rarekiller.Settings.BlacklistCheck && (BlacklistTimer.Elapsed.TotalSeconds > (Convert.ToInt32(Rarekiller.Settings.BlacklistTime))))
-							{
-                                Logging.Write(Colors.MediumPurple, "Rarekiller Part MoveTo: Can't reach Mob {0}, Blacklist and Move on", o.Name);
-                                Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist5));
-                                Logging.Write(Colors.MediumPurple, "Rarekiller: Blacklist Mob for 5 Minutes.");
-								BlacklistTimer.Reset();
-								WoWMovement.MoveStop();
-								return;
-							}
-						}
-						BlacklistTimer.Reset();
-                        if (o.TaggedByOther)
-                        {
-                            Logging.Write(Colors.MediumPurple, "Rarekiller: Mob is Tagged by another Player");
+						// ----------------- Security  ---------------------
+						if (Rarekiller.Settings.BlacklistCheck && (BlacklistTimer.Elapsed.TotalSeconds > (Convert.ToInt32(Rarekiller.Settings.BlacklistTime))))
+						{
+                            Logging.Write(Colors.MediumPurple, "Rarekiller Part MoveTo: Can't reach Mob {0}, Blacklist and Move on", o.Name);
                             Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist5));
                             Logging.Write(Colors.MediumPurple, "Rarekiller: Blacklist Mob for 5 Minutes.");
-                        }
-                        if (o.IsDead && !o.CanLoot)
-                        {
-                            Logging.Write(Colors.MediumPurple, "Rarekiller: Mob was killed by another Player");
-                            Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist60));
-                            Logging.Write(Colors.MediumPurple, "Rarekiller: Blacklist Mob for 60 Minutes.");
-                        }
-
+							BlacklistTimer.Reset();
+							WoWMovement.MoveStop();
+							return;
+						}
 					}
-	
+					BlacklistTimer.Reset();
+                    if (o.TaggedByOther)
+                    {
+                        Logging.Write(Colors.MediumPurple, "Rarekiller: Mob is Tagged by another Player");
+                        Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist5));
+                        Logging.Write(Colors.MediumPurple, "Rarekiller: Blacklist Mob for 5 Minutes.");
+                    }
+                    if (o.IsDead && !o.CanLoot)
+                    {
+                        Logging.Write(Colors.MediumPurple, "Rarekiller: Mob was killed by another Player");
+                        Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist60));
+                        Logging.Write(Colors.MediumPurple, "Rarekiller: Blacklist Mob for 60 Minutes.");
+                    }
+
                     o.Target();
                     Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Pull at Mob Location: {0} / {1} / {2}", Convert.ToString(o.X), Convert.ToString(o.Y), Convert.ToString(o.Z));
                     Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: ... my Location: {0} / {1} / {2}", Convert.ToString(Me.X), Convert.ToString(Me.Y), Convert.ToString(Me.Z));
                     Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Target is Flying - {0}", o.IsFlying);
 
 // ----------------- Pull Part --------------------
-					ForceGround = false;
                     if ((o.Entry == 3868) && !Rarekiller.Settings.BloodseekerKill)
                     {
                         while (!o.IsDead)
@@ -381,18 +342,10 @@ namespace katzerle
 // ----------------- Loot Helper for all killed Rare Mobs ---------------------
                         Logging.Write(Colors.MediumPurple, "Rarekiller: Found lootable corpse, move to him");
 
-// ----------------- Move to Corpse -------------------
-                        if (Rarekiller.Settings.GroundMountMode && (!(o.Entry == 50005)			// Poseidus Vashir
-                            || !(o.Entry == 50052)			// Burgy Blackheart Vashir
-                            || !(o.Entry == 49913)			// Lady La-La Vashir
-                            )) //In Vashir you have to use Flightor !
-                            ForceGround = true;
-                        else
-                            ForceGround = false;
                         Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part MoveTo: Move to target");
 						while (o.Location.Distance(Me.Location) > 5)
 						{
-							if (Rarekiller.Settings.GroundMountMode || ForceGround)
+                            if (o.Entry == 49822 || Me.IsIndoors)
 								Navigator.MoveTo(o.Location);
 							else
 								Flightor.MoveTo(o.Location);

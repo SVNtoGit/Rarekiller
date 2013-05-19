@@ -66,12 +66,10 @@ namespace katzerle
             this.TBPull = new System.Windows.Forms.TextBox();
             this.CBBlazewing = new System.Windows.Forms.CheckBox();
             this.CBVyragosa = new System.Windows.Forms.CheckBox();
-            this.CBGroundMount = new System.Windows.Forms.CheckBox();
             this.BSave = new System.Windows.Forms.Button();
             this.CBAlert = new System.Windows.Forms.CheckBox();
             this.BAlertTest = new System.Windows.Forms.Button();
             this.CBWisper = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.CBKeyer = new System.Windows.Forms.CheckBox();
             this.CBGuild = new System.Windows.Forms.CheckBox();
             this.CBNotKillTameable = new System.Windows.Forms.CheckBox();
@@ -110,7 +108,6 @@ namespace katzerle
             this.GBAddon.SuspendLayout();
             this.GBSlowfall.SuspendLayout();
             this.GBPull.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -471,17 +468,6 @@ namespace katzerle
             this.CBVyragosa.Text = "kill Vyragosa";
             this.CBVyragosa.UseVisualStyleBackColor = true;
             // 
-            // CBGroundMount
-            // 
-            this.CBGroundMount.AutoSize = true;
-            this.CBGroundMount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBGroundMount.Location = new System.Drawing.Point(6, 19);
-            this.CBGroundMount.Name = "CBGroundMount";
-            this.CBGroundMount.Size = new System.Drawing.Size(124, 17);
-            this.CBGroundMount.TabIndex = 4;
-            this.CBGroundMount.Text = "Ground Mount Mode";
-            this.CBGroundMount.UseVisualStyleBackColor = true;
-            // 
             // BSave
             // 
             this.BSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -530,25 +516,13 @@ namespace katzerle
             this.CBWisper.Text = "Wisper";
             this.CBWisper.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.CBKeyer);
-            this.groupBox1.Controls.Add(this.CBGroundMount);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(185, 139);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(162, 74);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Miscelaneous";
-            // 
             // CBKeyer
             // 
             this.CBKeyer.AutoSize = true;
-            this.CBKeyer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBKeyer.Location = new System.Drawing.Point(6, 42);
+            this.CBKeyer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CBKeyer.Location = new System.Drawing.Point(185, 139);
             this.CBKeyer.Name = "CBKeyer";
-            this.CBKeyer.Size = new System.Drawing.Size(74, 17);
+            this.CBKeyer.Size = new System.Drawing.Size(82, 17);
             this.CBKeyer.TabIndex = 12;
             this.CBKeyer.Text = "ANTI-AFK";
             this.CBKeyer.UseVisualStyleBackColor = true;
@@ -826,9 +800,9 @@ namespace katzerle
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.CBKeyer);
             this.tabPage2.Controls.Add(this.BAlertTest);
             this.tabPage2.Controls.Add(this.GBPull);
-            this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.groupBox8);
             this.tabPage2.Controls.Add(this.GBSlowfall);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -959,8 +933,6 @@ namespace katzerle
             this.GBSlowfall.PerformLayout();
             this.GBPull.ResumeLayout(false);
             this.GBPull.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -974,6 +946,7 @@ namespace katzerle
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -992,7 +965,6 @@ namespace katzerle
         private System.Windows.Forms.CheckBox CBCata;
         private System.Windows.Forms.GroupBox GBSlowfall;
         private System.Windows.Forms.GroupBox GBPull;
-        private System.Windows.Forms.CheckBox CBGroundMount;
         private System.Windows.Forms.TextBox TBHuntByID;
         private System.Windows.Forms.CheckBox CBHuntByID;
         private System.Windows.Forms.TextBox TBSlowfallSpell;
@@ -1008,7 +980,6 @@ namespace katzerle
         private System.Windows.Forms.CheckBox RBCloak;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox CBWisper;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox CBCamel;
         private System.Windows.Forms.TabControl tabControl1;
