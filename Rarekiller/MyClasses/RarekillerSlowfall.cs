@@ -44,23 +44,8 @@ namespace katzerle
         public void HelpFalling()
         {
 			int UseSlowfall = 1;
-			if ((Me.Class == WoWClass.Druid) && !Rarekiller.inCombat && !Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell) 
-				&& !Me.HasAura("Levitate") && Rarekiller.Settings.Spell && !Me.HasAura("Flight Form") && !Me.HasAura("Swift Flight Form") && !Me.HasAura("Slow Fall")
-				&& ((SpellManager.CanCast("Swift Flight Form") && SpellManager.HasSpell("Swift Flight Form")) || (SpellManager.CanCast("Flight Form") && SpellManager.HasSpell("Flight Form"))))
-			{
-				if (SpellManager.HasSpell("Swift Flight Form") && SpellManager.CanCast("Swift Flight Form"))
-					SpellManager.Cast("Swift Flight Form");
-				else
-					SpellManager.Cast("Flight Form");
-				Thread.Sleep(300);
-				if (Me.HasAura("Flight Form") || Me.HasAura("Swift Flight Form"))
-				{
-                    Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Slowfall: Used Slowfall Ability Flight Form");
-					return;
-				}
-			}
 			if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell) && !Me.HasAura("Slow Fall") 
-				&& !Me.HasAura("Flight Form") && !Me.HasAura("Swift Flight Form") && !Me.HasAura("Levitate") && Rarekiller.Settings.Spell 
+				&& !Me.HasAura("Levitate") && Rarekiller.Settings.Spell 
 				&& SpellManager.CanCast(Rarekiller.Settings.SlowfallSpell) && SpellManager.HasSpell(Rarekiller.Settings.SlowfallSpell))
 			{
 				SpellManager.Cast(Rarekiller.Settings.SlowfallSpell);
@@ -71,7 +56,7 @@ namespace katzerle
 					return;
 				}
 			}
-			if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell) && !Me.HasAura("Flight Form") && !Me.HasAura("Swift Flight Form")
+			if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell)
 				&& !Me.HasAura("Slow Fall") && !Me.HasAura("Levitate") && Rarekiller.Settings.Cloak && (Me.Inventory.Equipped.Back.Cooldown == 0))
 			{
 				Me.Inventory.Equipped.Back.Use();
@@ -82,7 +67,7 @@ namespace katzerle
 					return;
 				}
 			}
-			if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell) && !Me.HasAura("Flight Form") && !Me.HasAura("Swift Flight Form")
+			if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell)
 				&& !Me.HasAura("Slow Fall") && !Me.HasAura("Levitate") && Rarekiller.Settings.Item)
 			{
 				Lua.DoString("UseItemByName(\"" + Rarekiller.Settings.SlowfallItem + "\")"); // or use Item
@@ -93,7 +78,7 @@ namespace katzerle
 					return;
 				}
 			}
-			if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell) && !Me.HasAura("Flight Form") && !Me.HasAura("Swift Flight Form")
+			if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell)
 				&& !Me.HasAura("Slow Fall") && !Me.HasAura("Levitate") && SpellManager.CanCast("Slow Fall") && SpellManager.HasSpell("Slow Fall"))
 			{
 				SpellManager.Cast("Slow Fall");
@@ -104,7 +89,7 @@ namespace katzerle
 					return;
 				}
 			}
-			if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell) && !Me.HasAura("Flight Form") && !Me.HasAura("Swift Flight Form")
+			if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell)
 				&& !Me.HasAura("Slow Fall") && !Me.HasAura("Levitate") && SpellManager.CanCast("Levitate") && SpellManager.HasSpell("Levitate"))
 			{
 				SpellManager.Cast("Levitate");
@@ -116,8 +101,7 @@ namespace katzerle
 				}
 			}
 			
-			if (Me.HasAura("Snowfall Lager") || Me.HasAura("Parachute") || Me.HasAura(Rarekiller.Settings.SlowfallSpell) || Me.HasAura("Slow Fall") || Me.HasAura("Levitate")
-				|| Me.HasAura("Flight Form") || Me.HasAura("Swift Flight Form"))
+			if (Me.HasAura("Snowfall Lager") || Me.HasAura("Parachute") || Me.HasAura(Rarekiller.Settings.SlowfallSpell) || Me.HasAura("Slow Fall") || Me.HasAura("Levitate"))
 			{
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Slowfall: Slowfall successfull, Parachute to Ground");
 				//Überprüfen:

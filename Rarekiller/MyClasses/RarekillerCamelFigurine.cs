@@ -95,7 +95,7 @@ namespace katzerle
                         Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part MoveTo: Found a Problem Figurine {0} so dismount and walk", o.Entry);
 						while (o.Location.Distance(Me.Location) > 30)
 						{
-							if (Rarekiller.Settings.GroundMountMode || ForceGround)
+							if (ForceGround)
 								Navigator.MoveTo(o.Location);
 							else
 								Flightor.MoveTo(o.Location);
@@ -126,7 +126,7 @@ namespace katzerle
 
 					while (o.Location.Distance(Me.Location) > 4)
 					{
-						if (Rarekiller.Settings.GroundMountMode || ForceGround)
+						if (ForceGround)
 							Navigator.MoveTo(o.Location);
 						else
 							Flightor.MoveTo(o.Location);
@@ -219,10 +219,7 @@ namespace katzerle
 
                         while (o.Location.Distance(Me.Location) > 3)
                         {
-                            if (Rarekiller.Settings.GroundMountMode)
-                                Navigator.MoveTo(o.Location);
-                            else
-                                Flightor.MoveTo(o.Location);
+                            Navigator.MoveTo(o.Location);
                             Thread.Sleep(100);
                         }
                         WoWMovement.MoveStop();

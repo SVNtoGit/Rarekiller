@@ -97,7 +97,6 @@ namespace katzerle
         public bool BloodseekerSearch = false;
         public bool BloodseekerKill = false;
         //Misc
-        public bool GroundMountMode = false;
         public string BlacklistTime = "180";
         public bool BlacklistCheck = true;
         public bool Alert = true;
@@ -361,12 +360,6 @@ namespace katzerle
                 {
                     BlacklistTime = Convert.ToString(xvar.InnerText);
                     Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + BlacklistTime.ToString());
-                }
-                xvar = xml.SelectSingleNode("//Rarekiller/GroundMountMode");
-                if (xvar != null)
-                {
-                    GroundMountMode = Convert.ToBoolean(xvar.InnerText);
-                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + GroundMountMode.ToString());
                 }
                 xvar = xml.SelectSingleNode("//Rarekiller/Alert");
                 if (xvar != null)
