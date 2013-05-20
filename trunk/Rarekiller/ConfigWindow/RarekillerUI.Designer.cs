@@ -83,8 +83,6 @@ namespace katzerle
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.CBBloodseekerKill = new System.Windows.Forms.CheckBox();
-            this.CBBloodseekerSearch = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.TBTameID = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -450,7 +448,7 @@ namespace katzerle
             // 
             this.CBBlazewing.AutoSize = true;
             this.CBBlazewing.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBBlazewing.Location = new System.Drawing.Point(5, 54);
+            this.CBBlazewing.Location = new System.Drawing.Point(5, 81);
             this.CBBlazewing.Name = "CBBlazewing";
             this.CBBlazewing.Size = new System.Drawing.Size(89, 17);
             this.CBBlazewing.TabIndex = 10;
@@ -461,7 +459,7 @@ namespace katzerle
             // 
             this.CBVyragosa.AutoSize = true;
             this.CBVyragosa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBVyragosa.Location = new System.Drawing.Point(5, 77);
+            this.CBVyragosa.Location = new System.Drawing.Point(5, 104);
             this.CBVyragosa.Name = "CBVyragosa";
             this.CBVyragosa.Size = new System.Drawing.Size(85, 17);
             this.CBVyragosa.TabIndex = 8;
@@ -471,7 +469,7 @@ namespace katzerle
             // BSave
             // 
             this.BSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BSave.Location = new System.Drawing.Point(142, 446);
+            this.BSave.Location = new System.Drawing.Point(141, 424);
             this.BSave.Name = "BSave";
             this.BSave.Size = new System.Drawing.Size(103, 35);
             this.BSave.TabIndex = 5;
@@ -632,7 +630,7 @@ namespace katzerle
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(370, 428);
+            this.tabControl1.Size = new System.Drawing.Size(370, 406);
             this.tabControl1.TabIndex = 14;
             // 
             // tabPage1
@@ -645,7 +643,7 @@ namespace katzerle
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(362, 402);
+            this.tabPage1.Size = new System.Drawing.Size(362, 380);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Rarekiller";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -653,14 +651,12 @@ namespace katzerle
             // groupBox11
             // 
             this.groupBox11.Controls.Add(this.label2);
-            this.groupBox11.Controls.Add(this.CBBloodseekerKill);
-            this.groupBox11.Controls.Add(this.CBBloodseekerSearch);
             this.groupBox11.Controls.Add(this.CBBlazewing);
             this.groupBox11.Controls.Add(this.CBVyragosa);
             this.groupBox11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox11.Location = new System.Drawing.Point(7, 237);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(167, 153);
+            this.groupBox11.Size = new System.Drawing.Size(167, 135);
             this.groupBox11.TabIndex = 16;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Mobs with Problems";
@@ -669,36 +665,12 @@ namespace katzerle
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 16);
+            this.label2.Location = new System.Drawing.Point(6, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(161, 52);
             this.label2.TabIndex = 13;
             this.label2.Text = "Sometimes the Bot has problems\r\nto kill these Mobs.\r\nActivate the Buttons at your" +
                 " own\r\nrisk (see Forum for further infos)";
-            // 
-            // CBBloodseekerKill
-            // 
-            this.CBBloodseekerKill.AutoSize = true;
-            this.CBBloodseekerKill.Enabled = false;
-            this.CBBloodseekerKill.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBBloodseekerKill.Location = new System.Drawing.Point(16, 123);
-            this.CBBloodseekerKill.Name = "CBBloodseekerKill";
-            this.CBBloodseekerKill.Size = new System.Drawing.Size(100, 17);
-            this.CBBloodseekerKill.TabIndex = 12;
-            this.CBBloodseekerKill.Text = "kill Bloodseeker";
-            this.CBBloodseekerKill.UseVisualStyleBackColor = true;
-            // 
-            // CBBloodseekerSearch
-            // 
-            this.CBBloodseekerSearch.AutoSize = true;
-            this.CBBloodseekerSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBBloodseekerSearch.Location = new System.Drawing.Point(5, 100);
-            this.CBBloodseekerSearch.Name = "CBBloodseekerSearch";
-            this.CBBloodseekerSearch.Size = new System.Drawing.Size(111, 17);
-            this.CBBloodseekerSearch.TabIndex = 11;
-            this.CBBloodseekerSearch.Text = "seek Bloodseeker";
-            this.CBBloodseekerSearch.UseVisualStyleBackColor = true;
-            this.CBBloodseekerSearch.CheckedChanged += new System.EventHandler(this.CBBloodseekerSearch_CheckedChanged);
             // 
             // groupBox5
             // 
@@ -909,7 +881,7 @@ namespace katzerle
             // BDefault
             // 
             this.BDefault.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BDefault.Location = new System.Drawing.Point(12, 446);
+            this.BDefault.Location = new System.Drawing.Point(11, 424);
             this.BDefault.Name = "BDefault";
             this.BDefault.Size = new System.Drawing.Size(106, 35);
             this.BDefault.TabIndex = 15;
@@ -921,7 +893,7 @@ namespace katzerle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 492);
+            this.ClientSize = new System.Drawing.Size(397, 471);
             this.Controls.Add(this.BDefault);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.BSave);
@@ -1015,8 +987,6 @@ namespace katzerle
         private System.Windows.Forms.TextBox TBBlacklistTime;
         private System.Windows.Forms.CheckBox CBBlacklistCheck;
         private System.Windows.Forms.CheckBox CBPoseidus;
-        private System.Windows.Forms.CheckBox CBBloodseekerKill;
-        private System.Windows.Forms.CheckBox CBBloodseekerSearch;
         private System.Windows.Forms.Button BDefault;
         private System.Windows.Forms.CheckBox CBObjects;
         private System.Windows.Forms.RadioButton CBPull2;

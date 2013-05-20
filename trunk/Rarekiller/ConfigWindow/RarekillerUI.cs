@@ -91,8 +91,6 @@ namespace katzerle
 			TBRange.Text = Rarekiller.Settings.Range;
             CBVyragosa.Checked = Rarekiller.Settings.Vyragosa;
             CBBlazewing.Checked = Rarekiller.Settings.Blazewing;
-            CBBloodseekerSearch.Checked = Rarekiller.Settings.BloodseekerSearch;
-            CBBloodseekerKill.Checked = Rarekiller.Settings.BloodseekerKill;
             //Developer Box
             CBTestRaptorNest.Enabled = Rarekiller.Settings.DeveloperBoxActive;
             CBTestCamel.Enabled = Rarekiller.Settings.DeveloperBoxActive;
@@ -292,11 +290,6 @@ namespace katzerle
                 TBBlacklistTime.Text = "180";
                 Logging.Write(Colors.MediumPurple, "Rarekiller: Set Blacklist Time to Default");
             }
-            if (CBBloodseekerKill.Checked && !CBUseSlowfall.Checked)
-            {
-                CBBloodseekerKill.Checked = false;
-                Logging.Write(Colors.MediumPurple, "Rarekiller: You can't hunt Bloodseeker without Slowfall (Setup in Tap 2).");
-            }
 
 
 // Variablen nach Settings übernehmen
@@ -334,8 +327,6 @@ namespace katzerle
             Rarekiller.Settings.Range = TBRange.Text;
             Rarekiller.Settings.Vyragosa = CBVyragosa.Checked;
             Rarekiller.Settings.Blazewing = CBBlazewing.Checked;
-            Rarekiller.Settings.BloodseekerSearch = CBBloodseekerSearch.Checked;
-            Rarekiller.Settings.BloodseekerKill = CBBloodseekerKill.Checked;
             Rarekiller.Settings.Camel = CBCamel.Checked;
             //Alert etc
             Rarekiller.Settings.Alert = CBAlert.Checked;
@@ -365,8 +356,6 @@ namespace katzerle
 			// Problem Mobs
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Vyragosa = {0}", CBVyragosa.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Blazewing = {0}", CBBlazewing.Checked.ToString());
-            Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: BloodseekerSearch = {0}", CBBloodseekerSearch.Checked.ToString());
-            Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: BloodseekerKill = {0}", CBBloodseekerKill.Checked.ToString());
             // Hunt by ID
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: HuntByID = {0}", CBHuntByID.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: MobID = {0}", TBHuntByID.Text.ToString());
@@ -494,16 +483,6 @@ namespace katzerle
 			//let's add another element (child of the root)
             element = xml.CreateElement("Vyragosa");
             text = xml.CreateTextNode(CBVyragosa.Checked.ToString());
-            element.AppendChild(text);
-            root.AppendChild(element);
-            //let's add another element (child of the root)
-            element = xml.CreateElement("BloodseekerSearch");
-            text = xml.CreateTextNode(CBBloodseekerSearch.Checked.ToString());
-            element.AppendChild(text);
-            root.AppendChild(element);
-            //let's add another element (child of the root)
-            element = xml.CreateElement("BloodseekerKill");
-            text = xml.CreateTextNode(CBBloodseekerKill.Checked.ToString());
             element.AppendChild(text);
             root.AppendChild(element);
 
@@ -724,21 +703,6 @@ namespace katzerle
             }
         }
 
-
-        private void CBBloodseekerSearch_CheckedChanged(object sender, EventArgs e)
-        {
-            if (CBBloodseekerSearch.Checked)
-            {
-                CBBloodseekerKill.Enabled = true;
-                CBBloodseekerKill.Checked = Rarekiller.Settings.BloodseekerKill;
-            }
-            else
-            {
-                CBBloodseekerKill.Enabled = false;
-                CBBloodseekerKill.Checked = false;
-            }
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             // Addons
@@ -788,8 +752,6 @@ namespace katzerle
             TBRange.Text = "10";
             CBVyragosa.Checked = true;
             CBBlazewing.Checked = false;
-            CBBloodseekerSearch.Checked = false;
-            CBBloodseekerKill.Checked = false;
             CBCamel.Checked = true;
             //Developer Box
             CBTestRaptorNest.Enabled = false;
@@ -832,8 +794,6 @@ namespace katzerle
             Rarekiller.Settings.Range = TBRange.Text;
             Rarekiller.Settings.Vyragosa = CBVyragosa.Checked;
             Rarekiller.Settings.Blazewing = CBBlazewing.Checked;
-            Rarekiller.Settings.BloodseekerSearch = CBBloodseekerSearch.Checked;
-            Rarekiller.Settings.BloodseekerKill = CBBloodseekerKill.Checked;
             Rarekiller.Settings.Camel = CBCamel.Checked;
             //Alert etc
             Rarekiller.Settings.Alert = CBAlert.Checked;
