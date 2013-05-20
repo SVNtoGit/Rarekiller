@@ -245,9 +245,6 @@ namespace katzerle
                         Logging.WriteDiagnostic(Colors.MediumPurple, "Set Range to {0} because of Low-Ranged Customized Spell", Rarekiller.Spells.RangeCheck(Rarekiller.Settings.Pull));
                     }
 
-                    if ((o.Entry == 3868) && !Rarekiller.Settings.BloodseekerKill) // ... Special for Bloodseeker, just alert and don't kill him
-                        Rarekiller.Settings.Range = "20";
-
                     while ((o.Location.Distance(Me.Location) > Convert.ToInt64(Rarekiller.Settings.Range)) && !o.TaggedByOther && !o.IsDead)
 					{
                         if (o.Entry == 49822 || Me.IsIndoors)
@@ -287,17 +284,6 @@ namespace katzerle
                     Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Target is Flying - {0}", o.IsFlying);
 
 // ----------------- Pull Part --------------------
-                    if ((o.Entry == 3868) && !Rarekiller.Settings.BloodseekerKill)
-                    {
-                        while (!o.IsDead)
-                        {
-                            WoWMovement.MoveStop();
-                            o.Target();
-                            o.Face();
-                            Thread.Sleep(1000);
-                        }
-                        return;
-                    }
 					WoWMovement.MoveStop();
 
                     if (!(Rarekiller.Settings.DefaultPull) && SpellManager.HasSpell(Rarekiller.Settings.Pull))
@@ -319,7 +305,7 @@ namespace katzerle
                         Rarekiller.Settings.Range = "3";
                     }
 
-                    if (Me.Pet.IsAlive && ((Me.Class == WoWClass.Hunter) || (Me.Class == WoWClass.Warlock)))
+                    if (!(Me.Pet == null) && ((Me.Class == WoWClass.Hunter) || (Me.Class == WoWClass.Warlock)))
                         Lua.DoString(string.Format("RunMacroText(\"/petdefensive\")"), 0);
 
                     Thread.Sleep(100);

@@ -94,8 +94,6 @@ namespace katzerle
         public string Range = "10";
         public bool Vyragosa = true;
         public bool Blazewing = false;
-        public bool BloodseekerSearch = false;
-        public bool BloodseekerKill = false;
         //Misc
         public string BlacklistTime = "180";
         public bool BlacklistCheck = true;
@@ -334,18 +332,6 @@ namespace katzerle
                 {
                     Blazewing = Convert.ToBoolean(xvar.InnerText);
                     Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + Blazewing.ToString());
-                }
-                xvar = xml.SelectSingleNode("//Rarekiller/BloodseekerSearch");
-                if (xvar != null)
-                {
-                    BloodseekerSearch = Convert.ToBoolean(xvar.InnerText);
-                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + BloodseekerSearch.ToString());
-                }
-                xvar = xml.SelectSingleNode("//Rarekiller/BloodseekerKill");
-                if (xvar != null)
-                {
-                    BloodseekerKill = Convert.ToBoolean(xvar.InnerText);
-                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + BloodseekerKill.ToString());
                 }
 
                 // Load Variables - Other Settings
