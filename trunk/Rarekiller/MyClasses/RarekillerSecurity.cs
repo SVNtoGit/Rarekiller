@@ -8,32 +8,16 @@
 //
 //==================================================================
 using System;
-using System.Collections.Generic;
 using System.Threading;
-using System.Linq;
-using System.Xml.Linq;
-using System.Diagnostics;
 using System.IO;
-using System.Xml;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using System.Media;
-using System.Net;
-using System.Globalization;
 using System.Windows.Media;
 
 using Styx;
 using Styx.Common;
 using Styx.CommonBot;
-using Styx.CommonBot.Routines;
-using Styx.Helpers;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
-using Styx.Plugins;
-using Styx.Pathing;
 
 namespace katzerle
 {

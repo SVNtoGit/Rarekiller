@@ -1,0 +1,13 @@
+<!-- 	If you are going to do some afk camping
+
+		Use this:
+-->
+
+<HBProfile>
+	
+	<SubProfile>
+		<Name>EmptyProfile</Name>
+		<MinLevel>0</MinLevel>
+		<MaxLevel>100</MaxLevel>
+	</SubProfile>
+</HBProfile>
