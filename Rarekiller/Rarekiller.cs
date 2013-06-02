@@ -10,17 +10,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Linq;
 using System.Xml.Linq;
 using System.Diagnostics;
 using System.IO;
 using System.Xml;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Media;
 using System.Net;
 using System.Globalization;
 using System.Windows.Media;
@@ -28,12 +22,10 @@ using System.Windows.Media;
 using Styx;
 using Styx.Common;
 using Styx.CommonBot;
-using Styx.CommonBot.Routines;
 using Styx.Helpers;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
 using Styx.Plugins;
-using Styx.Pathing;
 
 namespace katzerle
 {
@@ -226,7 +218,7 @@ namespace katzerle
             }
 //KillMobs to List
             XmlDocument KillMobsXML = new XmlDocument();
-            string sPath4 = Path.Combine(FolderPath, "config\\CollectObjects.xml");
+            string sPath4 = Path.Combine(FolderPath, "config\\KillMobs.xml");
             System.IO.FileStream fs4 = new System.IO.FileStream(@sPath4, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite);
             try
             {
@@ -242,9 +234,9 @@ namespace katzerle
             XmlElement root4 = KillMobsXML.DocumentElement;
             foreach (XmlNode KillMob in root4.ChildNodes)
             {
-                Int32 Entry3 = Convert.ToInt32(KillMob.Attributes["Entry"].InnerText);
-                string Name3 = KillMob.Attributes["Name"].InnerText;
-                KillMobsList.Add(Entry3, Name3);
+                Int32 Entry4 = Convert.ToInt32(KillMob.Attributes["Entry"].InnerText);
+                string Name4 = KillMob.Attributes["Name"].InnerText;
+                KillMobsList.Add(Entry4, Name4);
             }
         }
 
