@@ -103,6 +103,7 @@ namespace katzerle
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.BDefault = new System.Windows.Forms.Button();
+            this.CBBNWisper = new System.Windows.Forms.CheckBox();
             this.GBAddon.SuspendLayout();
             this.GBSlowfall.SuspendLayout();
             this.GBPull.SuspendLayout();
@@ -493,7 +494,7 @@ namespace katzerle
             // BAlertTest
             // 
             this.BAlertTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BAlertTest.Location = new System.Drawing.Point(271, 316);
+            this.BAlertTest.Location = new System.Drawing.Point(271, 346);
             this.BAlertTest.Name = "BAlertTest";
             this.BAlertTest.Size = new System.Drawing.Size(85, 28);
             this.BAlertTest.TabIndex = 7;
@@ -507,7 +508,7 @@ namespace katzerle
             this.CBWisper.Checked = true;
             this.CBWisper.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CBWisper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBWisper.Location = new System.Drawing.Point(6, 45);
+            this.CBWisper.Location = new System.Drawing.Point(6, 52);
             this.CBWisper.Name = "CBWisper";
             this.CBWisper.Size = new System.Drawing.Size(59, 17);
             this.CBWisper.TabIndex = 11;
@@ -529,7 +530,7 @@ namespace katzerle
             // 
             this.CBGuild.AutoSize = true;
             this.CBGuild.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBGuild.Location = new System.Drawing.Point(6, 71);
+            this.CBGuild.Location = new System.Drawing.Point(6, 108);
             this.CBGuild.Name = "CBGuild";
             this.CBGuild.Size = new System.Drawing.Size(50, 17);
             this.CBGuild.TabIndex = 16;
@@ -780,7 +781,7 @@ namespace katzerle
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(362, 402);
+            this.tabPage2.Size = new System.Drawing.Size(362, 380);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Slowfall and other Behavior";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -793,20 +794,21 @@ namespace katzerle
             this.groupBox8.Controls.Add(this.TBSoundfileGuild);
             this.groupBox8.Controls.Add(this.TBSoundfileWisper);
             this.groupBox8.Controls.Add(this.TBSoundfileFoundRare);
+            this.groupBox8.Controls.Add(this.CBBNWisper);
             this.groupBox8.Controls.Add(this.CBWisper);
             this.groupBox8.Controls.Add(this.CBGuild);
             this.groupBox8.Controls.Add(this.CBAlert);
             this.groupBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox8.Location = new System.Drawing.Point(6, 207);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(343, 103);
+            this.groupBox8.Size = new System.Drawing.Size(343, 133);
             this.groupBox8.TabIndex = 14;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Alerts";
             // 
             // BSoundfileGuild
             // 
-            this.BSoundfileGuild.Location = new System.Drawing.Point(309, 67);
+            this.BSoundfileGuild.Location = new System.Drawing.Point(309, 104);
             this.BSoundfileGuild.Name = "BSoundfileGuild";
             this.BSoundfileGuild.Size = new System.Drawing.Size(28, 23);
             this.BSoundfileGuild.TabIndex = 18;
@@ -816,7 +818,7 @@ namespace katzerle
             // 
             // BSoundfileWisper
             // 
-            this.BSoundfileWisper.Location = new System.Drawing.Point(309, 41);
+            this.BSoundfileWisper.Location = new System.Drawing.Point(309, 60);
             this.BSoundfileWisper.Name = "BSoundfileWisper";
             this.BSoundfileWisper.Size = new System.Drawing.Size(28, 23);
             this.BSoundfileWisper.TabIndex = 18;
@@ -836,14 +838,14 @@ namespace katzerle
             // 
             // TBSoundfileGuild
             // 
-            this.TBSoundfileGuild.Location = new System.Drawing.Point(89, 69);
+            this.TBSoundfileGuild.Location = new System.Drawing.Point(89, 106);
             this.TBSoundfileGuild.Name = "TBSoundfileGuild";
             this.TBSoundfileGuild.Size = new System.Drawing.Size(214, 20);
             this.TBSoundfileGuild.TabIndex = 17;
             // 
             // TBSoundfileWisper
             // 
-            this.TBSoundfileWisper.Location = new System.Drawing.Point(89, 43);
+            this.TBSoundfileWisper.Location = new System.Drawing.Point(89, 62);
             this.TBSoundfileWisper.Name = "TBSoundfileWisper";
             this.TBSoundfileWisper.Size = new System.Drawing.Size(214, 20);
             this.TBSoundfileWisper.TabIndex = 17;
@@ -863,7 +865,7 @@ namespace katzerle
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(362, 402);
+            this.tabPage3.Size = new System.Drawing.Size(362, 380);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Dev Box";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -889,6 +891,19 @@ namespace katzerle
             this.BDefault.UseVisualStyleBackColor = true;
             this.BDefault.Click += new System.EventHandler(this.button1_Click);
             // 
+            // CBBNWisper
+            // 
+            this.CBBNWisper.AutoSize = true;
+            this.CBBNWisper.Checked = true;
+            this.CBBNWisper.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CBBNWisper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CBBNWisper.Location = new System.Drawing.Point(6, 75);
+            this.CBBNWisper.Name = "CBBNWisper";
+            this.CBBNWisper.Size = new System.Drawing.Size(74, 17);
+            this.CBBNWisper.TabIndex = 11;
+            this.CBBNWisper.Text = "BNWisper";
+            this.CBBNWisper.UseVisualStyleBackColor = true;
+            // 
             // RarekillerUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -898,7 +913,7 @@ namespace katzerle
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.BSave);
             this.Name = "RarekillerUI";
-            this.Text = "Rare Killer - Config";
+            this.Text = "Rarekiller - Config";
             this.GBAddon.ResumeLayout(false);
             this.GBAddon.PerformLayout();
             this.GBSlowfall.ResumeLayout(false);
@@ -995,6 +1010,7 @@ namespace katzerle
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TBRange;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox CBBNWisper;
     }
 }
 

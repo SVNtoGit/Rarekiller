@@ -35,7 +35,7 @@ namespace katzerle
 		public static string name { get { return "Rarekiller"; } }
 		public override string Name { get { return name; } }
 		public override string Author { get { return "katzerle"; } }
-		private readonly static Version _version = new Version(3, 1);
+		private readonly static Version _version = new Version(3, 2);
 		public override Version Version { get { return _version; } }
 		public override string ButtonText { get { return "Settings"; } }
 		public override bool WantButton { get { return true; } }
@@ -88,6 +88,9 @@ namespace katzerle
             if (Rarekiller.Settings.Wisper)
             {
                 Chat.Whisper -= Security.newWhisper;
+            }
+            if (Rarekiller.Settings.BNWisper)
+            {
                 Lua.Events.DetachEvent("CHAT_MSG_BN_WHISPER", Security.BNWhisper);
             }
             if (Rarekiller.Settings.Guild)
@@ -143,6 +146,9 @@ namespace katzerle
             if (Rarekiller.Settings.Wisper)
             {
                 Chat.Whisper += Security.newWhisper;
+            }
+            if (Rarekiller.Settings.BNWisper)
+            {
                 Lua.Events.AttachEvent("CHAT_MSG_BN_WHISPER", Security.BNWhisper);
             }
             if (Rarekiller.Settings.Guild)

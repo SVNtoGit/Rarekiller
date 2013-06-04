@@ -42,10 +42,10 @@ namespace katzerle
             TBHuntByID.Text = Rarekiller.Settings.MobID;
             CBBlacklistCheck.Checked = Rarekiller.Settings.BlacklistCheck;
             TBBlacklistTime.Text = Rarekiller.Settings.BlacklistTime;
-            //Misc
-			CBAlert.Checked = Rarekiller.Settings.Alert;
             //Security
+			CBAlert.Checked = Rarekiller.Settings.Alert;
             CBWisper.Checked = Rarekiller.Settings.Wisper;
+            CBBNWisper.Checked = Rarekiller.Settings.BNWisper;
             CBGuild.Checked = Rarekiller.Settings.Guild;
             CBKeyer.Checked = Rarekiller.Settings.Keyer;
 			TBSoundfileWisper.Text = Rarekiller.Settings.SoundfileWisper;
@@ -314,6 +314,7 @@ namespace katzerle
             //Alert etc
             Rarekiller.Settings.Alert = CBAlert.Checked;
             Rarekiller.Settings.Wisper = CBWisper.Checked;
+            Rarekiller.Settings.BNWisper = CBBNWisper.Checked;
             Rarekiller.Settings.Guild = CBGuild.Checked;
             Rarekiller.Settings.Keyer = CBKeyer.Checked;
             Rarekiller.Settings.SoundfileWisper = TBSoundfileWisper.Text;
@@ -366,6 +367,7 @@ namespace katzerle
 			// Alerts
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Alert = {0}", CBAlert.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Wisper = {0}", CBWisper.Checked.ToString());
+            Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: BNWisper = {0}", CBBNWisper.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Guild = {0}", CBGuild.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: FileWisper = {0}", TBSoundfileWisper.Text.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: FileGuild = {0}", TBSoundfileGuild.Text.ToString());
@@ -588,6 +590,11 @@ namespace katzerle
             element.AppendChild(text);
             root.AppendChild(element);
             //let's add another element (child of the root)
+            element = xml.CreateElement("BNWisper");
+            text = xml.CreateTextNode(CBBNWisper.Checked.ToString());
+            element.AppendChild(text);
+            root.AppendChild(element);
+            //let's add another element (child of the root)
             element = xml.CreateElement("GuildChat");
             text = xml.CreateTextNode(CBGuild.Checked.ToString());
             element.AppendChild(text);
@@ -707,6 +714,7 @@ namespace katzerle
             CBAlert.Checked = true;
             //Security
             CBWisper.Checked = true;
+            CBBNWisper.Checked = true;
             CBGuild.Checked = false;
             CBKeyer.Checked = true;
             TBSoundfileWisper.Text = Rarekiller.Soundfile;
@@ -781,6 +789,7 @@ namespace katzerle
             //Alert etc
             Rarekiller.Settings.Alert = CBAlert.Checked;
             Rarekiller.Settings.Wisper = CBWisper.Checked;
+            Rarekiller.Settings.BNWisper = CBBNWisper.Checked;
             Rarekiller.Settings.Guild = CBGuild.Checked;
             Rarekiller.Settings.Keyer = CBKeyer.Checked;
             Rarekiller.Settings.SoundfileWisper = TBSoundfileWisper.Text;
