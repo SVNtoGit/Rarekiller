@@ -79,6 +79,7 @@ namespace katzerle
         public bool BlacklistCheck = true;
         public bool Alert = true;
         public bool Wisper = true;
+        public bool BNWisper = true;
         public bool Guild = false;
         public bool Keyer = true;
 		public string SoundfileWisper = Rarekiller.Soundfile;
@@ -338,6 +339,12 @@ namespace katzerle
                 {
                     Wisper = Convert.ToBoolean(xvar.InnerText);
                     Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + Wisper.ToString());
+                }
+                xvar = xml.SelectSingleNode("//Rarekiller/BNWisper");
+                if (xvar != null)
+                {
+                    BNWisper = Convert.ToBoolean(xvar.InnerText);
+                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + BNWisper.ToString());
                 }
                 xvar = xml.SelectSingleNode("//Rarekiller/GuildChat");
                 if (xvar != null)
