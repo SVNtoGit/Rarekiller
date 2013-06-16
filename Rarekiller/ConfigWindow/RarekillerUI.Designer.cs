@@ -38,6 +38,7 @@ namespace katzerle
         private void InitializeComponent()
         {
             this.GBAddon = new System.Windows.Forms.GroupBox();
+            this.CBKillList = new System.Windows.Forms.CheckBox();
             this.CBPoseidus = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.CBTLPD = new System.Windows.Forms.CheckBox();
@@ -74,6 +75,8 @@ namespace katzerle
             this.CBGuild = new System.Windows.Forms.CheckBox();
             this.CBNotKillTameable = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.CBInteractNPC = new System.Windows.Forms.CheckBox();
+            this.CBAnotherMansTreasure = new System.Windows.Forms.CheckBox();
             this.CBObjects = new System.Windows.Forms.CheckBox();
             this.CBCamel = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -93,6 +96,7 @@ namespace katzerle
             this.TBBlacklistTime = new System.Windows.Forms.TextBox();
             this.CBBlacklistCheck = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.CBShadowmeld = new System.Windows.Forms.CheckBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.BSoundfileGuild = new System.Windows.Forms.Button();
             this.BSoundfileWisper = new System.Windows.Forms.Button();
@@ -100,10 +104,12 @@ namespace katzerle
             this.TBSoundfileGuild = new System.Windows.Forms.TextBox();
             this.TBSoundfileWisper = new System.Windows.Forms.TextBox();
             this.TBSoundfileFoundRare = new System.Windows.Forms.TextBox();
+            this.CBBNWisper = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.BDefault = new System.Windows.Forms.Button();
-            this.CBBNWisper = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CBAeonaxx = new System.Windows.Forms.CheckBox();
             this.GBAddon.SuspendLayout();
             this.GBSlowfall.SuspendLayout();
             this.GBPull.SuspendLayout();
@@ -117,13 +123,13 @@ namespace katzerle
             this.tabPage2.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // GBAddon
             // 
-            this.GBAddon.Controls.Add(this.CBPoseidus);
+            this.GBAddon.Controls.Add(this.CBKillList);
             this.GBAddon.Controls.Add(this.label3);
-            this.GBAddon.Controls.Add(this.CBTLPD);
             this.GBAddon.Controls.Add(this.CBLowRAR);
             this.GBAddon.Controls.Add(this.TBHuntByID);
             this.GBAddon.Controls.Add(this.CBBC);
@@ -133,10 +139,21 @@ namespace katzerle
             this.GBAddon.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBAddon.Location = new System.Drawing.Point(7, 9);
             this.GBAddon.Name = "GBAddon";
-            this.GBAddon.Size = new System.Drawing.Size(167, 213);
+            this.GBAddon.Size = new System.Drawing.Size(167, 194);
             this.GBAddon.TabIndex = 0;
             this.GBAddon.TabStop = false;
             this.GBAddon.Text = "Raremob Killer";
+            // 
+            // CBKillList
+            // 
+            this.CBKillList.AutoSize = true;
+            this.CBKillList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CBKillList.Location = new System.Drawing.Point(6, 113);
+            this.CBKillList.Name = "CBKillList";
+            this.CBKillList.Size = new System.Drawing.Size(116, 17);
+            this.CBKillList.TabIndex = 6;
+            this.CBKillList.Text = "Kill Mobs from XML";
+            this.CBKillList.UseVisualStyleBackColor = true;
             // 
             // CBPoseidus
             // 
@@ -144,7 +161,7 @@ namespace katzerle
             this.CBPoseidus.Checked = true;
             this.CBPoseidus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CBPoseidus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBPoseidus.Location = new System.Drawing.Point(6, 185);
+            this.CBPoseidus.Location = new System.Drawing.Point(6, 42);
             this.CBPoseidus.Name = "CBPoseidus";
             this.CBPoseidus.Size = new System.Drawing.Size(69, 17);
             this.CBPoseidus.TabIndex = 5;
@@ -155,7 +172,7 @@ namespace katzerle
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(30, 139);
+            this.label3.Location = new System.Drawing.Point(30, 164);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 1;
@@ -167,7 +184,7 @@ namespace katzerle
             this.CBTLPD.Checked = true;
             this.CBTLPD.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CBTLPD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBTLPD.Location = new System.Drawing.Point(5, 162);
+            this.CBTLPD.Location = new System.Drawing.Point(6, 19);
             this.CBTLPD.Name = "CBTLPD";
             this.CBTLPD.Size = new System.Drawing.Size(120, 17);
             this.CBTLPD.TabIndex = 4;
@@ -180,16 +197,16 @@ namespace katzerle
             this.CBLowRAR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CBLowRAR.Location = new System.Drawing.Point(6, 90);
             this.CBLowRAR.Name = "CBLowRAR";
-            this.CBLowRAR.Size = new System.Drawing.Size(114, 17);
+            this.CBLowRAR.Size = new System.Drawing.Size(128, 17);
             this.CBLowRAR.TabIndex = 3;
-            this.CBLowRAR.Text = "Classic Rare Mobs";
+            this.CBLowRAR.Text = "All Classic Rare Mobs";
             this.CBLowRAR.UseVisualStyleBackColor = true;
             // 
             // TBHuntByID
             // 
             this.TBHuntByID.Enabled = false;
             this.TBHuntByID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBHuntByID.Location = new System.Drawing.Point(78, 136);
+            this.TBHuntByID.Location = new System.Drawing.Point(78, 159);
             this.TBHuntByID.Name = "TBHuntByID";
             this.TBHuntByID.Size = new System.Drawing.Size(83, 20);
             this.TBHuntByID.TabIndex = 0;
@@ -202,16 +219,16 @@ namespace katzerle
             this.CBBC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CBBC.Location = new System.Drawing.Point(6, 67);
             this.CBBC.Name = "CBBC";
-            this.CBBC.Size = new System.Drawing.Size(104, 17);
+            this.CBBC.Size = new System.Drawing.Size(101, 17);
             this.CBBC.TabIndex = 2;
-            this.CBBC.Text = "Burning Crusade";
+            this.CBBC.Text = "Bloody Rare BC";
             this.CBBC.UseVisualStyleBackColor = true;
             // 
             // CBHuntByID
             // 
             this.CBHuntByID.AutoSize = true;
             this.CBHuntByID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBHuntByID.Location = new System.Drawing.Point(5, 113);
+            this.CBHuntByID.Location = new System.Drawing.Point(6, 136);
             this.CBHuntByID.Name = "CBHuntByID";
             this.CBHuntByID.Size = new System.Drawing.Size(104, 17);
             this.CBHuntByID.TabIndex = 0;
@@ -227,9 +244,9 @@ namespace katzerle
             this.CBWotlk.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CBWotlk.Location = new System.Drawing.Point(6, 43);
             this.CBWotlk.Name = "CBWotlk";
-            this.CBWotlk.Size = new System.Drawing.Size(128, 17);
+            this.CBWotlk.Size = new System.Drawing.Size(117, 17);
             this.CBWotlk.TabIndex = 1;
-            this.CBWotlk.Text = "Wrath of the Lichking";
+            this.CBWotlk.Text = "Frostbitten WOTLK";
             this.CBWotlk.UseVisualStyleBackColor = true;
             // 
             // CBCata
@@ -240,9 +257,9 @@ namespace katzerle
             this.CBCata.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CBCata.Location = new System.Drawing.Point(6, 19);
             this.CBCata.Name = "CBCata";
-            this.CBCata.Size = new System.Drawing.Size(74, 17);
+            this.CBCata.Size = new System.Drawing.Size(105, 17);
             this.CBCata.TabIndex = 0;
-            this.CBCata.Text = "Cataclysm";
+            this.CBCata.Text = "Cataclysm Rares";
             this.CBCata.UseVisualStyleBackColor = true;
             // 
             // CBMOP
@@ -263,7 +280,7 @@ namespace katzerle
             this.CBRaptorNest.Checked = true;
             this.CBRaptorNest.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CBRaptorNest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBRaptorNest.Location = new System.Drawing.Point(6, 67);
+            this.CBRaptorNest.Location = new System.Drawing.Point(6, 42);
             this.CBRaptorNest.Name = "CBRaptorNest";
             this.CBRaptorNest.Size = new System.Drawing.Size(123, 17);
             this.CBRaptorNest.TabIndex = 5;
@@ -470,7 +487,7 @@ namespace katzerle
             // BSave
             // 
             this.BSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BSave.Location = new System.Drawing.Point(141, 424);
+            this.BSave.Location = new System.Drawing.Point(279, 499);
             this.BSave.Name = "BSave";
             this.BSave.Size = new System.Drawing.Size(103, 35);
             this.BSave.TabIndex = 5;
@@ -550,16 +567,40 @@ namespace katzerle
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.CBInteractNPC);
+            this.groupBox3.Controls.Add(this.CBAnotherMansTreasure);
             this.groupBox3.Controls.Add(this.CBRaptorNest);
             this.groupBox3.Controls.Add(this.CBObjects);
             this.groupBox3.Controls.Add(this.CBCamel);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(180, 9);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(167, 98);
+            this.groupBox3.Size = new System.Drawing.Size(167, 138);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Collector";
+            // 
+            // CBInteractNPC
+            // 
+            this.CBInteractNPC.AutoSize = true;
+            this.CBInteractNPC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CBInteractNPC.Location = new System.Drawing.Point(6, 113);
+            this.CBInteractNPC.Name = "CBInteractNPC";
+            this.CBInteractNPC.Size = new System.Drawing.Size(140, 17);
+            this.CBInteractNPC.TabIndex = 7;
+            this.CBInteractNPC.Text = "Interact NPCs from XML";
+            this.CBInteractNPC.UseVisualStyleBackColor = true;
+            // 
+            // CBAnotherMansTreasure
+            // 
+            this.CBAnotherMansTreasure.AutoSize = true;
+            this.CBAnotherMansTreasure.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CBAnotherMansTreasure.Location = new System.Drawing.Point(6, 67);
+            this.CBAnotherMansTreasure.Name = "CBAnotherMansTreasure";
+            this.CBAnotherMansTreasure.Size = new System.Drawing.Size(131, 17);
+            this.CBAnotherMansTreasure.TabIndex = 6;
+            this.CBAnotherMansTreasure.Text = "AnotherMansTreasure";
+            this.CBAnotherMansTreasure.UseVisualStyleBackColor = true;
             // 
             // CBObjects
             // 
@@ -567,7 +608,7 @@ namespace katzerle
             this.CBObjects.Checked = true;
             this.CBObjects.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CBObjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBObjects.Location = new System.Drawing.Point(6, 19);
+            this.CBObjects.Location = new System.Drawing.Point(6, 90);
             this.CBObjects.Name = "CBObjects";
             this.CBObjects.Size = new System.Drawing.Size(145, 17);
             this.CBObjects.TabIndex = 3;
@@ -580,7 +621,7 @@ namespace katzerle
             this.CBCamel.Checked = true;
             this.CBCamel.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CBCamel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBCamel.Location = new System.Drawing.Point(6, 42);
+            this.CBCamel.Location = new System.Drawing.Point(6, 19);
             this.CBCamel.Name = "CBCamel";
             this.CBCamel.Size = new System.Drawing.Size(135, 17);
             this.CBCamel.TabIndex = 3;
@@ -631,11 +672,12 @@ namespace katzerle
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(370, 406);
+            this.tabControl1.Size = new System.Drawing.Size(370, 481);
             this.tabControl1.TabIndex = 14;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.groupBox11);
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox3);
@@ -644,7 +686,7 @@ namespace katzerle
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(362, 380);
+            this.tabPage1.Size = new System.Drawing.Size(362, 455);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Rarekiller";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -655,7 +697,7 @@ namespace katzerle
             this.groupBox11.Controls.Add(this.CBBlazewing);
             this.groupBox11.Controls.Add(this.CBVyragosa);
             this.groupBox11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox11.Location = new System.Drawing.Point(7, 237);
+            this.groupBox11.Location = new System.Drawing.Point(7, 310);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(167, 135);
             this.groupBox11.TabIndex = 16;
@@ -681,7 +723,7 @@ namespace katzerle
             this.groupBox5.Controls.Add(this.CBNotKillTameable);
             this.groupBox5.Controls.Add(this.CBTameDefault);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(180, 113);
+            this.groupBox5.Location = new System.Drawing.Point(186, 153);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(167, 124);
             this.groupBox5.TabIndex = 13;
@@ -736,7 +778,7 @@ namespace katzerle
             this.groupBox12.Controls.Add(this.TBBlacklistTime);
             this.groupBox12.Controls.Add(this.CBBlacklistCheck);
             this.groupBox12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox12.Location = new System.Drawing.Point(180, 243);
+            this.groupBox12.Location = new System.Drawing.Point(186, 283);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(159, 79);
             this.groupBox12.TabIndex = 17;
@@ -773,6 +815,7 @@ namespace katzerle
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.CBShadowmeld);
             this.tabPage2.Controls.Add(this.CBKeyer);
             this.tabPage2.Controls.Add(this.BAlertTest);
             this.tabPage2.Controls.Add(this.GBPull);
@@ -781,10 +824,20 @@ namespace katzerle
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(362, 380);
+            this.tabPage2.Size = new System.Drawing.Size(362, 405);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Slowfall and other Behavior";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // CBShadowmeld
+            // 
+            this.CBShadowmeld.AutoSize = true;
+            this.CBShadowmeld.Location = new System.Drawing.Point(186, 163);
+            this.CBShadowmeld.Name = "CBShadowmeld";
+            this.CBShadowmeld.Size = new System.Drawing.Size(87, 17);
+            this.CBShadowmeld.TabIndex = 15;
+            this.CBShadowmeld.Text = "Shadowmeld";
+            this.CBShadowmeld.UseVisualStyleBackColor = true;
             // 
             // groupBox8
             // 
@@ -857,15 +910,29 @@ namespace katzerle
             this.TBSoundfileFoundRare.Size = new System.Drawing.Size(214, 20);
             this.TBSoundfileFoundRare.TabIndex = 17;
             // 
+            // CBBNWisper
+            // 
+            this.CBBNWisper.AutoSize = true;
+            this.CBBNWisper.Checked = true;
+            this.CBBNWisper.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CBBNWisper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CBBNWisper.Location = new System.Drawing.Point(6, 75);
+            this.CBBNWisper.Name = "CBBNWisper";
+            this.CBBNWisper.Size = new System.Drawing.Size(74, 17);
+            this.CBBNWisper.TabIndex = 11;
+            this.CBBNWisper.Text = "BNWisper";
+            this.CBBNWisper.UseVisualStyleBackColor = true;
+            // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.CBAeonaxx);
             this.tabPage3.Controls.Add(this.CBMOP);
             this.tabPage3.Controls.Add(this.label6);
             this.tabPage3.Controls.Add(this.groupBox6);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(362, 380);
+            this.tabPage3.Size = new System.Drawing.Size(362, 455);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Dev Box";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -883,7 +950,7 @@ namespace katzerle
             // BDefault
             // 
             this.BDefault.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BDefault.Location = new System.Drawing.Point(11, 424);
+            this.BDefault.Location = new System.Drawing.Point(12, 499);
             this.BDefault.Name = "BDefault";
             this.BDefault.Size = new System.Drawing.Size(106, 35);
             this.BDefault.TabIndex = 15;
@@ -891,24 +958,35 @@ namespace katzerle
             this.BDefault.UseVisualStyleBackColor = true;
             this.BDefault.Click += new System.EventHandler(this.button1_Click);
             // 
-            // CBBNWisper
+            // groupBox1
             // 
-            this.CBBNWisper.AutoSize = true;
-            this.CBBNWisper.Checked = true;
-            this.CBBNWisper.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CBBNWisper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBBNWisper.Location = new System.Drawing.Point(6, 75);
-            this.CBBNWisper.Name = "CBBNWisper";
-            this.CBBNWisper.Size = new System.Drawing.Size(74, 17);
-            this.CBBNWisper.TabIndex = 11;
-            this.CBBNWisper.Text = "BNWisper";
-            this.CBBNWisper.UseVisualStyleBackColor = true;
+            this.groupBox1.Controls.Add(this.CBTLPD);
+            this.groupBox1.Controls.Add(this.CBPoseidus);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(7, 210);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(167, 94);
+            this.groupBox1.TabIndex = 18;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Mounts";
+            // 
+            // CBAeonaxx
+            // 
+            this.CBAeonaxx.AutoSize = true;
+            this.CBAeonaxx.Enabled = false;
+            this.CBAeonaxx.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CBAeonaxx.Location = new System.Drawing.Point(15, 136);
+            this.CBAeonaxx.Name = "CBAeonaxx";
+            this.CBAeonaxx.Size = new System.Drawing.Size(67, 17);
+            this.CBAeonaxx.TabIndex = 6;
+            this.CBAeonaxx.Text = "Aeonaxx";
+            this.CBAeonaxx.UseVisualStyleBackColor = true;
             // 
             // RarekillerUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 471);
+            this.ClientSize = new System.Drawing.Size(394, 546);
             this.Controls.Add(this.BDefault);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.BSave);
@@ -938,6 +1016,8 @@ namespace katzerle
             this.groupBox8.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1011,6 +1091,12 @@ namespace katzerle
         private System.Windows.Forms.TextBox TBRange;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox CBBNWisper;
+        private System.Windows.Forms.CheckBox CBInteractNPC;
+        private System.Windows.Forms.CheckBox CBAnotherMansTreasure;
+        private System.Windows.Forms.CheckBox CBShadowmeld;
+        private System.Windows.Forms.CheckBox CBKillList;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox CBAeonaxx;
     }
 }
 

@@ -28,15 +28,19 @@ namespace katzerle
 
             // Addons
             CBMOP.Checked = Rarekiller.Settings.MOP;
+            CBKillList.Checked = Rarekiller.Settings.KillList;
             CBCata.Checked = Rarekiller.Settings.CATA;
             CBWotlk.Checked = Rarekiller.Settings.WOTLK;
             CBBC.Checked = Rarekiller.Settings.BC;
             CBLowRAR.Checked = Rarekiller.Settings.LowRAR;
             CBTLPD.Checked = Rarekiller.Settings.TLPD;
+            CBAnotherMansTreasure.Checked = Rarekiller.Settings.AnotherMansTreasure;
+            CBInteractNPC.Checked = Rarekiller.Settings.InteractNPC;
 			CBPoseidus.Checked = Rarekiller.Settings.Poseidus;
             CBRaptorNest.Checked = Rarekiller.Settings.RaptorNest;
             CBObjects.Checked = Rarekiller.Settings.ObjectsCollector;
             CBCamel.Checked = Rarekiller.Settings.Camel;
+            CBAeonaxx.Checked = Rarekiller.Settings.Aeonaxx;
             // Hunt by ID
             CBHuntByID.Checked = Rarekiller.Settings.HUNTbyID;
             TBHuntByID.Text = Rarekiller.Settings.MobID;
@@ -48,6 +52,7 @@ namespace katzerle
             CBBNWisper.Checked = Rarekiller.Settings.BNWisper;
             CBGuild.Checked = Rarekiller.Settings.Guild;
             CBKeyer.Checked = Rarekiller.Settings.Keyer;
+            CBShadowmeld.Checked = Rarekiller.Settings.Shadowmeld;
 			TBSoundfileWisper.Text = Rarekiller.Settings.SoundfileWisper;
             TBSoundfileGuild.Text = Rarekiller.Settings.SoundfileGuild;
             TBSoundfileFoundRare.Text = Rarekiller.Settings.SoundfileFoundRare;
@@ -140,7 +145,7 @@ namespace katzerle
 
         private void BAlertTest_Click(object sender, EventArgs e)
         {
-            new SoundPlayer(Rarekiller.Soundfile).Play();
+            new SoundPlayer(TBSoundfileFoundRare.Text).Play();
         }
 
         private void CBUseSlowfall_CheckedChanged(object sender, EventArgs e)
@@ -217,6 +222,7 @@ namespace katzerle
                 && CBPull.Checked && !(SpellManager.HasSpell(Rarekiller.Spells.FastPullspell)))
             {
                 Logging.Write(Colors.MediumPurple, "Rarekiller Part Spells: Don't have your Pull Spell - please config one");
+                CBKillList.Checked = false;
                 CBWotlk.Checked = false;
                 CBBC.Checked = false;
                 CBCata.Checked = false;
@@ -278,14 +284,19 @@ namespace katzerle
 // Variablen nach Settings übernehmen
             // Addons
             Rarekiller.Settings.MOP = CBMOP.Checked;
+            Rarekiller.Settings.KillList = CBKillList.Checked;
             Rarekiller.Settings.CATA = CBCata.Checked;
             Rarekiller.Settings.WOTLK = CBWotlk.Checked;
             Rarekiller.Settings.BC = CBBC.Checked;
             Rarekiller.Settings.LowRAR = CBLowRAR.Checked;
             Rarekiller.Settings.TLPD = CBTLPD.Checked;
+            Rarekiller.Settings.AnotherMansTreasure = CBAnotherMansTreasure.Checked;
+            Rarekiller.Settings.InteractNPC = CBInteractNPC.Checked;
 			Rarekiller.Settings.Poseidus = CBPoseidus.Checked;
             Rarekiller.Settings.RaptorNest = CBRaptorNest.Checked;
             Rarekiller.Settings.ObjectsCollector = CBObjects.Checked;
+            Rarekiller.Settings.Aeonaxx = CBAeonaxx.Checked;
+
             // Hunt by ID
             Rarekiller.Settings.HUNTbyID = CBHuntByID.Checked;
             Rarekiller.Settings.MobID = TBHuntByID.Text;
@@ -317,6 +328,7 @@ namespace katzerle
             Rarekiller.Settings.BNWisper = CBBNWisper.Checked;
             Rarekiller.Settings.Guild = CBGuild.Checked;
             Rarekiller.Settings.Keyer = CBKeyer.Checked;
+            Rarekiller.Settings.Shadowmeld = CBShadowmeld.Checked;
             Rarekiller.Settings.SoundfileWisper = TBSoundfileWisper.Text;
             Rarekiller.Settings.SoundfileGuild = TBSoundfileGuild.Text;
             Rarekiller.Settings.SoundfileFoundRare = TBSoundfileFoundRare.Text;
@@ -326,6 +338,7 @@ namespace katzerle
 
             // Rarekiller
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: MOP = {0}", CBMOP.Checked.ToString());
+            Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: KillList = {0}", CBKillList.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: CATA = {0}", CBCata.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: WOTLK = {0}", CBWotlk.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: BC = {0}", CBBC.Checked.ToString());
@@ -333,11 +346,14 @@ namespace katzerle
 			// Mount Rares
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: TLPD = {0}", CBTLPD.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Poseidus = {0}", CBPoseidus.Checked.ToString());
-			// Collector
+            //Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Aeonaxx = {0}", CBAeonaxx.Checked.ToString());
+            // Collector
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Camel = {0}", CBCamel.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: RaptorNest = {0}", CBRaptorNest.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: ObjectsCollect = {0}", CBObjects.Checked.ToString());
-			// Problem Mobs
+            Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: AnotherMansTreasure = {0}", CBAnotherMansTreasure.Checked.ToString());
+            Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: InteractNPC = {0}", CBInteractNPC.Checked.ToString());
+            // Problem Mobs
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Vyragosa = {0}", CBVyragosa.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Blazewing = {0}", CBBlazewing.Checked.ToString());
             // Hunt by ID
@@ -364,6 +380,7 @@ namespace katzerle
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: BlacklistCheck = {0}", CBBlacklistCheck.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: BlacklistTime = {0}", TBBlacklistTime.Text.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: MoveAround = {0}", CBKeyer.Checked.ToString());
+            Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Shadowmeld = {0}", CBShadowmeld.Checked.ToString());
 			// Alerts
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Alert = {0}", CBAlert.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Wisper = {0}", CBWisper.Checked.ToString());
@@ -405,8 +422,18 @@ namespace katzerle
 
 			//Rarekiller
             //let's add another element (child of the root)
+            element = xml.CreateElement("KillList");
+            text = xml.CreateTextNode(CBKillList.Checked.ToString());
+            element.AppendChild(text);
+            root.AppendChild(element);
+            //let's add another element (child of the root)
             element = xml.CreateElement("MOP");
             text = xml.CreateTextNode(CBMOP.Checked.ToString());
+            element.AppendChild(text);
+            root.AppendChild(element);
+            //let's add another element (child of the root)
+            element = xml.CreateElement("CATA");
+            text = xml.CreateTextNode(CBCata.Checked.ToString());
             element.AppendChild(text);
             root.AppendChild(element);
             //let's add another element (child of the root)
@@ -441,6 +468,11 @@ namespace katzerle
             text = xml.CreateTextNode(CBPoseidus.Checked.ToString());
             element.AppendChild(text);
             root.AppendChild(element);
+            //let's add another element (child of the root)
+            element = xml.CreateElement("Aeonaxx");
+            text = xml.CreateTextNode(CBAeonaxx.Checked.ToString());
+            element.AppendChild(text);
+            root.AppendChild(element);
 
 			//Collector
             //let's add another element (child of the root)
@@ -456,6 +488,16 @@ namespace katzerle
             //let's add another element (child of the root)
             element = xml.CreateElement("ObjectsCollector");
             text = xml.CreateTextNode(CBObjects.Checked.ToString());
+            element.AppendChild(text);
+            root.AppendChild(element);
+            //let's add another element (child of the root)
+            element = xml.CreateElement("AnotherMansTreasure");
+            text = xml.CreateTextNode(CBAnotherMansTreasure.Checked.ToString());
+            element.AppendChild(text);
+            root.AppendChild(element);
+            //let's add another element (child of the root)
+            element = xml.CreateElement("InteractNPC");
+            text = xml.CreateTextNode(CBInteractNPC.Checked.ToString());
             element.AppendChild(text);
             root.AppendChild(element);
 			
@@ -565,6 +607,11 @@ namespace katzerle
             text = xml.CreateTextNode(CBKeyer.Checked.ToString());
             element.AppendChild(text);
             root.AppendChild(element);
+            //let's add another element (child of the root)
+            element = xml.CreateElement("Shadowmeld");
+            text = xml.CreateTextNode(CBShadowmeld.Checked.ToString());
+            element.AppendChild(text);
+            root.AppendChild(element);
 
 			//Blacklist Mobs
 			//let's add another element (child of the root)
@@ -628,6 +675,8 @@ namespace katzerle
             {
                 Logging.WriteDiagnostic(Colors.Red, np.Message);
             }
+
+            Close();
         }
 
         private void BSoundfileFoundRare_Click(object sender, EventArgs e)
@@ -697,13 +746,17 @@ namespace katzerle
         {
             // Addons
             CBMOP.Checked = false;
+            CBKillList.Checked = false;
             CBCata.Checked = true;
             CBWotlk.Checked = true;
             CBBC.Checked = true;
             CBLowRAR.Checked = false;
             CBTLPD.Checked = true;
             CBPoseidus.Checked = true;
+            CBAeonaxx.Checked = false;
             CBRaptorNest.Checked = true;
+            CBAnotherMansTreasure.Checked = false;
+            CBInteractNPC.Checked = false;
             CBObjects.Checked = true;
             // Hunt by ID
             CBHuntByID.Checked = false;
@@ -717,6 +770,7 @@ namespace katzerle
             CBBNWisper.Checked = true;
             CBGuild.Checked = false;
             CBKeyer.Checked = true;
+            CBShadowmeld.Checked = false;
             TBSoundfileWisper.Text = Rarekiller.Soundfile;
             TBSoundfileGuild.Text = Rarekiller.Soundfile;
             TBSoundfileFoundRare.Text = Rarekiller.Soundfile;
@@ -753,13 +807,17 @@ namespace katzerle
 			// Variablen nach Settings übernehmen
             // Addons
             Rarekiller.Settings.MOP = CBMOP.Checked;
+            Rarekiller.Settings.KillList = CBKillList.Checked;
             Rarekiller.Settings.CATA = CBCata.Checked;
             Rarekiller.Settings.WOTLK = CBWotlk.Checked;
             Rarekiller.Settings.BC = CBBC.Checked;
             Rarekiller.Settings.LowRAR = CBLowRAR.Checked;
             Rarekiller.Settings.TLPD = CBTLPD.Checked;
 			Rarekiller.Settings.Poseidus = CBPoseidus.Checked;
+            Rarekiller.Settings.Aeonaxx = CBAeonaxx.Checked;
             Rarekiller.Settings.RaptorNest = CBRaptorNest.Checked;
+            Rarekiller.Settings.InteractNPC = CBInteractNPC.Checked;
+            Rarekiller.Settings.AnotherMansTreasure = CBAnotherMansTreasure.Checked;
             Rarekiller.Settings.ObjectsCollector = CBObjects.Checked;
             // Hunt by ID
             Rarekiller.Settings.HUNTbyID = CBHuntByID.Checked;
@@ -792,6 +850,7 @@ namespace katzerle
             Rarekiller.Settings.BNWisper = CBBNWisper.Checked;
             Rarekiller.Settings.Guild = CBGuild.Checked;
             Rarekiller.Settings.Keyer = CBKeyer.Checked;
+            Rarekiller.Settings.Shadowmeld = CBShadowmeld.Checked;
             Rarekiller.Settings.SoundfileWisper = TBSoundfileWisper.Text;
             Rarekiller.Settings.SoundfileGuild = TBSoundfileGuild.Text;
             Rarekiller.Settings.SoundfileFoundRare = TBSoundfileFoundRare.Text;

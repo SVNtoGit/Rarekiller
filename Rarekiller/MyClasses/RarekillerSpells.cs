@@ -55,6 +55,7 @@ namespace katzerle
             }
             Logging.Write(Colors.MediumPurple, "Rarekiller Part Spells: * Cast Distance: {0}", Unit.Location.Distance(Me.Location).ToString());
             SpellSuccess = SpellManager.Cast(spellName);
+            
 
 			if (SpellSuccess)
                 Logging.Write(Colors.MediumPurple, "Rarekiller Part Spells: * {0}.", spellName);	
