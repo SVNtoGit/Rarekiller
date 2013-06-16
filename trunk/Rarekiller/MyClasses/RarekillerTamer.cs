@@ -47,11 +47,11 @@ namespace katzerle
                 .OrderBy(o => o.Distance).ToList();
             foreach (WoWUnit o in objList)
             {
-                if (!o.IsDead && !Blacklist.Contains(o.Guid, Rarekiller.Settings.Flags))
+                if (!o.IsDead)
                 {
                     Logging.Write(Colors.MediumPurple, "Rarekiller Part Tamer: Found a new Pet {0} ID {1}", o.Name, o.Entry);
                     // Don't tame the Rare if ...
-                    if (Rarekiller.inCombat)
+                    if (Me.Combat)
                     {
                         Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Tamer: ... but I'm in another Combat :( !!!");
                         return;

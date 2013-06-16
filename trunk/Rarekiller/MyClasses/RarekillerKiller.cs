@@ -30,11 +30,10 @@ namespace katzerle
 
         public static LocalPlayer Me = StyxWoW.Me;
         private static Stopwatch BlacklistTimer = new Stopwatch();
-
         public void findAndKillMob()
         {
             bool CastSuccess = false;
-			int loothelper = 0;
+			int loothelper = 0;            
 
             if (Rarekiller.Settings.DeveloperLogs)
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Scan for Rare Mob");
@@ -42,67 +41,14 @@ namespace katzerle
             ObjectManager.Update();
             List<WoWUnit> objList = ObjectManager.GetObjectsOfType<WoWUnit>()
                 .Where(o => (!Blacklist.Contains(o.Guid, Rarekiller.Settings.Flags) && (
-                (Rarekiller.Settings.CATA && ((o.Entry == 50057)	// Blazewing Hyjal
-                        || (o.Entry == 50053)           // Thartuk the Exile Hyjal
-                        || (o.Entry == 50050)			// Shok'sharak Vashir
-                        || (o.Entry == 50005)			// Poseidus Vashir
-                        || (o.Entry == 50052)			// Burgy Blackheart Vashir
-                        || (o.Entry == 49913)			// Lady La-La Vashir
-                        || (o.Entry == 50060)			// Terborus Tiefenheim
-                        || (o.Entry == 50059)			// Golgarok Tiefenheim
-                        || (o.Entry == 49822)			// Jadefang Tiefenheim
-                        || (o.Entry == 50065)			// Armagedillo Uldum
-                        || (o.Entry == 50064)			// Cyrus the Black Uldum
-                        || (o.Entry == 50085)			// Overlord Sunderfury Twilight Higlands
-                        || (o.Entry == 50086)))			// Tarvus the Vile Twilight Higlands
+                (Rarekiller.Settings.CATA && (Rarekiller.CataRaresList.ContainsKey(Convert.ToInt32(o.Entry))))
                 || (Rarekiller.Settings.Poseidus && ((o.Entry == 50005)	// Poseidus
                         || (o.Entry == 9999999)))			// Platzhalter
                 || (Rarekiller.Settings.TLPD && ((o.Entry == 32491)	// Timelost Protodrake
                         || (o.Entry == 32630)))			// Vyragosa
-                || (Rarekiller.Settings.WOTLK && ((o.Entry == 32517)	// Loque'nahak
-                        || (o.Entry == 32495)			// Hildana Deathstealer
-                        || (o.Entry == 32358)			// Fumblub Gearwind
-                        || (o.Entry == 32377)			// Perobas the Bloodthirster
-                        || (o.Entry == 32398)			// King Ping
-                        || (o.Entry == 32409)			// Crazed Indu'le Survivor
-                        || (o.Entry == 32422)			// Grocklar
-                        || (o.Entry == 32438)			// Syreian the Bonecarver
-                        || (o.Entry == 32471)			// Griegen
-                        || (o.Entry == 32481)			// Aotona
-                        || (o.Entry == 32630)			// Vyragosa
-                        || (o.Entry == 32487)			// Putridus the Ancient
-                        || (o.Entry == 32501)			// High Thane Jorfus
-                        || (o.Entry == 32357)			// Old Crystalbark
-                        || (o.Entry == 32361)			// Icehorn
-                        || (o.Entry == 32386)			// Vigdis the War Maiden
-                        || (o.Entry == 32400)			// Tukemuth
-                        || (o.Entry == 32417)			// Scarlet Highlord Daion
-                        || (o.Entry == 32429)			// Seething Hate
-                        || (o.Entry == 32447)			// Zul'drak Sentinel
-                        || (o.Entry == 32475)			// Terror Spinner
-                        || (o.Entry == 32485)			// King Krush
-                        || (o.Entry == 32500)))			// Dirkee
-                || (Rarekiller.Settings.BC && ((o.Entry == 18695)		// Ambassador Jerrikar
-                        || (o.Entry == 18697)			// Chief Engineer Lorthander
-                        || (o.Entry == 18694)			// Collidus the Warp-Watcher
-                        || (o.Entry == 18686)			// Doomslayer Jurim
-                        || (o.Entry == 18678)			// Fulgorge
-                        || (o.Entry == 18692)			// Hemathion
-                        || (o.Entry == 18680)			// Marticar
-                        || (o.Entry == 18690)			// Morcrush
-                        || (o.Entry == 18685)			// Okrek
-                        || (o.Entry == 18683)			// Voidhunter Yar
-                        || (o.Entry == 18682)			// Bog Lurker
-                        || (o.Entry == 18681)			// Coilfang Emissary
-                        || (o.Entry == 18689)			// Crippler
-                        || (o.Entry == 18698)			// Ever-Core the Punisher
-                        || (o.Entry == 17144)			// Goretooth
-                        || (o.Entry == 18696)			// Kraator
-                        || (o.Entry == 18677)			// Mekthorg the Wild
-                        || (o.Entry == 20932)			// Nuramoc
-                        || (o.Entry == 18693)			// Speaker Mar'grom
-                        || (o.Entry == 18679)))			// Vorakem Doomspeaker
-                || Rarekiller.KillMobsList.ContainsKey(Convert.ToInt32(o.Entry)) //Kill Mobs from List
+                || (Rarekiller.Settings.WOTLK && (Rarekiller.FrostbittenList.ContainsKey(Convert.ToInt32(o.Entry))))
+                || (Rarekiller.Settings.BC && (Rarekiller.BloodyRareList.ContainsKey(Convert.ToInt32(o.Entry))))
+                || (Rarekiller.Settings.KillList && (Rarekiller.KillMobsList.ContainsKey(Convert.ToInt32(o.Entry)))) //Kill Mobs from List
                 || ((o.Level == 86 || o.Level == 87 || o.Level == 88 || o.Level == 89 || o.Level == 90) && Rarekiller.Settings.MOP && (o.CreatureRank == Styx.WoWUnitClassificationType.Rare)) // every single Pandaren Rare Mob is hunted
                 || ((o.Level < Rarekiller.Settings.Level) && Rarekiller.Settings.LowRAR && (o.CreatureRank == Styx.WoWUnitClassificationType.Rare)) // every single Rare Mob < Level 61 is hunted	
                 || (Rarekiller.Settings.HUNTbyID && (o.Entry == Convert.ToInt64(Rarekiller.Settings.MobID)))				// Hunt special IDs 
@@ -110,7 +56,7 @@ namespace katzerle
                 .OrderBy(o => o.Distance).ToList();
             foreach (WoWUnit o in objList)
             {
-                if (!o.TaggedByOther && !o.IsDead && !o.IsPet && !Blacklist.Contains(o.Guid, Rarekiller.Settings.Flags))
+                if (!o.TaggedByOther && !o.IsDead && !o.IsPet)
                 {
                     Logging.Write(Colors.MediumPurple, "Rarekiller: Find a hunted Mob called {0} ID {1}", o.Name, o.Entry);
 
@@ -181,7 +127,7 @@ namespace katzerle
 						return;
 					}
 
-					if (Rarekiller.inCombat) // ... I'm in combat
+                    if (Me.Combat) // ... I'm in combat
 					{
                         Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: ... but first I have to finish fighting another one.");
 						return;
@@ -316,8 +262,10 @@ namespace katzerle
 // ----------------- Loot Helper for all killed Rare Mobs ---------------------
                         Logging.Write(Colors.MediumPurple, "Rarekiller: Found lootable corpse, move to him");
 
-                        Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part MoveTo: Move to target");
-						while (o.Location.Distance(Me.Location) > 5)
+                        Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part MoveTo: Take Screen and Move to target");
+                        Lua.DoString("TakeScreenshot()");
+                        Thread.Sleep(300);
+                        while (o.Location.Distance(Me.Location) > 5)
 						{
                             if (o.Entry == 49822 || o.IsIndoors)
 								Navigator.MoveTo(o.Location);
@@ -333,6 +281,9 @@ namespace katzerle
                         else if (Me.Mounted)
                             Lua.DoString("Dismount()");
 
+                        Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Take another Screen");
+                        Lua.DoString("TakeScreenshot()");
+                        Thread.Sleep(300); 
                         while (loothelper < 3)
                         {
                             Thread.Sleep(500);

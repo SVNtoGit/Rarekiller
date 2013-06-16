@@ -45,10 +45,14 @@ namespace katzerle
         public bool BC = true;
         public bool LowRAR = false;
         public bool TLPD = true;
+        public bool KillList = false;
         public bool RaptorNest = true;
         public bool ObjectsCollector = true;
+        public bool AnotherMansTreasure = false;
+        public bool InteractNPC = false;
 		public bool Poseidus = true;
         public bool Camel = true;
+        public bool Aeonaxx = false;
         // Hunt by ID
         public bool HUNTbyID = false;
         public string MobID = "";
@@ -82,6 +86,7 @@ namespace katzerle
         public bool BNWisper = true;
         public bool Guild = false;
         public bool Keyer = true;
+        public bool Shadowmeld = false;
 		public string SoundfileWisper = Rarekiller.Soundfile;
 		public string SoundfileGuild = Rarekiller.Soundfile;
 		public string SoundfileFoundRare = Rarekiller.Soundfile;
@@ -91,7 +96,7 @@ namespace katzerle
         public Int64 Blacklist15 = 900;
         public Int64 Blacklist5 = 300;
         public Int64 Blacklist2 = 120;
-        public BlacklistFlags Flags = BlacklistFlags.Combat;
+        public BlacklistFlags Flags = BlacklistFlags.All;
  	
 // Attentione for Developers		
 //Developer Things
@@ -145,6 +150,12 @@ namespace katzerle
                 if (xml == null)
                     return;
                 // Load Variables - Addons
+                xvar = xml.SelectSingleNode("//Rarekiller/KillList");
+                if (xvar != null)
+                {
+                    KillList = Convert.ToBoolean(xvar.InnerText);
+                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + KillList.ToString());
+                }
                 xvar = xml.SelectSingleNode("//Rarekiller/MOP");
                 if (xvar != null)
                 {
@@ -180,6 +191,18 @@ namespace katzerle
                 {
                     TLPD = Convert.ToBoolean(xvar.InnerText);
                     Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + TLPD.ToString());
+                }
+                xvar = xml.SelectSingleNode("//Rarekiller/InteractNPC");
+                if (xvar != null)
+                {
+                    InteractNPC = Convert.ToBoolean(xvar.InnerText);
+                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + InteractNPC.ToString());
+                }
+                xvar = xml.SelectSingleNode("//Rarekiller/AnotherMansTreasure");
+                if (xvar != null)
+                {
+                    AnotherMansTreasure = Convert.ToBoolean(xvar.InnerText);
+                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + AnotherMansTreasure.ToString());
                 }
 				xvar = xml.SelectSingleNode("//Rarekiller/Poseidus");
                 if (xvar != null)
@@ -387,16 +410,25 @@ namespace katzerle
                     Keyer = Convert.ToBoolean(xvar.InnerText);
                     Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + Keyer.ToString());
                 }
-							
-                // Load Variables - Camel Figurine
-
+                xvar = xml.SelectSingleNode("//Rarekiller/Shadowmeld");
+                if (xvar != null)
+                {
+                    Shadowmeld = Convert.ToBoolean(xvar.InnerText);
+                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + Shadowmeld.ToString());
+                }
                 xvar = xml.SelectSingleNode("//Rarekiller/Camel");
                 if (xvar != null)
                 {
                     Camel = Convert.ToBoolean(xvar.InnerText);
                     Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + Camel.ToString());
                 }
-                xvar = xml.SelectSingleNode("//Rarekiller/Collect");
+
+                xvar = xml.SelectSingleNode("//Rarekiller/Aeonaxx");
+                if (xvar != null)
+                {
+                    Aeonaxx = Convert.ToBoolean(xvar.InnerText);
+                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + Aeonaxx.ToString());
+                }
             }
             catch (Exception e)
             {

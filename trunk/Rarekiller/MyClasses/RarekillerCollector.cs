@@ -28,7 +28,7 @@ namespace katzerle
     {
 		public static LocalPlayer Me = StyxWoW.Me;
         private static Stopwatch BlacklistTimer = new Stopwatch();
-        public void findAndPickupNest()
+        public void findAndPickupObject()
         {
 
             if (Rarekiller.Settings.DeveloperLogs)
@@ -37,31 +37,58 @@ namespace katzerle
 
 			ObjectManager.Update();
             List<WoWGameObject> objList = ObjectManager.GetObjectsOfType<WoWGameObject>()
-                .Where(o => (!Blacklist.Contains(o.Guid, Rarekiller.Settings.Flags) && ((o.Entry == 202082)
-                || (o.Entry == 202080)
-                || (o.Entry == 202083)
-                || (o.Entry == 202081)
+                .Where(o => (!Blacklist.Contains(o.Guid, Rarekiller.Settings.Flags) && (((o.Entry == 202082) && Rarekiller.Settings.TestRaptorNest)
+                || ((o.Entry == 202080) && Rarekiller.Settings.TestRaptorNest)
+                || ((o.Entry == 202083) && Rarekiller.Settings.TestRaptorNest)
+                || ((o.Entry == 202081) && Rarekiller.Settings.TestRaptorNest)
+                || (Rarekiller.AnotherMansTreasureList.ContainsKey(Convert.ToInt32(o.Entry)) && Rarekiller.Settings.AnotherMansTreasure && o.Entry > 200000)
 				|| (Rarekiller.CollectObjectsList.ContainsKey(Convert.ToInt32(o.Entry)) && Rarekiller.Settings.ObjectsCollector)
                 || ((o.Entry == 206195) && Rarekiller.Settings.TestRaptorNest) //Testcase Thundermar Ale Keg
                 )))
                 .OrderBy(o => o.Distance).ToList();
+
+            List<WoWUnit> RareList = ObjectManager.GetObjectsOfType<WoWUnit>()
+                .Where(r => ((r.CreatureRank == Styx.WoWUnitClassificationType.Rare) && r.Level > 85 && !r.IsDead)).OrderBy(r => r.Distance).ToList();
+
             foreach (WoWGameObject o in objList)
             {
                 Logging.Write(Colors.MediumPurple, "Rarekiller: Find A Object to collect {0} ID {1}", o.Name, o.Entry);
-// Don't collect the Nest if ...
-				if(Blacklist.Contains(o.Guid, Rarekiller.Settings.Flags))
-					return;
+				
+				
+// ----------------- Alert ---------------------
+                if (Rarekiller.Settings.Alert)
+                {
+                    if (File.Exists(Rarekiller.Settings.SoundfileFoundRare))
+                        new SoundPlayer(Rarekiller.Settings.SoundfileFoundRare).Play();
+                    else if (File.Exists(Rarekiller.Soundfile))
+                        new SoundPlayer(Rarekiller.Soundfile).Play();
+                    else
+                        Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Collector: playing Soundfile failes");
+                }
 
+				
 // ----------------- Underground Object ----------
                 if (o.IsIndoors && Me.IsFlying && Me.IsOutdoors && (o.Location.Distance(Me.Location) > 30))
                 {
                     Logging.Write(Colors.MediumPurple, "Rarekiller Part Collector: Can't reach Object because it is Indoors and I fly Outdoors {0}, Blacklist and Move on", o.Name);
                     Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist5));
-                    BlacklistTimer.Reset();
-                    WoWMovement.MoveStop();
                     return;
                 }
-                if (Rarekiller.inCombat)
+// ----------------- don't collect if Rare Pandaria Elite Around
+                if (RareList != null)
+                {
+                    foreach (WoWUnit r in RareList)
+                    {
+                        if (r.Location.Distance(o.Location) < 30)
+                        {
+                            Logging.Write(Colors.MediumPurple, "Rarekiller Part Collector: Can't reach Object because there's a Rare Elite around, Blacklist and move on", o.Name);
+                            Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist5));
+                            return;
+                        }
+                    }
+                }
+
+                if (Me.Combat)
                 {
                     Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Collector: ... but first I have to finish fighting another Mob.");
                     return;
@@ -76,17 +103,6 @@ namespace katzerle
                 {
                     Thread.Sleep(100);
                 }
-// ----------------- Alert ---------------------
-                if (Rarekiller.Settings.Alert)
-                {
-                    if (File.Exists(Rarekiller.Settings.SoundfileFoundRare))
-                        new SoundPlayer(Rarekiller.Settings.SoundfileFoundRare).Play();
-                    else if (File.Exists(Rarekiller.Soundfile))
-                        new SoundPlayer(Rarekiller.Soundfile).Play();
-                    else
-                        Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Collector: playing Soundfile failes");
-                }
-
 
 // ----------------- Move to Object Part ---------------------
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part MoveTo: Move to Object");
@@ -124,7 +140,9 @@ namespace katzerle
                 else if (Me.Mounted)
                     Lua.DoString("Dismount()");
 
-				Thread.Sleep(500);
+                //Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Take a Screen");
+                //Lua.DoString("TakeScreenshot()"); 
+				Thread.Sleep(1000);
                 o.Interact();
                 o.Interact();
                 o.Interact();
