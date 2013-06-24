@@ -12,12 +12,18 @@ using System.Threading;
 using System.IO;
 using System.Media;
 using System.Windows.Media;
+using System.Collections.Generic;
+using System.Linq;
 
 using Styx;
 using Styx.Common;
 using Styx.CommonBot;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
+
+
+
+
 
 namespace katzerle
 {
@@ -48,6 +54,32 @@ namespace katzerle
                 //KeyboardManager.ReleaseKey('D');
                 LeftRight = true;
             }
+        }
+
+        static public bool PlayerAround(WoWObject Object)
+        {
+            List<WoWPlayer> PlayerList = ObjectManager.GetObjectsOfType<WoWPlayer>()
+                .Where(r => !r.IsDead).OrderBy(r => r.Distance).ToList();
+            foreach (WoWPlayer r in PlayerList)
+            {
+                if (Object.Location.Distance(r.Location) < 5)
+                    return true;
+            }
+            
+            return false;
+        }
+
+        static public bool PlayerAround(WoWUnit Unit)
+        {
+            List<WoWPlayer> PlayerList = ObjectManager.GetObjectsOfType<WoWPlayer>()
+                .Where(r => !r.IsDead).OrderBy(r => r.Distance).ToList();
+            foreach (WoWPlayer r in PlayerList)
+            {
+                if (Unit.Location.Distance(r.Location) < 5)
+                    return true;
+            }
+
+            return false;
         }
 
         public void newWhisper(Chat.ChatWhisperEventArgs arg)

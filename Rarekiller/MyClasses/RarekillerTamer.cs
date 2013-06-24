@@ -50,10 +50,14 @@ namespace katzerle
                 if (!o.IsDead)
                 {
                     Logging.Write(Colors.MediumPurple, "Rarekiller Part Tamer: Found a new Pet {0} ID {1}", o.Name, o.Entry);
+                    if (Rarekiller.Settings.LUAoutput)
+                        Lua.DoString("print('NPCScan: Find {0} ID {1}')", o.Name, o.Entry);
                     // Don't tame the Rare if ...
                     if (Me.Combat)
                     {
                         Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Tamer: ... but I'm in another Combat :( !!!");
+                        if (Rarekiller.Settings.LUAoutput)
+                            Lua.DoString("print('NPCScan: First finish combat')");
                         return;
                     }
 
@@ -63,6 +67,8 @@ namespace katzerle
                         Logging.Write(Colors.MediumPurple, "Rarekiller Part Tamer: You have to place me next to the Spawnpoint, if you want me to hunt this Mob.");
                         Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist5));
                         Logging.Write(Colors.MediumPurple, " Part TamerRarekiller: Blacklist Mob for 5 Minutes.");
+                        if (Rarekiller.Settings.LUAoutput)
+                            Lua.DoString("print('NPCScan: NPC is Indoors')", o.Name);
                         return;
                     }
 
@@ -71,6 +77,8 @@ namespace katzerle
                         Logging.Write(Colors.MediumPurple, "Rarekiller Part Tamer: Mob Level is higher then mine, can't tame the Mob.");
                         Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist60));
                         Logging.Write(Colors.MediumPurple, "Rarekiller Part Tamer: Blacklist Mob for 60 Minutes.");
+                        if (Rarekiller.Settings.LUAoutput)
+                            Lua.DoString("print('NPCScan: NPC Level is to high to tame')", o.Name);
                         return;
                     }
                     if (Me.IsOnTransport)
@@ -88,6 +96,8 @@ namespace katzerle
                         Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Tamer: {0} is Member of the BlacklistedMobs.xml", o.Name);
                         Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist15));
                         Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Tamer: Blacklist Mob for 15 Minutes.");
+                        if (Rarekiller.Settings.LUAoutput)
+                            Lua.DoString("print('NPCScan: I'm on Transport')");
                         return;
                     }
 

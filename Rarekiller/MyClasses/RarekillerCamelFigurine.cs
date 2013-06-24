@@ -34,15 +34,13 @@ namespace katzerle
         public static WoWPoint ProblemCamel2 = new WoWPoint(-9900.116, 461.3653, 45.62226);
         public static WoWPoint ProblemCamel3 = new WoWPoint(-10697.69, 1045.757, 24.125);
         public static WoWPoint ProblemCamel4 = new WoWPoint(-11066.67, -2100.342, 175.2816);
-        //public static WoWPoint IndoorNPC1 = new WoWPoint(-11066.67, -2100.342, 175.2816);
-        //public static WoWPoint IndoorNPC2 = new WoWPoint(-11066.67, -2100.342, 175.2816);
-        //public static WoWPoint IndoorNPC3 = new WoWPoint(-11066.67, -2100.342, 175.2816);
-        //public static WoWPoint IndoorNPC4 = new WoWPoint(-11066.67, -2100.342, 175.2816);
-        //public static WoWPoint IndoorNPC5 = new WoWPoint(-11066.67, -2100.342, 175.2816);
+
+        //ToDo Landing Points for of Underground NPCs
+        public static WoWPoint LandingPoint64227 = new WoWPoint(2359.229, 2484.88, 686.5128);
 
         public void findAndPickupObject()
         {
-			bool ForceGround = false;
+            //bool ForceGround = false;
 
             if (Rarekiller.Settings.DeveloperLogs)
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Scan for NPC to Interact");
@@ -62,8 +60,12 @@ namespace katzerle
             foreach (WoWUnit o in objList)
             {
                 Logging.Write(Colors.MediumPurple, "Rarekiller Part NPC: Find {0} ID {1}", o.Name, o.Entry);
+                if (Rarekiller.Settings.LUAoutput)
+                    Lua.DoString("print('NPCScan: Find {0} ID {1}')", o.Name, o.Entry);
 
-				
+                if (Me.IsIndoors)
+                    Rarekiller.Settings.Forceground = true;
+                
                 if (Rarekiller.Settings.Alert)
                 {
                     if (File.Exists(Rarekiller.Settings.SoundfileFoundRare))
@@ -71,17 +73,23 @@ namespace katzerle
                     else if (File.Exists(Rarekiller.Soundfile))
                         new SoundPlayer(Rarekiller.Soundfile).Play();
                     else
-                        Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Camel: playing Soundfile failes");
+                        Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part NPC: playing Soundfile failes");
                 }
-				
 				
 // ----------------- Underground ----------
-                if (o.IsIndoors && Me.IsFlying && Me.IsOutdoors && (o.Location.Distance(Me.Location) > 30))
+                //if not ID of Underground NPCs of Another Mans Treasure --> don't collect
+                if (!(o.Entry == 64227))
                 {
-                    Logging.Write(Colors.MediumPurple, "Rarekiller Part NPC: Can't reach NPC because it is Indoors and I fly Outdoors {0}, Blacklist and Move on", o.Name);
-                    Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist5));
-                    return;
+                    if (o.IsIndoors && Me.IsFlying && Me.IsOutdoors && (o.Location.Distance(Me.Location) > 30))
+                    {
+                        Logging.Write(Colors.MediumPurple, "Rarekiller Part NPC: Can't reach NPC because it is Indoors and I fly Outdoors {0}, Blacklist and Move on", o.Name);
+                        if (Rarekiller.Settings.LUAoutput)
+                            Lua.DoString("print('NPCScan: NPC is Indoors')", o.Name);
+                        Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist5));
+                        return;
+                    }
                 }
+
 // -----------------  don't collect if Rare Pandaria Elite Around
                 if (RareList != null)
                 {
@@ -89,21 +97,36 @@ namespace katzerle
                     {
                         if (r.Location.Distance(o.Location) < 30)
                         {
-                            Logging.Write(Colors.MediumPurple, "Rarekiller Part Collector: Can't reach Object because there's a Rare Elite around, Blacklist and move on", o.Name);
+                            Logging.Write(Colors.MediumPurple, "Rarekiller Part NPC: Can't reach Object because there's a Rare Elite around, Blacklist and move on", o.Name);
+                            if (Rarekiller.Settings.LUAoutput)
+                                Lua.DoString("print('NPCScan: NPC Elite Rare around')", o.Name);
                             Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist5));
                             return;
                         }
                     }
                 }
+
+                if (Rarekiller.Settings.PlayerScan && RarekillerSecurity.PlayerAround(o))
+                {
+                    Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part NPC: There are other Players around, so move on");
+                    if (Rarekiller.Settings.LUAoutput)
+                        Lua.DoString("print('NPCScan: Other Players around')");
+                    Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist5));
+                    return;
+                }
 				
                 if (Me.Combat)
                 {
                     Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part NPC: ... but first I have to finish fighting another Mob.");
+                    if (Rarekiller.Settings.LUAoutput)
+                        Lua.DoString("print('NPCScan: First finish combat')");
                     return;
                 }
                 if (Me.IsOnTransport)
                 {
                     Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part NPC: ... but I'm on a Transport.");
+                    if (Rarekiller.Settings.LUAoutput)
+                        Lua.DoString("print('NPCScan: I'm on Transport')");
                     return;
                 }
                 if (Me.IsCasting)
@@ -111,25 +134,22 @@ namespace katzerle
                     SpellManager.StopCasting();
                     Thread.Sleep(100);
                 }
-					
-				if (Me.IsFlying && ((o.Location.Distance(ProblemCamel1) < 10) || (o.Location.Distance(ProblemCamel2) < 10) || 
+
+                if (!Rarekiller.Settings.Forceground && ((o.Location.Distance(ProblemCamel1) < 10) || (o.Location.Distance(ProblemCamel2) < 10) || 
 						(o.Location.Distance(ProblemCamel3) < 10) || (o.Location.Distance(ProblemCamel4) < 20)))
 				{
-                    Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part MoveTo: Found a Problem NPC {0} so dismount and walk", o.Entry);
-					while (o.Location.Distance(Me.Location) > 30)
+                    Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part MoveTo: Found a Problem Figurine {0} so dismount and walk", o.Entry);
+					while (o.Location.Distance(Me.Location) > 15)
 					{
-						if (ForceGround)
-							Navigator.MoveTo(o.Location);
-						else
-							Flightor.MoveTo(o.Location);
+						Flightor.MoveTo(o.Location);
 						Thread.Sleep(100);
 						if (Rarekiller.inCombat) return;
 					}
 					WoWMovement.MoveStop();
-					Thread.Sleep(1000);
+					Thread.Sleep(500);
 					//Descend to Land
 					WoWMovement.Move(WoWMovement.MovementDirection.Descend);
-					Thread.Sleep(2000);
+					Thread.Sleep(1000);
 					WoWMovement.MoveStop();
 					//Dismount
                     if (Me.Auras.ContainsKey("Flight Form"))
@@ -138,8 +158,32 @@ namespace katzerle
                         Lua.DoString("Dismount()");
 
 					Thread.Sleep(300);
-					ForceGround = true;						
+                    Rarekiller.Settings.Forceground = true;						
 				}
+
+                //ToDo IDs of Underground NPCs
+                if (!Rarekiller.Settings.Forceground && o.Entry == 64227)
+                {
+                    Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part MoveTo: Found a Underground NPC {0} so dismount and walk", o.Entry);
+
+                    while (Me.Location.Distance(LandingPoint64227) > 5)
+                    {
+                        Flightor.MoveTo(LandingPoint64227);
+                        Thread.Sleep(100);
+                        if (Rarekiller.inCombat) return;
+                    }
+
+                    WoWMovement.MoveStop();
+                    //Dismount
+                    if (Me.Auras.ContainsKey("Flight Form"))
+                        Lua.DoString("CancelShapeshiftForm()");
+                    else if (Me.Mounted)
+                        Lua.DoString("Dismount()");
+
+                    Thread.Sleep(300);
+                    Rarekiller.Settings.Forceground = true;						
+                }
+
 
                 Logging.Write(Colors.MediumPurple, "Rarekiller Part MoveTo: Move to target");
 
@@ -149,7 +193,7 @@ namespace katzerle
 
 				while (o.Location.Distance(Me.Location) > 4)
 				{
-					if (ForceGround)
+                    if (Rarekiller.Settings.Forceground)
 						Navigator.MoveTo(o.Location);
 					else
 						Flightor.MoveTo(o.Location);
@@ -161,6 +205,7 @@ namespace katzerle
                         Logging.Write(Colors.MediumPurple, "Rarekiller Part NPC: Blacklist NPC for 15 Minutes.");
 						BlacklistTimer.Reset();
 						WoWMovement.MoveStop();
+                        Rarekiller.Settings.Forceground = false;
 						return;
 					}
 				}
@@ -193,7 +238,7 @@ namespace katzerle
 					Lua.DoString("RunMacroText(\"/click GossipTitleButton1\");");
 					Thread.Sleep(1000);
 				}
-				ForceGround = false;
+                Rarekiller.Settings.Forceground = false;
             }
         }
 

@@ -38,6 +38,7 @@ namespace katzerle
             CBInteractNPC.Checked = Rarekiller.Settings.InteractNPC;
 			CBPoseidus.Checked = Rarekiller.Settings.Poseidus;
             CBRaptorNest.Checked = Rarekiller.Settings.RaptorNest;
+            CBDarkSoil.Checked = Rarekiller.Settings.DarkSoil;
             CBObjects.Checked = Rarekiller.Settings.ObjectsCollector;
             CBCamel.Checked = Rarekiller.Settings.Camel;
             CBAeonaxx.Checked = Rarekiller.Settings.Aeonaxx;
@@ -47,6 +48,8 @@ namespace katzerle
             CBBlacklistCheck.Checked = Rarekiller.Settings.BlacklistCheck;
             TBBlacklistTime.Text = Rarekiller.Settings.BlacklistTime;
             //Security
+            CBLUAoutput.Checked = Rarekiller.Settings.LUAoutput;
+            CBPlayerScan.Checked = Rarekiller.Settings.PlayerScan;
 			CBAlert.Checked = Rarekiller.Settings.Alert;
             CBWisper.Checked = Rarekiller.Settings.Wisper;
             CBBNWisper.Checked = Rarekiller.Settings.BNWisper;
@@ -294,6 +297,7 @@ namespace katzerle
             Rarekiller.Settings.InteractNPC = CBInteractNPC.Checked;
 			Rarekiller.Settings.Poseidus = CBPoseidus.Checked;
             Rarekiller.Settings.RaptorNest = CBRaptorNest.Checked;
+            Rarekiller.Settings.DarkSoil = CBDarkSoil.Checked;
             Rarekiller.Settings.ObjectsCollector = CBObjects.Checked;
             Rarekiller.Settings.Aeonaxx = CBAeonaxx.Checked;
 
@@ -323,6 +327,8 @@ namespace katzerle
             Rarekiller.Settings.Blazewing = CBBlazewing.Checked;
             Rarekiller.Settings.Camel = CBCamel.Checked;
             //Alert etc
+            Rarekiller.Settings.PlayerScan = CBPlayerScan.Checked;
+            Rarekiller.Settings.LUAoutput = CBLUAoutput.Checked;
             Rarekiller.Settings.Alert = CBAlert.Checked;
             Rarekiller.Settings.Wisper = CBWisper.Checked;
             Rarekiller.Settings.BNWisper = CBBNWisper.Checked;
@@ -337,7 +343,7 @@ namespace katzerle
             Rarekiller.Settings.TestFigurineInteract = CBTestCamel.Checked;
 
             // Rarekiller
-            Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: MOP = {0}", CBMOP.Checked.ToString());
+            //Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: MOP = {0}", CBMOP.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: KillList = {0}", CBKillList.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: CATA = {0}", CBCata.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: WOTLK = {0}", CBWotlk.Checked.ToString());
@@ -350,6 +356,7 @@ namespace katzerle
             // Collector
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Camel = {0}", CBCamel.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: RaptorNest = {0}", CBRaptorNest.Checked.ToString());
+            Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: DarkSoil = {0}", CBDarkSoil.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: ObjectsCollect = {0}", CBObjects.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: AnotherMansTreasure = {0}", CBAnotherMansTreasure.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: InteractNPC = {0}", CBInteractNPC.Checked.ToString());
@@ -382,6 +389,8 @@ namespace katzerle
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: MoveAround = {0}", CBKeyer.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Shadowmeld = {0}", CBShadowmeld.Checked.ToString());
 			// Alerts
+            Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: PlayerScan = {0}", CBPlayerScan.Checked.ToString());
+            Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: LUAoutput = {0}", CBLUAoutput.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Alert = {0}", CBAlert.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: Wisper = {0}", CBWisper.Checked.ToString());
             Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Save: BNWisper = {0}", CBBNWisper.Checked.ToString());
@@ -483,6 +492,11 @@ namespace katzerle
             //let's add another element (child of the root)
             element = xml.CreateElement("RaptorNest");
             text = xml.CreateTextNode(CBRaptorNest.Checked.ToString());
+            element.AppendChild(text);
+            root.AppendChild(element);
+            //let's add another element (child of the root)
+            element = xml.CreateElement("DarkSoil");
+            text = xml.CreateTextNode(CBDarkSoil.Checked.ToString());
             element.AppendChild(text);
             root.AppendChild(element);
             //let's add another element (child of the root)
@@ -626,6 +640,16 @@ namespace katzerle
             root.AppendChild(element);
 
             //Alerts
+            //let's add another element (child of the root)
+            element = xml.CreateElement("PlayerScan");
+            text = xml.CreateTextNode(CBPlayerScan.Checked.ToString());
+            element.AppendChild(text);
+            root.AppendChild(element);
+            //let's add another element (child of the root)
+            element = xml.CreateElement("LUAoutput");
+            text = xml.CreateTextNode(CBLUAoutput.Checked.ToString());
+            element.AppendChild(text);
+            root.AppendChild(element);
 			//let's add another element (child of the root)
             element = xml.CreateElement("Alert");
             text = xml.CreateTextNode(CBAlert.Checked.ToString());
@@ -755,6 +779,7 @@ namespace katzerle
             CBPoseidus.Checked = true;
             CBAeonaxx.Checked = false;
             CBRaptorNest.Checked = true;
+            CBDarkSoil.Checked = false;
             CBAnotherMansTreasure.Checked = false;
             CBInteractNPC.Checked = false;
             CBObjects.Checked = true;
@@ -766,6 +791,8 @@ namespace katzerle
             //Misc
             CBAlert.Checked = true;
             //Security
+            CBPlayerScan.Checked = false;
+            CBLUAoutput.Checked = false;
             CBWisper.Checked = true;
             CBBNWisper.Checked = true;
             CBGuild.Checked = false;
@@ -816,6 +843,7 @@ namespace katzerle
 			Rarekiller.Settings.Poseidus = CBPoseidus.Checked;
             Rarekiller.Settings.Aeonaxx = CBAeonaxx.Checked;
             Rarekiller.Settings.RaptorNest = CBRaptorNest.Checked;
+            Rarekiller.Settings.DarkSoil = CBDarkSoil.Checked;
             Rarekiller.Settings.InteractNPC = CBInteractNPC.Checked;
             Rarekiller.Settings.AnotherMansTreasure = CBAnotherMansTreasure.Checked;
             Rarekiller.Settings.ObjectsCollector = CBObjects.Checked;
@@ -845,6 +873,8 @@ namespace katzerle
             Rarekiller.Settings.Blazewing = CBBlazewing.Checked;
             Rarekiller.Settings.Camel = CBCamel.Checked;
             //Alert etc
+            Rarekiller.Settings.PlayerScan = CBPlayerScan.Checked;
+            Rarekiller.Settings.LUAoutput = CBLUAoutput.Checked;
             Rarekiller.Settings.Alert = CBAlert.Checked;
             Rarekiller.Settings.Wisper = CBWisper.Checked;
             Rarekiller.Settings.BNWisper = CBBNWisper.Checked;
