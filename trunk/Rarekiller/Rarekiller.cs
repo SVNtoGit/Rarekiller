@@ -35,7 +35,7 @@ namespace katzerle
 		public static string name { get { return "Rarekiller"; } }
 		public override string Name { get { return name; } }
 		public override string Author { get { return "katzerle"; } }
-		private readonly static Version _version = new Version(3, 3);
+		private readonly static Version _version = new Version(3, 4);
 		public override Version Version { get { return _version; } }
 		public override string ButtonText { get { return "Settings"; } }
 		public override bool WantButton { get { return true; } }
@@ -63,6 +63,7 @@ namespace katzerle
         public static Dictionary<Int32, string> FrostbittenList = new Dictionary<Int32, string>();
         public static Dictionary<Int32, string> BloodyRareList = new Dictionary<Int32, string>();
         public static Dictionary<Int32, string> CataRaresList = new Dictionary<Int32, string>();
+        public static Dictionary<Int32, string> TaggedMobsList = new Dictionary<Int32, string>();
 		
         public static bool hasItBeenInitialized = false; 
         Int32 MoveTimer = 100;
@@ -72,7 +73,7 @@ namespace katzerle
 			UpdatePlugin();
 
             Settings.Load();
-            Logging.Write(Colors.MediumPurple, "Rarekiller 3.3 loaded");
+            Logging.Write(Colors.MediumPurple, "Rarekiller 3.4 loaded");
             if (Me.Class != WoWClass.Hunter)
             {
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Tamer: I'm no Hunter. Deactivate the Tamer Part");
@@ -125,6 +126,7 @@ namespace katzerle
             FrostbittenList.Clear();
             BloodyRareList.Clear();
             CataRaresList.Clear();
+            TaggedMobsList.Clear();
 
             hasItBeenInitialized = false;
         }
@@ -206,7 +208,10 @@ namespace katzerle
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: BlacklistedMobs.xml loaded");
             }
             else
+            {
+                BlacklistMobsList.Add(99999999, "DummyMob");
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: File Rarekiller/config/BlacklistedMobs.xml doesn't exist");
+            }
 //Tameable Mobs to List
             XmlDocument TameableMobsXML = new XmlDocument();
             string sPath2 = Path.Combine(FolderPath, "config\\TameableMobs.xml");
@@ -236,7 +241,10 @@ namespace katzerle
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: TameableMobs.xml loaded");
             }
             else
+            {
+                TameableMobsList.Add(99999999, "DummyMob");
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: File Rarekiller/config/TameableMobs.xml doesn't exist");
+            }
 
 //CollectObjects to List
             XmlDocument CollectObjectsXML = new XmlDocument();
@@ -267,7 +275,10 @@ namespace katzerle
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: CollectObjects.xml loaded");
             }
             else
+            {
+                CollectObjectsList.Add(99999999, "DummyMob");
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: File Rarekiller/config/CollectObjects.xml doesn't exist");
+            }
 
 //KillMobs to List
             XmlDocument KillMobsXML = new XmlDocument();
@@ -298,7 +309,10 @@ namespace katzerle
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: KillMobs.xml loaded");
             }
             else
+            {
+                KillMobsList.Add(99999999, "DummyMob");
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: File Rarekiller/config/KillMobs.xml doesn't exist");
+            }
 
 //InteractNPC to List
             XmlDocument InteractNPCXML = new XmlDocument();
@@ -329,7 +343,10 @@ namespace katzerle
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: InteractNPC.xml loaded");
             }
             else
+            {
+                InteractNPCList.Add(99999999, "DummyMob");
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: File Rarekiller/config/InteractNPC.xml doesn't exist");
+            }
 
 //AnotherMansTreasure to List
             XmlDocument AnotherMansTreasureXML = new XmlDocument();
@@ -360,7 +377,10 @@ namespace katzerle
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: AnotherMansTreasure.xml loaded");
             }
             else
+            {
+                AnotherMansTreasureList.Add(99999999, "DummyMob");
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: File Rarekiller/config/AnotherMansTreasure.xml doesn't exist");
+            }
 
 //Frostbitten to List
             XmlDocument FrostbittenXML = new XmlDocument();
@@ -391,7 +411,10 @@ namespace katzerle
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Frostbitten.xml loaded");
             }
             else
+            {
+                FrostbittenList.Add(99999999, "DummyMob");
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: File Rarekiller/config/Frostbitten.xml doesn't exist");
+            }
 
 //BloodyRare to List
             XmlDocument BloodyRareXML = new XmlDocument();
@@ -422,7 +445,10 @@ namespace katzerle
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: BloodyRare.xml loaded");
             }
             else
+            {
+                BloodyRareList.Add(99999999, "DummyMob");
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: File Rarekiller/config/BloodyRare.xml doesn't exist");
+            }
 
 //CataRares to List
             XmlDocument CataRaresXML = new XmlDocument();
@@ -443,18 +469,54 @@ namespace katzerle
                     return;
                 }
                 XmlElement root9 = CataRaresXML.DocumentElement;
-                foreach (XmlNode BloodyRare in root9.ChildNodes)
+                foreach (XmlNode CataRare in root9.ChildNodes)
                 {
-                    Int32 Entry9 = Convert.ToInt32(BloodyRare.Attributes["Entry"].InnerText);
-                    string Name9 = BloodyRare.Attributes["Name"].InnerText;
-                    BloodyRareList.Add(Entry9, Name9);
+                    Int32 Entry9 = Convert.ToInt32(CataRare.Attributes["Entry"].InnerText);
+                    string Name9 = CataRare.Attributes["Name"].InnerText;
+                    CataRaresList.Add(Entry9, Name9);
                     Logging.WriteDiagnostic(Colors.MediumPurple, "Name: {0} Entry: {1}", Name9, Entry9);
                 }
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: CataRares.xml loaded");
             }
             else
+            {
+                CataRaresList.Add(99999999, "DummyMob");
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: File Rarekiller/config/CataRares.xml doesn't exist");
+            }
 
+//TaggedMobs to List
+            XmlDocument TaggedMobsXML = new XmlDocument();
+            string sPath10 = Path.Combine(FolderPath, "config\\TaggedMobs.xml");
+            Logging.WriteDiagnostic(Colors.MediumPurple, "Load TaggedMobs.xml");
+            if (File.Exists(sPath10))
+            {
+                System.IO.FileStream fs10 = new System.IO.FileStream(@sPath10, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite);
+                try
+                {
+                    TaggedMobsXML.Load(fs10);
+                    fs10.Close();
+                }
+                catch (Exception e)
+                {
+                    Logging.WriteDiagnostic(Colors.Red, e.Message);
+                    fs10.Close();
+                    return;
+                }
+                XmlElement root10 = TaggedMobsXML.DocumentElement;
+                foreach (XmlNode TaggedMob in root10.ChildNodes)
+                {
+                    Int32 Entry10 = Convert.ToInt32(TaggedMob.Attributes["Entry"].InnerText);
+                    string Name10 = TaggedMob.Attributes["Name"].InnerText;
+                    TaggedMobsList.Add(Entry10, Name10);
+                    Logging.WriteDiagnostic(Colors.MediumPurple, "Name: {0} Entry: {1}", Name10, Entry10);
+                }
+                Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: TaggedMobs.xml loaded");
+            }
+            else
+            {
+                TaggedMobsList.Add(99999999, "DummyMob");
+                Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: File Rarekiller/config/TaggedMobs.xml doesn't exist");
+            }
         }
 
 

@@ -47,6 +47,7 @@ namespace katzerle
         public bool TLPD = true;
         public bool KillList = false;
         public bool RaptorNest = true;
+        public bool DarkSoil = false;
         public bool ObjectsCollector = true;
         public bool AnotherMansTreasure = false;
         public bool InteractNPC = false;
@@ -81,6 +82,7 @@ namespace katzerle
         //Misc
         public string BlacklistTime = "180";
         public bool BlacklistCheck = true;
+        public bool PlayerScan = false;
         public bool Alert = true;
         public bool Wisper = true;
         public bool BNWisper = true;
@@ -90,6 +92,7 @@ namespace katzerle
 		public string SoundfileWisper = Rarekiller.Soundfile;
 		public string SoundfileGuild = Rarekiller.Soundfile;
 		public string SoundfileFoundRare = Rarekiller.Soundfile;
+        public bool LUAoutput = false;
 //Some other Stuff
         public Int32 Level = 61;
         public Int64 Blacklist60 = 3600;
@@ -105,6 +108,7 @@ namespace katzerle
 //Developer Testcases
         public bool TestRaptorNest = false;
         public bool TestFigurineInteract = false;
+        public bool Forceground = false;
 
         // -------------- Load ConfigFile ---------------
         public void Load()
@@ -215,6 +219,12 @@ namespace katzerle
                 {
                     RaptorNest = Convert.ToBoolean(xvar.InnerText);
                     Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + RaptorNest.ToString());
+                }
+                xvar = xml.SelectSingleNode("//Rarekiller/DarkSoil");
+                if (xvar != null)
+                {
+                    DarkSoil = Convert.ToBoolean(xvar.InnerText);
+                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + DarkSoil.ToString());
                 }
                 xvar = xml.SelectSingleNode("//Rarekiller/ObjectsCollector");
                 if (xvar != null)
@@ -350,6 +360,18 @@ namespace katzerle
                 {
                     BlacklistTime = Convert.ToString(xvar.InnerText);
                     Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + BlacklistTime.ToString());
+                }
+                xvar = xml.SelectSingleNode("//Rarekiller/LUAoutput");
+                if (xvar != null)
+                {
+                    LUAoutput = Convert.ToBoolean(xvar.InnerText);
+                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + LUAoutput.ToString());
+                }
+                xvar = xml.SelectSingleNode("//Rarekiller/PlayerScan");
+                if (xvar != null)
+                {
+                    PlayerScan = Convert.ToBoolean(xvar.InnerText);
+                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + PlayerScan.ToString());
                 }
                 xvar = xml.SelectSingleNode("//Rarekiller/Alert");
                 if (xvar != null)
