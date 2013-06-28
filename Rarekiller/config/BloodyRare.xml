@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- BloodyRare Mobs - Burning Crusade -->
+<BloodyRare>
+	<NPC Entry="18695" Name="Ambassador Jerrikar" />
+	<NPC Entry="18697" Name="Chief Engineer Lorthander" />
+	<NPC Entry="18694" Name="Collidus the Warp-Watcher" />
+	<NPC Entry="18686" Name="Doomslayer Jurim" />
+	<NPC Entry="18678" Name="Fulgorge" />
+	<NPC Entry="18692" Name="Hemathion" />
+	<NPC Entry="18680" Name="Marticar" />
+	<NPC Entry="18690" Name="Morcrush" />
+	<NPC Entry="18685" Name="Okrek" />
+	<NPC Entry="18683" Name="Voidhunter Yar" />
+	<NPC Entry="18682" Name="Bog Lurker" />
+	<NPC Entry="18681" Name="Coilfang Emissary" />
+	<NPC Entry="18689" Name="Crippler" />
+	<NPC Entry="18698" Name="Ever-Core the Punisher" />
+	<NPC Entry="17144" Name="Goretooth" />
+	<NPC Entry="18696" Name="Kraator" />
+	<NPC Entry="18677" Name="Mekthorg the Wild" />
+	<NPC Entry="20932" Name="Nuramoc" />
+	<NPC Entry="18693" Name="Speaker Mar'grom" />
+	<NPC Entry="18679" Name="Vorakem Doomspeaker" />
+</BloodyRare>
