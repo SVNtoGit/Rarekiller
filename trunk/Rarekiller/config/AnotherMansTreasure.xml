@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Another Mans Treasure -->
+<AnotherMansTreasure>
+    <Object Entry="213651" Name="Equipment Locker" />			
+    <Object Entry="213653" Name="Pandaren Fishing Spear" />
+    <Object Entry="213765" Name="Tablet of Ren Yun" />
+    <Object Entry="213842" Name="Stash of Yaungol Weapons" />
+    <Object Entry="213751" Name="Sprite's Cloth Chest" />
+    <Object Entry="213768" Name="Hozen Warrior Spear" />
+    <Object Entry="213960" Name="Yaungol Fire Carrier" />
+    <Object Entry="213961" Name="Abandoned Crate of Goods" />
+    <Object Entry="214439" Name="Barrel of Banana Infused Rum" />
+    <Object Entry="213749" Name="Staff of the Hidden Master" />
+    <Object Entry="213649" Name="Cache of Pilfered Goods" />
+    <Object Entry="213962" Name="Wind-Reaver's Dagger of Quick Strikes" />
+    <Object Entry="213971" Name="Swarmkeeper's Medallion" />
+    <Object Entry="213968" Name="Swarming Cleaver of Ka'roz" />
+    <Object Entry="213964" Name="Malik's Stalwart Spear" />
+    <Object Entry="213966" Name="Amber Encased Necklace" />
+    <Object Entry="213969" Name="Dissector's Staff of Mutation" />
+    <Object Entry="213970" Name="Bloodsoaked Chitin Fragment" />
+    <Object Entry="213967" Name="Blade of the Prime" />
+    <Object Entry="213972" Name="Blade of the Poisoned Mind" />
+    <Object Entry="213959" Name="Hardened Sap of Kri'vess" />
+    <Object Entry="213956" Name="Fragment of Dread" />
+    <Object Entry="213844" Name="Amber Encased Moth" />
+    <Object Entry="213770" Name="Stolen Sprite Treasure" />
+    <Object Entry="214438" Name="Ancient Mogu Tablet" />
+    <Object Entry="213793" Name="Rikktik's Tiny Chest" />
+    <Object Entry="213782" Name="Terracotta Head" />
+    <Object Entry="213771" Name="Statue of Xuen" />
+    <Object Entry="213845" Name="The Hammer of Folly" />
+    <Object Entry="213750" Name="Saurok Stone Tablet" />
+    <Object Entry="213368" Name="Lucky Pandaren Coin" />
+    <Object Entry="213366" Name="Ancient Pandaren Tea Pot" />
+    <Object Entry="213748" Name="Pandaren Ritual Stone" />
+    <Object Entry="213741" Name="Ancient Jinyu Staff" />
+    <Object Entry="213364" Name="Ancient Pandaren Mining Pick" />
+    <Object Entry="213363" Name="Wodin's Mantid Shanker" />
+	<Object Entry="213769" Name="Hozen Treasure Cache" />
+    <Object Entry="213774" Name="Lost Adventurer's Belongings" />
+    <Object Entry="214407" Name="Mo-Mo's Treasure Chest" />
+    <Object Entry="214403" Name="Stack of Papers" />
+    <Object Entry="214337" Name="Stash of Gems" />
+    <Object Entry="214338" Name="Offering of Rememberance" />
+    <Object Entry="213362" Name="Ship's Locker" />
+    <Object Entry="214325" Name="Forgotten Lockbox" />
+    <Object Entry="214340" Name="Boat-Building Instructions" />
+    <Object Entry="213650" Name="Virmen Treasure Cache" />
+    <Object Entry="213742" Name="Hammer of Ten Thunders" />
+    <Object Entry="65552" Name="Glinting Rapana Whelk" />
+    <Object Entry="64272" Name="Jade Warrior Statue" />
+    <Object Entry="64004" Name="Ghostly Pandaren Fisherman" />
+    <Object Entry="64191" Name="Ghostly Pandaren Craftsman" />
+    <Object Entry="64227" Name="Frozen Trail Packer" />
+</AnotherMansTreasure>

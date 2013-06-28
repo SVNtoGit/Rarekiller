@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Frostbitten Mobs - WOTLK -->
+<Frostbitten>
+	<NPC Entry="32517" Name="Loque'nahak" />
+	<NPC Entry="32495" Name="Hildana Deathstealer" />
+	<NPC Entry="32358" Name="Fumblub Gearwind" />
+	<NPC Entry="32377" Name="Perobas the Bloodthirster" />
+	<NPC Entry="32398" Name="King Ping" />
+	<NPC Entry="32409" Name="Crazed Indu'le Survivor" />
+	<NPC Entry="32422" Name="Grocklar" />
+	<NPC Entry="32438" Name="Syreian the Bonecarver" />
+	<NPC Entry="32471" Name="Griegen" />
+	<NPC Entry="32481" Name="Aotona" />
+	<NPC Entry="32630" Name="Vyragosa" />
+	<NPC Entry="32487" Name="Putridus the Ancient" />
+	<NPC Entry="32501" Name="High Thane Jorfus" />
+	<NPC Entry="32357" Name="Old Crystalbark" />
+	<NPC Entry="32361" Name="Icehorn" />
+	<NPC Entry="32386" Name="Vigdis the War Maiden" />
+	<NPC Entry="32400" Name="Tukemuth" />
+	<NPC Entry="32417" Name="Scarlet Highlord Daion" />
+	<NPC Entry="32429" Name="Seething Hate" />
+	<NPC Entry="32447" Name="Zul'drak Sentinel" />
+	<NPC Entry="32475" Name="Terror Spinner" />
+	<NPC Entry="32485" Name="King Krush" />
+	<NPC Entry="32500" Name="Dirkee" />
+</Frostbitten>

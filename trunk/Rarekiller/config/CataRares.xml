@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- CataRares -->
+<CataRares>
+	<NPC Entry="50057" Name="Blazewing Hyjal" />
+	<NPC Entry="50053" Name="Thartuk the Exile Hyjal" />
+	<NPC Entry="50050" Name="Shok'sharak Vashir" />
+	<NPC Entry="50005" Name="Poseidus Vashir" />
+	<NPC Entry="50052" Name="Burgy Blackheart Vashir" />
+	<NPC Entry="49913" Name="Lady La-La Vashir" />
+	<NPC Entry="50060" Name="Terborus Tiefenheim" />
+	<NPC Entry="50059" Name="Golgarok Tiefenheim" />
+	<NPC Entry="49822" Name="Jadefang Tiefenheim" />
+	<NPC Entry="50065" Name="Armagedillo Uldum" />
+	<NPC Entry="50064" Name="Cyrus the Black Uldum" />
+	<NPC Entry="50085" Name="Overlord Sunderfury Twilight Highlands" />
+	<NPC Entry="50086" Name="Tarvus the Vile Twilight Highlands" />
+</CataRares>
