@@ -223,15 +223,13 @@ namespace katzerle
 
                 //Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Take a Screen");
                 //Lua.DoString("TakeScreenshot()"); 
-				Thread.Sleep(1000);
+				Thread.Sleep(500);
                 o.Interact();
                 o.Interact();
                 o.Interact();
                 Logging.Write(Colors.MediumPurple, "Rarekiller Part NPC: Interact with NPC - ID {0}", o.Entry);
-                if (o.Entry == 50410 || o.Entry == 50409)
-					Thread.Sleep(10000);
-				else
-					Thread.Sleep(1000);
+				Thread.Sleep(1000);
+
                 //64143 = Test
 				if (o.Entry == 65552 || o.Entry == 64272 || o.Entry == 64004 || o.Entry == 64191 || o.Entry == 64227)
 				{
