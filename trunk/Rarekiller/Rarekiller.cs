@@ -35,7 +35,7 @@ namespace katzerle
 		public static string name { get { return "Rarekiller"; } }
 		public override string Name { get { return name; } }
 		public override string Author { get { return "katzerle"; } }
-		private readonly static Version _version = new Version(3, 4);
+		private readonly static Version _version = new Version(3, 5);
 		public override Version Version { get { return _version; } }
 		public override string ButtonText { get { return "Settings"; } }
 		public override bool WantButton { get { return true; } }
@@ -73,7 +73,7 @@ namespace katzerle
 			UpdatePlugin();
 
             Settings.Load();
-            Logging.Write(Colors.MediumPurple, "Rarekiller 3.4 loaded");
+            Logging.Write(Colors.MediumPurple, "Rarekiller 3.5 loaded");
             if (Me.Class != WoWClass.Hunter)
             {
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Tamer: I'm no Hunter. Deactivate the Tamer Part");
@@ -100,19 +100,10 @@ namespace katzerle
         static private void BotStopped(EventArgs args)
         {
 //Alerts for Wisper and Guild
-            if (Rarekiller.Settings.Wisper)
-            {
-                Chat.Whisper -= Security.newWhisper;
-            }
-            if (Rarekiller.Settings.BNWisper)
-            {
-                Lua.Events.DetachEvent("CHAT_MSG_BN_WHISPER", Security.BNWhisper);
-            }
-            if (Rarekiller.Settings.Guild)
-            {
-                Chat.Guild -= Security.newGuild;
-                Chat.Officer -= Security.newOfficer;
-            }
+            Chat.Whisper -= Security.newWhisper;
+            Lua.Events.DetachEvent("CHAT_MSG_BN_WHISPER", Security.BNWhisper);
+            Chat.Guild -= Security.newGuild;
+            Chat.Officer -= Security.newOfficer;
                         
 // Register the events of the Start/Stop Button in HB
 			BotEvents.OnBotStopped -= BotStopped;
@@ -165,19 +156,10 @@ namespace katzerle
 
 
 //Alerts for Wisper and Guild
-            if (Rarekiller.Settings.Wisper)
-            {
-                Chat.Whisper += Security.newWhisper;
-            }
-            if (Rarekiller.Settings.BNWisper)
-            {
-                Lua.Events.AttachEvent("CHAT_MSG_BN_WHISPER", Security.BNWhisper);
-            }
-            if (Rarekiller.Settings.Guild)
-            {
-                Chat.Guild += Security.newGuild;
-                Chat.Officer += Security.newOfficer;
-            }
+            Chat.Whisper += Security.newWhisper;
+            Lua.Events.AttachEvent("CHAT_MSG_BN_WHISPER", Security.BNWhisper);
+            Chat.Guild += Security.newGuild;
+            Chat.Officer += Security.newOfficer;
 //Blacklisted Mobs to List
 
             XmlDocument BlacklistMobsXML = new XmlDocument();

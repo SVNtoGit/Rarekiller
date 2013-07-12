@@ -105,14 +105,16 @@ namespace katzerle
             string Message = Args[0].ToString();
             string presenceId = Args[12].ToString();
             string Author = Lua.GetReturnValues(String.Format("return BNGetFriendInfoByID({0})", presenceId))[3];
-
-            if (File.Exists(Rarekiller.Settings.SoundfileWisper))
-                new SoundPlayer(Rarekiller.Settings.SoundfileWisper).Play();
-            else if (File.Exists(Rarekiller.Soundfile))
-                new SoundPlayer(Rarekiller.Soundfile).Play();
-            else
-                Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Alert: playing Soundfile failes");
-            Logging.Write(Colors.Aqua, "Rarekiller Part Alert: You got a BN Wisper: {0}: {1} - Timestamp: {2}: {3}", Author, Message, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
+            if (Rarekiller.Settings.BNWisper)
+            {
+                if (File.Exists(Rarekiller.Settings.SoundfileWisper))
+                    new SoundPlayer(Rarekiller.Settings.SoundfileWisper).Play();
+                else if (File.Exists(Rarekiller.Soundfile))
+                    new SoundPlayer(Rarekiller.Soundfile).Play();
+                else
+                    Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Alert: playing Soundfile failes");
+                Logging.Write(Colors.Aqua, "Rarekiller Part Alert: You got a BN Wisper: {0}: {1} - Timestamp: {2}: {3}", Author, Message, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
+            }
         }
         public void newGuild(Chat.ChatGuildEventArgs arg)
         {
