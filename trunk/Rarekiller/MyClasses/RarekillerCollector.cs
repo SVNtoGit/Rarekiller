@@ -78,6 +78,8 @@ namespace katzerle
             foreach (WoWGameObject o in objList)
             {
                 Logging.Write(Colors.MediumPurple, "Rarekiller: Find A Object to collect {0} ID {1}", o.Name, o.Entry);
+                Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Object Location: {0} / {1} / {2}", Convert.ToString(o.X), Convert.ToString(o.Y), Convert.ToString(o.Z));
+
                 if (Rarekiller.Settings.LUAoutput)
                     Lua.DoString("print('NPCScan: Find {0} ID {1}')", o.Name, o.Entry);
 				
