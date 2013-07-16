@@ -49,7 +49,8 @@ namespace katzerle
             {
                 if (!o.IsDead)
                 {
-                    Logging.Write(Colors.MediumPurple, "Rarekiller Part Tamer: Found a new Pet {0} ID {1}", o.Name, o.Entry);
+                    Logging.Write(Colors.MediumPurple, "Rarekiller: Found a new Pet {0} ID {1}", o.Name, o.Entry);
+					Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Mob Location: {0} / {1} / {2}", Convert.ToString(o.X), Convert.ToString(o.Y), Convert.ToString(o.Z));
                     if (Rarekiller.Settings.LUAoutput)
                         Lua.DoString("print('NPCScan: Find {0} ID {1}')", o.Name, o.Entry);
                     // Don't tame the Rare if ...
