@@ -8,6 +8,7 @@
 //
 //==================================================================
 using System.Threading;
+using System.Linq;
 using System.Windows.Media;
 
 using Styx;
@@ -21,10 +22,27 @@ namespace katzerle
     class RarekillerSlowfall
     {
         public static LocalPlayer Me = StyxWoW.Me;
+        #region Snowfall Lager
+        public WoWItem SnowfallLagerID
+        {
+            get
+            {
+				return ObjectManager.GetObjectsOfType<WoWItem>().Where(u => u.Entry == 43472).OrderBy(u => u.Distance).FirstOrDefault();
+            }
+        }
+        public WoWItem SnowfallLagerString
+        {
+            get
+            {
+                return ObjectManager.GetObjectsOfType<WoWItem>().Where(u => Rarekiller.Settings.Item && u.Name == Rarekiller.Settings.SlowfallItem).OrderBy(u => u.Distance).FirstOrDefault();
+            }
+        }
+        #endregion
 
         public void HelpFalling()
         {
 			int UseSlowfall = 1;
+            //Slowfall Spell
 			if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell) && !Me.HasAura("Slow Fall") 
 				&& !Me.HasAura("Levitate") && Rarekiller.Settings.Spell 
 				&& SpellManager.CanCast(Rarekiller.Settings.SlowfallSpell) && SpellManager.HasSpell(Rarekiller.Settings.SlowfallSpell))
@@ -37,6 +55,7 @@ namespace katzerle
 					return;
 				}
 			}
+            //Cloak
 			if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell)
 				&& !Me.HasAura("Slow Fall") && !Me.HasAura("Levitate") && Rarekiller.Settings.Cloak && (Me.Inventory.Equipped.Back.Cooldown == 0))
 			{
@@ -48,10 +67,12 @@ namespace katzerle
 					return;
 				}
 			}
+            //Snowfall Lager english
 			if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell)
-				&& !Me.HasAura("Slow Fall") && !Me.HasAura("Levitate") && Rarekiller.Settings.Item)
+                && !Me.HasAura("Slow Fall") && !Me.HasAura("Levitate") && Rarekiller.Settings.Item && Rarekiller.Settings.SlowfallItem == "Snowfall Lager")
 			{
-				Lua.DoString("UseItemByName(\"" + Rarekiller.Settings.SlowfallItem + "\")"); // or use Item
+                if (SnowfallLagerID.Usable)
+                    SnowfallLagerID.Use(); // or use Item
 				Thread.Sleep(300);
 				if (Me.HasAura("Snowfall Lager") || Me.HasAura("Parachute") || Me.HasAura("Slow Fall"))
 				{
@@ -59,7 +80,21 @@ namespace katzerle
 					return;
 				}
 			}
-			if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell)
+            //Snowfall Lager Client Language
+            if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell)
+                && !Me.HasAura("Slow Fall") && !Me.HasAura("Levitate") && Rarekiller.Settings.Item)
+            {
+                if (SnowfallLagerString.Usable)
+                    SnowfallLagerString.Use(); // or use Item
+                Thread.Sleep(300); if (Me.HasAura("Snowfall Lager") || Me.HasAura("Parachute") || Me.HasAura("Slow Fall"))
+                {
+                    Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Slowfall: Used Slowfall Ability {0}", Rarekiller.Settings.SlowfallItem);
+                    return;
+                }
+            }
+
+            #region Notfallzauber Levitate, Slow Fall, Snowfall Lager by ID
+            if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell)
 				&& !Me.HasAura("Slow Fall") && !Me.HasAura("Levitate") && SpellManager.CanCast("Slow Fall") && SpellManager.HasSpell("Slow Fall"))
 			{
 				SpellManager.Cast("Slow Fall");
@@ -81,8 +116,23 @@ namespace katzerle
 					return;
 				}
 			}
-			
-			if (Me.HasAura("Snowfall Lager") || Me.HasAura("Parachute") || Me.HasAura(Rarekiller.Settings.SlowfallSpell) || Me.HasAura("Slow Fall") || Me.HasAura("Levitate"))
+            if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell)
+                 && !Me.HasAura("Slow Fall") && !Me.HasAura("Levitate") && SnowfallLagerID != null)
+            {
+                Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Slowfall: Found {0} in Bag", SnowfallLagerID.Name);
+				if(SnowfallLagerID.Usable)
+                    SnowfallLagerID.Use(); // or use Item
+                Thread.Sleep(300);
+                if (Me.HasAura("Snowfall Lager"))
+                {
+                    Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Slowfall: Used Slowfall Ability Snowfall Lager (ID)");
+                    return;
+                }
+            }
+            #endregion
+
+            #region Slowfall sucessfull ?
+            if (Me.HasAura("Snowfall Lager") || Me.HasAura("Parachute") || Me.HasAura(Rarekiller.Settings.SlowfallSpell) || Me.HasAura("Slow Fall") || Me.HasAura("Levitate"))
 			{
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller Part Slowfall: Slowfall successfull, Parachute to Ground");
 				//Überprüfen:
@@ -118,8 +168,9 @@ namespace katzerle
 				UseSlowfall = UseSlowfall + 1;
 				Thread.Sleep(300);
 				Rarekiller.Slowfall.HelpFalling();
-			}
-// Slowfall Part End
+            }
+            #endregion
+            // Slowfall Part End
         }
     }
 }
