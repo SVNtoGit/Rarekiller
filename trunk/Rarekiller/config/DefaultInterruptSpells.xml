@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- These are the Default Spells Rarekiller will use to pull -->
+<Spelllist>
+	<Spell Class = "Priest" Name="Silence" />
+	<Spell Class = "Mage" Name="Counterspell" />
+	<Spell Class = "Warrior" Name="Disrupting Shout" />
+	<Spell Class = "Hunter" Name="Silencing Shot" />
+	<Spell Class = "Rogue" Name="Kick" />
+	<Spell Class = "DeathKnight" Name="Mind Freeze" />
+	<Spell Class = "Paladin" Name="Rebuke" />
+	<Spell Class = "Shaman" Name="Wind Shear" />				
+	<Spell Class = "Warlock" Name="Shadowfury" />
+	<Spell Class = "Druid" Name="Mighty Bash" />
+	<Spell Class = "Monk" Name="Spear Hand Strike" />
+</Spelllist>

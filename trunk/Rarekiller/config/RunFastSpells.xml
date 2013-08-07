@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- These are the Default Spells Rarekiller will use to pull -->
+<Spelllist>
+	<Spell Class = "Worgen" Name="Darkflight" />
+	<Spell Class = "Priest" Name="Power Word: Shield" />
+	<Spell Class = "Mage" Name="Blink" />
+	<Spell Class = "Warrior" Name="no Spell available" />
+	<Spell Class = "Hunter" Name="no Spell available" />
+	<Spell Class = "Rogue" Name="Sprint" />
+	<Spell Class = "DeathKnight" Name="no Spell available" />
+	<Spell Class = "Paladin" Name="Speed of Light" />
+	<Spell Class = "Shaman" Name="Ghost Wolf" />				
+	<Spell Class = "Warlock" Name="no Spell available" />
+	<Spell Class = "Druid" Name="Feline Swiftness" />
+	<Spell Class = "Monk" Name="Roll" />
+</Spelllist>
