@@ -374,11 +374,11 @@ namespace katzerle
                     o.Entry == 50791 || o.Entry == 51059 || o.Entry == 50334 || o.Entry == 51078 ||
                     o.Entry == 50331 || o.Entry == 50332 || o.Entry == 50333 || o.Entry == 50336)
                     {
-                        Rarekiller.Settings.Range = "5";
-                        Logging.Write(Colors.MediumPurple, "Rarekiller: Set Range to 5 because of other Pandaria Rares");
+                        Rarekiller.Settings.Range = "3";
+                        Logging.Write(Colors.MediumPurple, "Rarekiller: Set Range to 3 because of other Pandaria Rares");
                     }
 
-                    if (!Rarekiller.Settings.DefaultPull && (Convert.ToInt64(Rarekiller.Settings.Range) > Convert.ToInt64(Rarekiller.Spells.RangeCheck(Rarekiller.Settings.Pull))))
+                    else if (!Rarekiller.Settings.DefaultPull && (Convert.ToInt64(Rarekiller.Settings.Range) > Convert.ToInt64(Rarekiller.Spells.RangeCheck(Rarekiller.Settings.Pull))))
                     {
                         Rarekiller.Settings.Range = Rarekiller.Spells.RangeCheck(Rarekiller.Settings.Pull);
                         Logging.Write(Colors.MediumPurple, "Rarekiller: Set Range to {0} because of Low-Ranged Customized Spell", Rarekiller.Spells.RangeCheck(Rarekiller.Settings.Pull));
