@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- These are the Default Spells Rarekiller will use to pull -->
+<Spelllist>
+	<Spell Class = "Priest" Name="Psychic Horror" />
+	<Spell Class = "Mage" Name="no Spell available" />
+	<Spell Class = "Warrior" Name="Intimidating Shout" />
+	<Spell Class = "Hunter" Name="Scatter Shot" />
+	<Spell Class = "Rogue" Name="Kidney Shot" />
+	<Spell Class = "DeathKnight" Name="Asphyxiate" />
+	<Spell Class = "DeathKnight" Name="Strangulate" />
+	<Spell Class = "Paladin" Name="Hammer of Justice" />
+	<Spell Class = "Shaman" Name="Capacitor Totem" />				
+	<Spell Class = "Warlock" Name="no Spell available" />
+	<Spell Class = "Druid" Name="no Spell available" />
+	<Spell Class = "Monk" Name="Paralysis" />
+</Spelllist>
