@@ -239,7 +239,7 @@ namespace katzerle
                     Thread.Sleep(80);
                     if (Rarekiller.ToonInvalid) return;
                     WoWUnit Check = Units.OrderBy(u => u.Distance).FirstOrDefault();
-                    if (Check.Location.Distance(Me.Location) > 20)
+                    if (Check.Location.Distance(Me.Location) > 40)
                     {
                         Logging.Write(Colors.MediumPurple, "Rarekiller: Far enough away from {0}", Check.Name);
                         WoWMovement.MoveStop();

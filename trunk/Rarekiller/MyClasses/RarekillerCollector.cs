@@ -198,7 +198,8 @@ namespace katzerle
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Object Location: {0} / {1} / {2}", Convert.ToString(o.X), Convert.ToString(o.Y), Convert.ToString(o.Z));
                 Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: My Location: {0} / {1} / {2}", Convert.ToString(Me.X), Convert.ToString(Me.Y), Convert.ToString(Me.Z));
                 Rarekiller.Dismount();
-
+                if (Rarekiller.ToonInvalidCombat) return;
+                Thread.Sleep(1000);
                 o.Interact();
                 o.Interact();
                 o.Interact();

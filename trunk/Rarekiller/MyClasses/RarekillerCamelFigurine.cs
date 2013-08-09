@@ -84,13 +84,14 @@ namespace katzerle
                     ((o.Entry == 50409) && Rarekiller.Settings.Camel) || ((o.Entry == 50410) && Rarekiller.Settings.Camel) // 50409 might be the porting Camel Figurine
                     || (Rarekiller.AnotherMansTreasureList.ContainsKey(Convert.ToInt32(o.Entry)) && Rarekiller.Settings.AnotherMansTreasure && o.Entry < 200000)
                     || (Rarekiller.InteractNPCList.ContainsKey(Convert.ToInt32(o.Entry)) && Rarekiller.Settings.InteractNPC)
-                    || (o.Entry == 43929 && Rarekiller.Settings.Blingtron && o.IsQuestGiver && o.QuestGiverStatus == QuestGiverStatus.Available)
+                    || (o.Entry == 43929 && Rarekiller.Settings.Blingtron && o.QuestGiverStatus == QuestGiverStatus.AvailableRepeatable) //ToDo - Is Quest completed 31752
                     || ((o.Entry == 48959) && Rarekiller.Settings.TestFigurineInteract) //Testcase rostiger Amboss - Schnotzz Landing
                 )))
                 .OrderBy(o => o.Distance).ToList();
             List<WoWUnit> RareList = ObjectManager.GetObjectsOfType<WoWUnit>()
                 .Where(r => ((r.CreatureRank == Styx.WoWUnitClassificationType.Rare) && r.Level > 85 && !r.IsDead)).OrderBy(r => r.Distance).ToList();
             #endregion
+
             bool Forceground = false;
 
             foreach (WoWUnit o in objList)
@@ -195,9 +196,12 @@ namespace katzerle
                 //Blingtron
                 if (o.Entry == 43929)
                 {
-                    Thread.Sleep(1000); 
-                    Lua.DoString("AcceptQuest()");
                     Thread.Sleep(1000);
+                    Lua.DoString("SelectGossipAvailableQuest(GetNumGossipAvailableQuests())");
+                    Thread.Sleep(1000);
+                    Lua.DoString("RunMacroText(\"/click QuestFrameCompleteQuestButton\")");
+                    Thread.Sleep(1000);
+                    Blacklist.Add(o.Guid, Rarekiller.Settings.Flags, TimeSpan.FromSeconds(Rarekiller.Settings.Blacklist60));
                 }
             }
         }

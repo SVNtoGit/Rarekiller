@@ -8,15 +8,6 @@
 //==================================================================
 
 // -- ToDo --
-// * Blingtron testen
-// * Stun Spells für alle Klassen raussuchen
-// * Range Pull Spell für alle Klassen raussuchen
-// * Run Fast Spells für alle Klassen raussuchen
-
-// * Check All überarbeiten nach Abschluß der Tests
-
-// * Punktberechnung und Behavior zum zähmen der Pandaria Footprint Rares
-
 
 using System;
 using System.Collections.Generic;
@@ -51,7 +42,7 @@ namespace katzerle
 		public static string name { get { return "Rarekiller"; } }
 		public override string Name { get { return name; } }
 		public override string Author { get { return "katzerle"; } }
-		private readonly static Version _version = new Version(4, 5);
+		private readonly static Version _version = new Version(4, 6);
 		public override Version Version { get { return _version; } }
 		public override string ButtonText { get { return "Settings"; } }
 		public override bool WantButton { get { return true; } }
@@ -71,7 +62,7 @@ namespace katzerle
         private static Stopwatch Shadowmeldtimer = new Stopwatch();
         // Developer Thing (ToDo Remove)
         private static Stopwatch DumpAuraTimer = new Stopwatch();
-        private static Stopwatch SideTimer = new Stopwatch();
+        private static Stopwatch FallTimer = new Stopwatch();
 
 		public static Dictionary<Int32, string> BlacklistMobsList = new Dictionary<Int32, string>();
         public static Dictionary<Int32, string> TameableMobsList = new Dictionary<Int32, string>();
@@ -92,7 +83,7 @@ namespace katzerle
         {
 			UpdatePlugin();
             //Settings.Load();
-            Logging.WriteQuiet(Colors.MediumPurple, "Rarekiller 4.5 loaded");
+            Logging.WriteQuiet(Colors.MediumPurple, "Rarekiller 4.6 loaded");
             if (Me.Class != WoWClass.Hunter)
             {
                 Logging.Write(Colors.MediumPurple, "Rarekiller: I'm no Hunter. Deactivate the Tamer Part");
@@ -257,12 +248,23 @@ namespace katzerle
                 #endregion
 
                 #region Slowfall
-                if (Me.IsFalling && Settings.UseSlowfall)
-				{
-					Thread.Sleep(Convert.ToInt32(Rarekiller.Settings.Falltimer));
-					if (Me.IsFalling && !Me.IsDead && !Me.IsGhost)
-						Slowfall.HelpFalling();
+                if (Me.IsFalling && Settings.UseSlowfall && !FallTimer.IsRunning)
+                    FallTimer.Start();
+                if (!Me.IsFalling && Settings.UseSlowfall && FallTimer.IsRunning)
+                    FallTimer.Reset();
+                if (Me.IsFalling && Settings.UseSlowfall && FallTimer.ElapsedMilliseconds > Convert.ToInt32(Rarekiller.Settings.Falltimer))
+                {
+                    FallTimer.Reset();
+                    Slowfall.HelpFalling();
+
                 }
+
+                //if (Me.IsFalling && Settings.UseSlowfall)
+                //{
+                //    Thread.Sleep(Convert.ToInt32(Rarekiller.Settings.Falltimer));
+                //    if (Me.IsFalling && !Me.IsDead && !Me.IsGhost)
+                //        Slowfall.HelpFalling();
+                //}
                 #endregion
 
                 if (!Me.Combat)
@@ -363,7 +365,7 @@ namespace katzerle
                     #region Saurok - working
                     if (MoPRares.Saurok != null)
                     {
-                        if (MoPRares.Saurok.Location.Distance(Me.Location) > 15)
+                        if (MoPRares.Saurok.Combat && MoPRares.Saurok.Location.Distance(Me.Location) > 15)
                         {
                             while (MoPRares.Saurok.Location.Distance(Me.Location) > 5)
                             {
@@ -439,7 +441,7 @@ namespace katzerle
                         if (MoPRares.getTornadoList != null)
                         {
                             if (MoPRares.getTornadoList[0].Distance < 7)
-                                MoPRares.AvoidEnemyAOE(MoPRares.Mantid, 25, MoPRares.getTornadoList, 10, 5);
+                                MoPRares.AvoidEnemyAOE(MoPRares.Mantid, 27, MoPRares.getTornadoList, 10, 5);
                         }
 
                     }
@@ -460,7 +462,7 @@ namespace katzerle
                             MoPRares.FleeingFromEnemy(MoPRares.Pandaren, 125799, 60, 10, 5);
                         }
                         // Chi Burst
-                        else if (MoPRares.Pandaren.Location.Distance(Me.Location) > 10)
+                        else if (MoPRares.Pandaren.Combat && MoPRares.Pandaren.Location.Distance(Me.Location) > 10)
                         {
                             Logging.Write(Colors.MediumPurple, "Rarekiller: Run to Pandaren because of Chistoß");
                             while (MoPRares.Pandaren.Location.Distance(Me.Location) > 5)
@@ -495,7 +497,7 @@ namespace katzerle
                             MoPRares.FleeingFromEnemy(MoPRares.Yaungol, 0, 30, 10, 5);
 
                         // Rushing Charge
-                        else if (Me.Location.Distance(MoPRares.Yaungol.Location) > 20)
+                        else if (MoPRares.Yaungol.Combat && Me.Location.Distance(MoPRares.Yaungol.Location) > 20)
                         {
                             while (Me.Location.Distance(MoPRares.Yaungol.Location) > 10)
                             {
