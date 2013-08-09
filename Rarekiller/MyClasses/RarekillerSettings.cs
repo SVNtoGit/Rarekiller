@@ -167,7 +167,7 @@ namespace katzerle
 //Developer Things
         public bool DeveloperBoxActive = false;
         public bool MoPRaresDeveloper = true;
-        public bool BETA = false;
+        public bool BETA = true;
 //Developer Testcases
         public bool TestCaseDormus = false;
         public bool TestRaptorNest = false;

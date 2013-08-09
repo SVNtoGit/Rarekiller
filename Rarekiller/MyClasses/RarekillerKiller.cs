@@ -28,7 +28,7 @@ namespace katzerle
     {
 
         public static LocalPlayer Me = StyxWoW.Me;
-        //private static Stopwatch BlacklistTimer = new Stopwatch();
+        private static Stopwatch WaitAfterPullTimer = new Stopwatch();
 
         #region Landingpoints for Inhouse Pandaria Rares
         public static WoWPoint LandingPoint50817 = new WoWPoint(3805.414, 2307.001, 751.3418); // Ahone the Wanderer
@@ -344,8 +344,8 @@ namespace katzerle
                     #endregion
 
                     #region Check PullRange
-                    if (SpellManager.HasSpell(Rarekiller.Spells.RangedPullspell) && (o.Entry == 50817 
-                        || o.Entry == 50836 || o.Entry == 50782 || o.Entry == 50331 || o.Entry == 51078
+                    if (SpellManager.HasSpell(Rarekiller.Spells.RangedPullspell) && (
+                        o.Entry == 50836 || o.Entry == 50782 || o.Entry == 50331 || o.Entry == 51078
                         || o.Entry == 50822 || o.Entry == 50831 || o.Entry == 50832 || o.Entry == 50768
                         || o.Entry == 50749 || o.Entry == 50334 || o.Entry == 50347))
                     {
@@ -420,7 +420,7 @@ namespace katzerle
                     if (o.Entry == 50749 || o.Entry == 50334 || o.Entry == 50347)
                     {
                         ObjectManager.Update();
-                        List<WoWUnit> AddList = ObjectManager.GetObjectsOfType<WoWUnit>().Where(Add => !Add.IsDead && Add.IsHostile && Add.Location.Distance(o.Location) < 27 && Add.Location.Distance(Me.Location) < 27).OrderBy(Add => Add.Distance).ToList();
+                        List<WoWUnit> AddList = ObjectManager.GetObjectsOfType<WoWUnit>().Where(Add => !Add.IsDead && Add.IsHostile && (Add != o) && Add.Location.Distance(o.Location) < 27 && Add.Location.Distance(Me.Location) < 27).OrderBy(Add => Add.Distance).ToList();
                         foreach (WoWUnit Add in AddList)
                         {
                             if (SpellManager.HasSpell(Rarekiller.Spells.RangedPullspell))
@@ -453,37 +453,47 @@ namespace katzerle
                     else
                         Logging.Write(Colors.MediumPurple, "Rarekiller: I have no valid Pullspell - sorry");
 
-                    if (CastSuccess)
+                    if (Me.CurrentTarget != o)
+                        o.Target();
+                    #endregion
+
+                    #region Quick Slowfall for known flying Mobs
+                    if (Rarekiller.Settings.UseSlowfall && ((o.Entry == 29753) || (o.Entry == 32491) || (o.Entry == 32630) || (o.Entry == 33687) || (o.Entry == 50364)))
+                    {
+                        Thread.Sleep(500);
+                        if(Me.IsFalling)
+                            Rarekiller.Slowfall.HelpFalling();
+                    }
+                    Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Use Quick Slowfall: {0} Mob: {1}", Me.IsFalling, o.Name);
+                    #endregion
+
+                    #region Pulltimer and Pullcounter
+                    WaitAfterPullTimer.Reset();
+                    WaitAfterPullTimer.Start();
+                    while (WaitAfterPullTimer.IsRunning && !Rarekiller.ToonInvalidCombat && WaitAfterPullTimer.ElapsedMilliseconds < 2000)
+                    {
+                        Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Wait for Combat now {0} ms", WaitAfterPullTimer.ElapsedMilliseconds);
+                        Thread.Sleep(100);
+                    }
+
+                    if (CastSuccess && Me.Combat)
                         Logging.Write(Colors.MediumPurple, "Rarekiller: Successfully pulled {0}", o.Name);
 
-                    if (o.Entry != 32491 && o.Entry != 50005 && (Rarekiller.Settings.GuidCurrentPull != o.Guid))
+                    if (o.Entry != 32491 && o.Entry != 50005 && (Rarekiller.Settings.GuidCurrentPull != o.Guid) && Me.Combat)
                     {
                         Rarekiller.Settings.PullCounter = 1;
                         Rarekiller.Settings.GuidCurrentPull = o.Guid;
                         Logging.Write(Colors.MediumPurple, "Rarekiller: Pulled {0} now first time", o.Name);
                     }
-                    else
+                    else if (Me.Combat)
                     {
                         Rarekiller.Settings.PullCounter++;
                         Logging.Write(Colors.MediumPurple, "Rarekiller: Pulled {0} now {1} times", o.Name, Rarekiller.Settings.PullCounter);
                     }
                     #endregion
 
-                    #region Quick Slowfall for known flying Mobs
-                    if (Me.IsFalling && Rarekiller.Settings.UseSlowfall && ((o.Entry == 29753) || (o.Entry == 32491) || (o.Entry == 32630) || (o.Entry == 33687) || (o.Entry == 50364)))
-                    {
-                        Thread.Sleep(500);
-                        Rarekiller.Slowfall.HelpFalling();
-                    }
-                    Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Use Quick Slowfall: {0} Mob: {1}", Me.IsFalling, o.Name);
-                    
-					if(Me.CurrentTarget != o)
-						o.Target();
-					o.Face();
-                    #endregion
-
                     #region Move to a Save Fighting Area after Pull for some Pandaria Rares
-                    if (o.Entry == 50768 || o.Entry == 50832)
+                    if ((o.Entry == 50768 || o.Entry == 50832) && Me.Combat)
                     {
                         WoWPoint SaveHelperpoint = o.Location;
                         Logging.Write(Colors.MediumPurple, "Rarekiller: Move to Save Fighting Point", o.Entry);

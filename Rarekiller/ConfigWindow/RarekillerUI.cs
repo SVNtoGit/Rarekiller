@@ -1567,7 +1567,7 @@ namespace katzerle
             CBSahn50780.Checked = true;
             CBNalash50776.Checked = true;
             //CBGarlok50739.Checked = true;
-            CBKaltik50749.Checked = true;
+            //CBKaltik50749.Checked = true;
             CBLithik50734.Checked = true;
             //CBNallak50364.Checked = true;
             CBKraxik50363.Checked = true;
@@ -1591,7 +1591,7 @@ namespace katzerle
             //CBAhone50817.Checked = true;
             //CBAiRan50822.Checked = true;
             //CBRuun50816.Checked = true;
-            CBNasra50811.Checked = true;
+            //CBNasra50811.Checked = true;
             CBUrobi50808.Checked = true;
             //CBYul50820.Checked = true;
             CBArness50787.Checked = true;
