@@ -91,15 +91,18 @@ namespace katzerle
             if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell)
                 && !Me.HasAura("Slow Fall") && !Me.HasAura("Levitate") && Rarekiller.Settings.Item)
             {
-                if (SnowfallLagerString.Usable)
+                if (SnowfallLagerString != null)
                 {
-                    SnowfallLagerString.Use(); // or use Item
-                    Thread.Sleep(200);
-                }
-                if (Me.HasAura("Snowfall Lager") || Me.HasAura("Parachute") || Me.HasAura("Slow Fall"))
-                {
-                    Logging.Write(Colors.MediumPurple, "Rarekiller: Used Slowfall Ability {0}", Rarekiller.Settings.SlowfallItem);
-                    return;
+                    if (SnowfallLagerString.Usable)
+                    {
+                        SnowfallLagerString.Use(); // or use Item
+                        Thread.Sleep(200);
+                    }
+                    if (Me.HasAura("Snowfall Lager") || Me.HasAura("Parachute") || Me.HasAura("Slow Fall"))
+                    {
+                        Logging.Write(Colors.MediumPurple, "Rarekiller: Used Slowfall Ability {0}", Rarekiller.Settings.SlowfallItem);
+                        return;
+                    }
                 }
             }
 
