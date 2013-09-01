@@ -37,28 +37,25 @@ namespace katzerle
         //public static WoWPoint LandingPoint50739 = new WoWPoint(291.5115, 1772.154, 310.9289); // Gar'lok - evt mehrere nötig da mehrere Locations
         public static WoWPoint LandingPoint50836 = new WoWPoint(-939.2353, 3206.821, 73.79557); // IkIk the Nibble
         public static WoWPoint LandingPoint50782 = new WoWPoint(190.8846, -3087.344, 22.34637); // Sarnak
-        //public static WoWPoint SavePoint50816 = new WoWPoint(-1675.159, 1056.908, 21.96591); // Ruun Ghostpaw
+        //public static WoWPoint LandingPoint50816 = new WoWPoint(-1675.159, 1056.908, 21.96591); // Ruun Ghostpaw
         public static WoWPoint LandingPoint50831 = new WoWPoint(2982.228, 1911.914, 642.4153); // Scritch
         public static WoWPoint LandingPoint50832 = new WoWPoint(1800.888, 3203.81, 297.0952); // The Yowler
         public static WoWPoint LandingPoint50769 = new WoWPoint(2365.477, 202.3723, 480.2043); // Zai the Outcast
         public static WoWPoint LandingPoint50331 = new WoWPoint(-1007.527, 1143.013, 16.38882); // Go Kan
         public static WoWPoint LandingPoint51078 = new WoWPoint(1473.872, -2270.498, 154.341); // Ferdinand
         public static WoWPoint LandingPoint50749 = new WoWPoint(1001.682, 2123.806, 301.3187); // Kal'thik
-        public static WoWPoint LandingPoint50334 = new WoWPoint(428.7074, 4705.66, 59.79057); // Dak
+        public static WoWPoint LandingPoint50334 = new WoWPoint(455.7283, 4783.266, 50.25636); // Dak the Breaker
         public static WoWPoint LandingPoint50347 = new WoWPoint(103.4087, 2322.122, 202.9273); //Karr der Verdunkler
+        public static WoWPoint LandingPoint50811 = new WoWPoint(609.7339, -808.8943, 257.7697); //Nasra Spothide
+        public static WoWPoint LandingPoint50821 = new WoWPoint(574.8134, 4256.733, 219.0302); //Ai-Li Skymirror 
+        public static WoWPoint LandingPoint50808 = new WoWPoint(320.6452, -2527.102, 42.96289); //Urobi the Walker
+        public static WoWPoint LandingPoint50820 = new WoWPoint(2191.15, 5223.58, 89.64538); //Yul Wildpaw
+
         #endregion
 
         #region Save Fighting Locations for Pandaria Rares
-        //public static WoWPoint SavePoint50817 = new WoWPoint(3805.414, 2307.001, 751.3418); // Ahone the Wanderer
-        //public static WoWPoint SavePoint50822 = new WoWPoint(802.5736, 1461.719, 385.2514); // Ai-Ran the Shifting Cloud
         public static WoWPoint SavePoint50768 = new WoWPoint(-1282.449, 1513.644, 13.70746); // Cournith Waterstrider
-        //public static WoWPoint SavePoint50739 = new WoWPoint(999, 999, 999); // Gar'lok
-        //public static WoWPoint SavePoint50816 = new WoWPoint(2559.742, 275.2169, 496.4695); // Ruun Ghostpaw
-        //public static WoWPoint SavePoint50782 = new WoWPoint(162.5192, -3096.608, 25.27735); // Sarnak
-        //public static WoWPoint SavePoint50831 = new WoWPoint(2982.228, 1911.914, 642.4153); // Scritch
-        //public static WoWPoint SavePoint50733 = new WoWPoint(2303.905, 2533.055, 667.6075); // Ski'thik
         public static WoWPoint SavePoint50832 = new WoWPoint(1749.258, 3209.693, 316.2377); // The Yowler
-        //public static WoWPoint SavePoint50769 = new WoWPoint(2365.477, 202.3723, 480.2043); // Zai the Outcast - evt mehrere nötig da mehrere Locations
         #endregion
 
         /// <summary>
@@ -308,7 +305,8 @@ namespace katzerle
                     if (Me.IsFlying && (o.Entry == 50817 || o.Entry == 50768
                         || o.Entry == 50836 || o.Entry == 50782 || o.Entry == 50331 || o.Entry == 51078 
                         || o.Entry == 50822 || o.Entry == 50831 || o.Entry == 50832 || o.Entry == 50769
-                        || o.Entry == 50749 || o.Entry == 50334 || o.Entry == 50347))
+                        || o.Entry == 50749 || o.Entry == 50334 || o.Entry == 50347 || o.Entry == 50811
+                        || o.Entry == 50821 || o.Entry == 50808 || o.Entry == 50820))
                     {
                         WoWPoint Helperpoint = o.Location;
                         if (o.Entry == 50817)
@@ -337,6 +335,14 @@ namespace katzerle
                             Helperpoint = LandingPoint50334;
                         if (o.Entry == 50347)
                             Helperpoint = LandingPoint50347;
+                        if (o.Entry == 50811)
+                            Helperpoint = LandingPoint50811;
+                        if (o.Entry == 50821)
+                            Helperpoint = LandingPoint50821;
+                        if (o.Entry == 50808)
+                            Helperpoint = LandingPoint50808;
+                        if (o.Entry == 50820)
+                            Helperpoint = LandingPoint50820;
 
                         if (!Rarekiller.MoveTo(Helperpoint, o, 5, false)) return;
                         Rarekiller.Dismount();
@@ -347,18 +353,12 @@ namespace katzerle
                     if (SpellManager.HasSpell(Rarekiller.Spells.RangedPullspell) && (
                         o.Entry == 50836 || o.Entry == 50782 || o.Entry == 50331 || o.Entry == 51078
                         || o.Entry == 50822 || o.Entry == 50831 || o.Entry == 50832 || o.Entry == 50768
-                        || o.Entry == 50749 || o.Entry == 50334 || o.Entry == 50347))
+                        || o.Entry == 50749 || o.Entry == 50334 || o.Entry == 50347 || o.Entry == 50811
+                        || o.Entry == 50821 || o.Entry == 50808 || o.Entry == 50820))
                     {
                         Rarekiller.Settings.Range = "27";
                         Logging.Write(Colors.MediumPurple, "Rarekiller: Set Range to 27 because of Inhouse Pandaria Rare");
                     }
-
-                    //else if (o.Entry == 50364)
-                    //{
-                    //    Rarekiller.Settings.Range = "3";
-                    //    Logging.Write(Colors.MediumPurple, "Rarekiller: Set Range to 3 because of Flying Rare Nal'lak the Ripper");
-                    //}
-
                     else if (o.Entry == 50828 || o.Entry == 50836 || o.Entry == 50840 || o.Entry == 50823 ||
                     o.Entry == 50831 || o.Entry == 50830 || o.Entry == 50832 || o.Entry == 50750 ||
                     o.Entry == 50768 || o.Entry == 50772 || o.Entry == 50766 || o.Entry == 50769 ||
@@ -395,11 +395,11 @@ namespace katzerle
                     if (o.Entry == 50817 || o.Entry == 50768
                         || o.Entry == 50836 || o.Entry == 50782 || o.Entry == 50331 || o.Entry == 51078
                         || o.Entry == 50822 || o.Entry == 50831 || o.Entry == 50832 || o.Entry == 50769
-                        || o.Entry == 50749 || o.Entry == 50334 || o.Entry == 50347)
+                        || o.Entry == 50749 || o.Entry == 50334 || o.Entry == 50347 || o.Entry == 50811
+                        || o.Entry == 50821 || o.Entry == 50808 || o.Entry == 50820)
                     { if (!Rarekiller.MoveTo(o, Convert.ToInt64(Rarekiller.Settings.Range), true)) return; }
                     else
                     { if (!Rarekiller.MoveTo(o, Convert.ToInt64(Rarekiller.Settings.Range), false)) return; }
-                    o.Target();
                     #endregion
 
                     #region Special Behavior Nal'lak
@@ -438,12 +438,13 @@ namespace katzerle
                     Logging.Write(Colors.MediumPurple, "Rarekiller: ... my Location: {0} / {1} / {2}", Convert.ToString(Me.X), Convert.ToString(Me.Y), Convert.ToString(Me.Z));
                     Logging.WriteDiagnostic(Colors.MediumPurple, "Rarekiller: Target is Flying - {0}", o.IsFlying);
 
-
+                    o.Target();
                     if (SpellManager.HasSpell(Rarekiller.Spells.RangedPullspell) &&
                         (o.Entry == 50817 || o.Entry == 50768
                         || o.Entry == 50836 || o.Entry == 50782 || o.Entry == 50331 || o.Entry == 51078
                         || o.Entry == 50822 || o.Entry == 50831 || o.Entry == 50832 || o.Entry == 50769
-                        || o.Entry == 50749 || o.Entry == 50334 || o.Entry == 50347))
+                        || o.Entry == 50749 || o.Entry == 50334 || o.Entry == 50347 || o.Entry == 50811
+                        || o.Entry == 50821 || o.Entry == 50808 || o.Entry == 50820))
                         CastSuccess = RarekillerSpells.CastSafe(Rarekiller.Spells.RangedPullspell, o, true);
 
                     else if (!(Rarekiller.Settings.DefaultPull) && SpellManager.HasSpell(Rarekiller.Settings.Pull))
