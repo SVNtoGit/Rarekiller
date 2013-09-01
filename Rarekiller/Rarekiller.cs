@@ -42,7 +42,7 @@ namespace katzerle
 		public static string name { get { return "Rarekiller"; } }
 		public override string Name { get { return name; } }
 		public override string Author { get { return "katzerle"; } }
-		private readonly static Version _version = new Version(4, 6);
+		private readonly static Version _version = new Version(4, 7);
 		public override Version Version { get { return _version; } }
 		public override string ButtonText { get { return "Settings"; } }
 		public override bool WantButton { get { return true; } }
@@ -83,7 +83,7 @@ namespace katzerle
         {
 			UpdatePlugin();
             //Settings.Load();
-            Logging.WriteQuiet(Colors.MediumPurple, "Rarekiller 4.6 loaded");
+            Logging.WriteQuiet(Colors.MediumPurple, "Rarekiller 4.7 loaded");
             if (Me.Class != WoWClass.Hunter)
             {
                 Logging.Write(Colors.MediumPurple, "Rarekiller: I'm no Hunter. Deactivate the Tamer Part");
@@ -96,7 +96,6 @@ namespace katzerle
             if (!Settings.BETA)
             {
                 Settings.Footprints = false;
-                Settings.Blingtron = false;
             }
             if (Me.Race != WoWRace.NightElf)
             {
@@ -459,10 +458,18 @@ namespace katzerle
                         else if (MoPRares.Pandaren.CastingSpellId == 125799 && MoPRares.Pandaren.Location.Distance(Me.Location) < 25)
                         {
                             WoWMovement.Move(WoWMovement.MovementDirection.Backwards);
-                            MoPRares.FleeingFromEnemy(MoPRares.Pandaren, 125799, 60, 10, 5);
+                            MoPRares.FleeingFromEnemy(MoPRares.Pandaren, 125799, 40, 10, 5);
                         }
+
+                        // Healing Mists
+                        else if (MoPRares.Pandaren.CastingSpellId == 125802 && SpellManager.CanCast(Spells.Interrupt))
+                        {
+                            RarekillerSpells.CastSafe(Spells.Interrupt, MoPRares.Pandaren, false);
+                            Logging.Write(Colors.MediumPurple, "Rarekiller: * {0}. - Interrupt", Spells.Interrupt);
+                        }
+
                         // Chi Burst
-                        else if (MoPRares.Pandaren.Combat && MoPRares.Pandaren.Location.Distance(Me.Location) > 10)
+                        else if (MoPRares.Pandaren.Combat && MoPRares.Pandaren.Location.Distance(Me.Location) > 15)
                         {
                             Logging.Write(Colors.MediumPurple, "Rarekiller: Run to Pandaren because of Chistoß");
                             while (MoPRares.Pandaren.Location.Distance(Me.Location) > 5)
@@ -473,14 +480,18 @@ namespace katzerle
                                     Navigator.MoveTo(MoPRares.Pandaren.Location);
                                 Thread.Sleep(80);
                                 if (Rarekiller.ToonInvalid) return;
+
+                                // Healing Mists
+                                else if (MoPRares.Pandaren.CastingSpellId == 125802 && SpellManager.CanCast(Spells.Interrupt) && MoPRares.Pandaren.Location.Distance(Me.Location) < 30)
+                                {
+                                    RarekillerSpells.CastSafe(Spells.Interrupt, MoPRares.Pandaren, false);
+                                    Logging.Write(Colors.MediumPurple, "Rarekiller: * {0}. - Interrupt", Spells.Interrupt);
+                                }
+
                             }
+							WoWMovement.MoveStop();
                         }
-                        // Healing Mists
-                        else if (MoPRares.Pandaren.CastingSpellId == 125802 && SpellManager.CanCast(Spells.Interrupt))
-                        {
-                            RarekillerSpells.CastSafe(Spells.Interrupt, MoPRares.Pandaren, false);
-                            Logging.Write(Colors.MediumPurple, "Rarekiller: * {0}. - Interrupt", Spells.Interrupt);
-                        }
+
 
                     }
                     #endregion

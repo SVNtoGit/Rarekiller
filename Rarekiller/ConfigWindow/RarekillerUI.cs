@@ -152,9 +152,8 @@ namespace katzerle
             CBLon50333.Checked = Rarekiller.Settings.Lon50333;
             CBYorik50336.Checked = Rarekiller.Settings.Yorik50336;
 
-            CBBlingtron.Checked = Rarekiller.Settings.Blingtron && Rarekiller.Settings.BETA;
+            CBBlingtron.Checked = Rarekiller.Settings.Blingtron;
             CBFootprints.Checked = Rarekiller.Settings.Footprints && Rarekiller.Settings.BETA;
-            CBBlingtron.Enabled = Rarekiller.Settings.BETA;
             CBFootprints.Enabled = Rarekiller.Settings.BETA;
         }
 		
@@ -1284,7 +1283,6 @@ namespace katzerle
             CBDarkSoil.Checked = false;
             CBAnotherMansTreasure.Checked = false;
             CBBlingtron.Checked = false;
-            CBBlingtron.Enabled = Rarekiller.Settings.BETA;
             CBInteractNPC.Checked = false;
             CBObjects.Checked = true;
             // Hunt by ID
