@@ -42,6 +42,11 @@ namespace katzerle
         /// </summary>
         public void HelpFalling()
         {
+			if (Rarekiller.Settings.SlowfallSpell == "")
+				Rarekiller.Settings.SlowfallSpell = "No special Spell given by User";
+			if (Rarekiller.Settings.SlowfallItem == "")
+				Rarekiller.Settings.SlowfallItem = "No special Item given by User";			
+			
 			int UseSlowfall = 1;
             //Slowfall Spell
 			if (!Me.HasAura("Snowfall Lager") && !Me.HasAura("Parachute") && !Me.HasAura(Rarekiller.Settings.SlowfallSpell) && !Me.HasAura("Slow Fall") 
