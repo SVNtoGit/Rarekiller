@@ -490,6 +490,25 @@ namespace katzerle
                     {
                         Rarekiller.Settings.PullCounter++;
                         Logging.Write(Colors.MediumPurple, "Rarekiller: Pulled {0} now {1} times", o.Name, Rarekiller.Settings.PullCounter);
+						
+						if ((o.Entry == 50828 || o.Entry == 50836 || o.Entry == 50840 || o.Entry == 50823 ||
+						o.Entry == 50831 || o.Entry == 50830 || o.Entry == 50832 || o.Entry == 50750 ||
+						o.Entry == 50768 || o.Entry == 50772 || o.Entry == 50766 || o.Entry == 50769 ||
+						o.Entry == 50780 || o.Entry == 50776 || o.Entry == 50739 || o.Entry == 50749 ||
+						o.Entry == 50734 || o.Entry == 50364 || o.Entry == 50363 || o.Entry == 50733 ||
+						o.Entry == 50388 || o.Entry == 50341 || o.Entry == 50349 || o.Entry == 50340 ||
+						o.Entry == 50347 || o.Entry == 50338 || o.Entry == 50344 || o.Entry == 50339 ||
+						o.Entry == 50354 || o.Entry == 50351 || o.Entry == 50355 || o.Entry == 50356 ||
+						o.Entry == 50350 || o.Entry == 50352 || o.Entry == 50359 || o.Entry == 50821 ||
+						o.Entry == 50817 || o.Entry == 50822 || o.Entry == 50816 || o.Entry == 50811 ||
+						o.Entry == 50808 || o.Entry == 50820 || o.Entry == 50787 || o.Entry == 50806 ||
+						o.Entry == 50789 || o.Entry == 50805 || o.Entry == 50783 || o.Entry == 50782 ||
+						o.Entry == 50791 || o.Entry == 51059 || o.Entry == 50334 || o.Entry == 51078 ||
+						o.Entry == 50331 || o.Entry == 50332 || o.Entry == 50333 || o.Entry == 50336)
+							&& Me.Level < 90)
+						{
+							RoutineManager.Current.Combat();
+						}
                     }
                     #endregion
 
