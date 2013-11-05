@@ -42,7 +42,7 @@ namespace katzerle
 		public static string name { get { return "Rarekiller"; } }
 		public override string Name { get { return name; } }
 		public override string Author { get { return "katzerle"; } }
-		private readonly static Version _version = new Version(4, 8);
+		private readonly static Version _version = new Version(4, 9);
 		public override Version Version { get { return _version; } }
 		public override string ButtonText { get { return "Settings"; } }
 		public override bool WantButton { get { return true; } }
@@ -76,14 +76,14 @@ namespace katzerle
         public static Dictionary<Int32, string> TaggedMobsList = new Dictionary<Int32, string>();
 		
         public static bool hasItBeenInitialized = false; 
-        Int32 MoveTimer = 100;
+        Int32 MoveTimer = 400;
         public static Random rnd = new Random();
 		
         public Rarekiller()
         {
 			UpdatePlugin();
             //Settings.Load();
-            Logging.WriteQuiet(Colors.MediumPurple, "Rarekiller 4.8 loaded");
+            Logging.WriteQuiet(Colors.MediumPurple, "Rarekiller 4.9 loaded");
             if (Me.Class != WoWClass.Hunter)
             {
                 Logging.Write(Colors.MediumPurple, "Rarekiller: I'm no Hunter. Deactivate the Tamer Part");
@@ -304,7 +304,7 @@ namespace katzerle
                         if (Checktimer.Elapsed.TotalSeconds > MoveTimer)
                         {
                             Checktimer.Reset();
-                            MoveTimer = rnd.Next(90, 200);
+                            MoveTimer = rnd.Next(360, 540);
                             Security.Movearound();
                         }
                     }
@@ -586,7 +586,7 @@ namespace katzerle
             {
                 string sPath = Process.GetCurrentProcess().MainModule.FileName;
                 sPath = Path.GetDirectoryName(sPath);
-                sPath = Path.Combine(sPath, "Plugins\\RareKiller\\");
+                sPath = Path.Combine(sPath, "Plugins\\Rarekiller\\");
                 return sPath;
             }
         }

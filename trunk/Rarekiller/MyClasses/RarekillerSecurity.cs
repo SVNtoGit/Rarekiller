@@ -18,6 +18,7 @@ using Styx.Common;
 using Styx.CommonBot;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
+using Styx.Helpers;
 
 namespace katzerle
 {
@@ -35,20 +36,20 @@ namespace katzerle
             Logging.Write(Colors.MediumPurple, "Rarekiller: Anti AFK Move around");
             if (LeftRight)
             {
-                //KeyboardManager.PressKey('A');
-                WoWMovement.Move(WoWMovement.MovementDirection.TurnLeft);
-				Thread.Sleep(50);
-				WoWMovement.MoveStop();
-                //KeyboardManager.ReleaseKey('A');
+                KeyboardManager.PressKey('A');
+                //WoWMovement.Move(WoWMovement.MovementDirection.TurnLeft);
+				Thread.Sleep(100);
+				//WoWMovement.MoveStop();
+                KeyboardManager.ReleaseKey('A');
                 LeftRight = false;
             }
             else
             {
-                //KeyboardManager.PressKey('D');
-				WoWMovement.Move(WoWMovement.MovementDirection.TurnRight);
-                Thread.Sleep(50);
-				WoWMovement.MoveStop();
-                //KeyboardManager.ReleaseKey('D');
+                KeyboardManager.PressKey('D');
+				//WoWMovement.Move(WoWMovement.MovementDirection.TurnRight);
+                Thread.Sleep(100);
+				//WoWMovement.MoveStop();
+                KeyboardManager.ReleaseKey('D');
                 LeftRight = true;
             }
         }
