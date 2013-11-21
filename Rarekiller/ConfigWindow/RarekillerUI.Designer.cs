@@ -190,6 +190,7 @@ namespace katzerle
             this.CBAeonaxx = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.CBDefault = new System.Windows.Forms.Button();
+            this.CBOnyxEgg = new System.Windows.Forms.CheckBox();
             this.GBAddon.SuspendLayout();
             this.GBSlowfall.SuspendLayout();
             this.GBPull.SuspendLayout();
@@ -380,7 +381,7 @@ namespace katzerle
             this.CBRaptorNest.Checked = true;
             this.CBRaptorNest.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CBRaptorNest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBRaptorNest.Location = new System.Drawing.Point(6, 65);
+            this.CBRaptorNest.Location = new System.Drawing.Point(6, 88);
             this.CBRaptorNest.Name = "CBRaptorNest";
             this.CBRaptorNest.Size = new System.Drawing.Size(123, 17);
             this.CBRaptorNest.TabIndex = 5;
@@ -677,6 +678,7 @@ namespace katzerle
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.CBOnyxEgg);
             this.groupBox3.Controls.Add(this.CBBlingtron);
             this.groupBox3.Controls.Add(this.CBDarkSoil);
             this.groupBox3.Controls.Add(this.CBAnotherMansTreasure);
@@ -684,7 +686,7 @@ namespace katzerle
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(180, 9);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(167, 116);
+            this.groupBox3.Size = new System.Drawing.Size(167, 139);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Collector";
@@ -693,7 +695,7 @@ namespace katzerle
             // 
             this.CBBlingtron.AutoSize = true;
             this.CBBlingtron.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBBlingtron.Location = new System.Drawing.Point(6, 89);
+            this.CBBlingtron.Location = new System.Drawing.Point(6, 111);
             this.CBBlingtron.Name = "CBBlingtron";
             this.CBBlingtron.Size = new System.Drawing.Size(67, 17);
             this.CBBlingtron.TabIndex = 17;
@@ -845,7 +847,7 @@ namespace katzerle
             this.groupBox16.Controls.Add(this.CBObjects);
             this.groupBox16.Controls.Add(this.CBInteractNPC);
             this.groupBox16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox16.Location = new System.Drawing.Point(180, 318);
+            this.groupBox16.Location = new System.Drawing.Point(180, 341);
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.Size = new System.Drawing.Size(167, 180);
             this.groupBox16.TabIndex = 19;
@@ -939,7 +941,7 @@ namespace katzerle
             this.groupBox5.Controls.Add(this.CBNotKillTameable);
             this.groupBox5.Controls.Add(this.CBTameDefault);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(180, 131);
+            this.groupBox5.Location = new System.Drawing.Point(180, 154);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(167, 181);
             this.groupBox5.TabIndex = 13;
@@ -1977,6 +1979,17 @@ namespace katzerle
             this.CBDefault.UseVisualStyleBackColor = true;
             this.CBDefault.Click += new System.EventHandler(this.button1_Click);
             // 
+            // CBOnyxEgg
+            // 
+            this.CBOnyxEgg.AutoSize = true;
+            this.CBOnyxEgg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CBOnyxEgg.Location = new System.Drawing.Point(6, 65);
+            this.CBOnyxEgg.Name = "CBOnyxEgg";
+            this.CBOnyxEgg.Size = new System.Drawing.Size(72, 17);
+            this.CBOnyxEgg.TabIndex = 18;
+            this.CBOnyxEgg.Text = "Onyx Egg";
+            this.CBOnyxEgg.UseVisualStyleBackColor = true;
+            // 
             // RarekillerUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2193,6 +2206,7 @@ namespace katzerle
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox CBBlingtron;
+        private System.Windows.Forms.CheckBox CBOnyxEgg;
     }
 }
 

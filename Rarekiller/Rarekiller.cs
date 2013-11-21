@@ -42,7 +42,7 @@ namespace katzerle
 		public static string name { get { return "Rarekiller"; } }
 		public override string Name { get { return name; } }
 		public override string Author { get { return "katzerle"; } }
-		private readonly static Version _version = new Version(4, 9);
+		private readonly static Version _version = new Version(4, 10);
 		public override Version Version { get { return _version; } }
 		public override string ButtonText { get { return "Settings"; } }
 		public override bool WantButton { get { return true; } }
@@ -83,7 +83,7 @@ namespace katzerle
         {
 			UpdatePlugin();
             //Settings.Load();
-            Logging.WriteQuiet(Colors.MediumPurple, "Rarekiller 4.9 loaded");
+            Logging.WriteQuiet(Colors.MediumPurple, "Rarekiller 4.10 loaded");
             if (Me.Class != WoWClass.Hunter)
             {
                 Logging.Write(Colors.MediumPurple, "Rarekiller: I'm no Hunter. Deactivate the Tamer Part");
