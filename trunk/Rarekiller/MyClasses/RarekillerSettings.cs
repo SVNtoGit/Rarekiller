@@ -47,6 +47,7 @@ namespace katzerle
         public bool KillList = false;
         public bool RaptorNest = true;
         public bool DarkSoil = false;
+        public bool OnyxEgg = false;
         public bool ObjectsCollector = true;
         public bool Blingtron = false;
         public bool AnotherMansTreasure = false;
@@ -300,6 +301,12 @@ namespace katzerle
                 {
                     DarkSoil = Convert.ToBoolean(xvar.InnerText);
                     Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + DarkSoil.ToString());
+                }
+                xvar = xml.SelectSingleNode("//Rarekiller/OnyxEgg");
+                if (xvar != null)
+                {
+                    OnyxEgg = Convert.ToBoolean(xvar.InnerText);
+                    Logging.WriteDiagnostic("Rarekiller Load: " + xvar.Name + "=" + OnyxEgg.ToString());
                 }
                 xvar = xml.SelectSingleNode("//Rarekiller/ObjectsCollector");
                 if (xvar != null)

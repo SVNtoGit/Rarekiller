@@ -64,6 +64,7 @@ namespace katzerle
                 || ((o.Entry == 202083) && Rarekiller.Settings.RaptorNest)
                 || ((o.Entry == 202081) && Rarekiller.Settings.RaptorNest)
                 || ((o.Entry == 210565) && Rarekiller.Settings.DarkSoil)
+                || ((o.Entry == 214945) && Rarekiller.Settings.OnyxEgg)
                 || (Rarekiller.AnotherMansTreasureList.ContainsKey(Convert.ToInt32(o.Entry)) && Rarekiller.Settings.AnotherMansTreasure && o.Entry > 200000)
 				|| (Rarekiller.CollectObjectsList.ContainsKey(Convert.ToInt32(o.Entry)) && Rarekiller.Settings.ObjectsCollector)
                 || ((o.Entry == 206195) && Rarekiller.Settings.TestRaptorNest) //Testcase Thundermar Ale Keg
