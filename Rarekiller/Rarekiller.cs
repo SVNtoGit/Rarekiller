@@ -278,7 +278,7 @@ namespace katzerle
                     #endregion
 
                     #region Pulse Object Interactor
-                    if (Settings.RaptorNest || Settings.TestRaptorNest || Settings.ObjectsCollector || Settings.AnotherMansTreasure)
+                    if (Settings.RaptorNest || Settings.TestRaptorNest || Settings.ObjectsCollector || Settings.AnotherMansTreasure ||Settings.OnyxEgg)
                         Collector.findAndPickupObject();
                     #endregion
 
